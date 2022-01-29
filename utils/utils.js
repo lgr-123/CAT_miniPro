@@ -1,0 +1,61 @@
+const formatTime = date => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+
+  return `${[year, month, day].map(formatNumber).join('/')} ${[hour, minute, second].map(formatNumber).join(':')}`
+}
+
+const formatNumber = n => {
+  n = n.toString()
+  return n[1] ? n : `0${n}`
+}
+
+const showToast =  (showMsg, type, time) => {
+  wx.showToast({
+    title: showMsg,
+    icon: type || 'none',
+    duration: time || 1000
+  })
+}
+
+const toLogin = () => {
+  wx.login({
+    success: res => {
+      if(res.errMsg == 'login:ok') {
+        const code = res.code
+        wx.navigateBack({
+          url: '/pages/login/login',
+          success: (res) => {
+            res.eventChannel.emit('getCode', {code: code})
+          }
+
+        })
+      } else {
+        this.showToast('登录失败')
+      }
+    }
+  })
+}
+
+// 将微信的api换成promise形式
+const wxPromise = (functionName, params) => {
+  return new Promise((resolve, reject) => {
+    wx[functionName]({
+      ...params,
+      success: resolve,
+      fail: reject
+    })
+  })
+}
+
+module.exports = {
+  formatTime,
+  toLogin,
+  showToast,
+  wxPromise
+
+}

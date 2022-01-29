@@ -2,8 +2,10 @@
 App({
   onLaunch() {
 
+  
+
   },
   globalData: {
-    happyNewYaer: null
+    // happyNewYaer: null
   }
 })
