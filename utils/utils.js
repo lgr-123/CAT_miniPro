@@ -32,7 +32,6 @@ const toLogin = () => {
           success: (res) => {
             res.eventChannel.emit('getCode', {code: code})
           }
-
         })
       } else {
         this.showToast('登录失败')

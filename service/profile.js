@@ -8,3 +8,14 @@ import cat_config from './network'
 //   })
 // }
 
+const login = (data) => {
+  return request({
+    url: '',
+    data
+  })
+}
+
+export {
+  login
+}
+

@@ -1,5 +1,19 @@
 <!--pages/login/login.wxml-->
 <!--pages/login/login.wxml-->
+<view>
+  <view class="cu-avatar xl round margin-left bg-red">
+    <image class="" src="../../assets/img/catlogo.jpg" mode="aspectFit"></image>
+  </view>
+</view>
+<view class="solids-bottom padding-xs flex align-center">
+  <view class="flex-sub">
+    <view class="solid-bottom text-xl padding">
+      <text class="text-black text-bold">您的订单已提交成功！</text>
+    </view>
+    <view class="padding">页面大标题，用于结果页等单一信息页</view>
+  </view>
+</view>
+
 <cu-custom isBack="{{true}}">
   <text slot="content">授权登录</text>
 </cu-custom>
@@ -10,4 +24,3 @@
   </view>
   <button bindtap="showLogin" class="text-center margin-top num" type="primary" style="height: 96rpx; width: 474rpx; line-height: 66rpx">授权登录</button>
 </view>
-

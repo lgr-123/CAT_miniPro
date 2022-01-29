@@ -8,30 +8,38 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    code: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // let eventChannel = this.getOpenerEventChannel()
+    // eventChannel.on('code', data => {
+    //   this.data.code = data.code
+    // })
   },
 
   showLogin() {
+   
     wxPromise('getUserProfile', {
       desc: '获取用户信息',
     }).then((res) => {
       console.log(res);
+      const encryptedData = e.detail.encryptedData;
+      const iv = e.detail.iv;
+      login({
+        code: this.data.code,
+        iv: iv,
+        encryptedData: encryptedData
+      }).then((res) => {
+        
+      })
     }).catch((err) => {
       console.log(err);
     })
-    // wx.getUserProfile({
-    //   desc: '获取用户信息',
-    //   success: e => {
-    //     console.log(e);
-    //   }
-    // })
+    
   },
 
 
