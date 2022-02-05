@@ -1,21 +1,128 @@
 import request from './network'
-import cat_config from './network'
 
-// export function login(data) {
- 
-//   return request({
-//     url: lhr_config,
-//   })
-// }
+import {
+  BASE_URL,
+  H_config
+} from './config'
 
-const login = (data) => {
+export function baomin(data){
   return request({
-    url: '',
+    method:'POST',
+    url:'/user/signUp',
     data
   })
 }
-
-export {
-  login
+// 登录
+export function login(data) {
+  return request({
+    url: H_config.API_login_URL,
+    method: 'post',
+    data: data
+  })
 }
 
+// 获取用户信息
+export function getUserInfo(data) {
+  return request({
+    url: H_config.API_getUserInfo_URL,
+    data: data
+  })
+}
+
+// 获取用户报名信息
+export function getSignUpInfo(data) {
+  return request({
+    url: H_config.API_getSignUpInfo_URL,
+    method: 'post',
+    data: data,
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    }
+  })
+}
+
+// 获取用户进度
+export function selectSchedule(data) {
+  return request({
+    url: H_config.API_selectSchedule_URL,
+    method: 'post',
+    data: data,
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    }
+  })
+}
+
+// 获取可预约时间
+export function getAppointTime(data) {
+  return request({
+    url: H_config.API_getAppointTime_URL,
+    method: 'post',
+    data: data,
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    }
+  })
+}
+
+// 预约
+export function appointTime(data) {
+  return request({
+    url: H_config.API_appointTime_URL,
+    method: 'post',
+    data: data,
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    }
+  })
+}
+
+// 获取用户已预约时间
+export function selectUserAppoint(data) {
+  return request({
+    url: H_config.API_selectUserAppoint_URL,
+    method: 'post',
+    data: data,
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    }
+  })
+}
+
+// 取消预约
+export function cancelAppoint(data) {
+  return request({
+    url: H_config.API_cancelAppoint_URL,
+    method: 'post',
+    data: data,
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    }
+  })
+}
+
+// 获取通知列表
+export function getNotice(data) {
+  return request({
+    url: H_config.API_getNotice_URL,
+    method: 'post',
+    data: data,
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    }
+  })
+}
+
+// 更改通知状态
+export function checkNotice(data) {
+  return request({
+    url: H_config.API_checkNotice_URL,
+    method: 'post',
+    data: data,
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    }
+  })
+}
+
+// 

@@ -1,0 +1,4 @@
+<!--pages/more/more.wxml-->
+<cu-custom bgColor="bg-olive" isBack="{{true}}">
+  <text slot="content">其他</text>
+</cu-custom>

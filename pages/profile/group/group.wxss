@@ -1,6 +1,6 @@
-/* pages/login/login.wxss */
+/* pages/group/group.wxss */
 page {
-  background-color: #fff;
+  background-color: #ecf0f3;
   --RBShadow: rgba(207, 219, 230, .6);
   --LTShadow: rgba(255, 255, 255, 1);
 }

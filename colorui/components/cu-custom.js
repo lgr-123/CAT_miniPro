@@ -27,6 +27,23 @@ Component({
       type: String,
       default: ''
     },
+    isLocated: {
+      type: [Boolean, String],
+      default: false
+    },
+    isRedirectPage: {
+      type: [Boolean, String],
+      default: false
+    },
+    delta: {
+      type: [Number, String],
+      default: 1
+    },
+    toProfile: {
+      type: [Boolean, String],
+      default: false
+    },
+    url: String
   },
   /**
    * 组件的初始数据
@@ -42,13 +59,41 @@ Component({
   methods: {
     BackPage() {
       wx.navigateBack({
-        delta: 1
+        delta: Number(this.data.delta)
       });
     },
     toHome(){
       wx.reLaunch({
-        url: '/pages/index/index',
+        url: '/pages/WCH/home/home',
       })
+    },
+    selctPosition() {
+      wx.navigateTo({
+        url: '/pages/WCH/location/location?canback=' + 1,
+      })
+    },
+    redirectPage() {
+      let pages = getCurrentPages()
+    
+      // 判断前一页是否是备注页面
+      if('/pages/WCH/bill/bill' === pages[pages.length - 2].route) {
+        wx.navigateBack()
+      }else {
+        wx.redirectTo({
+          url: '/pages/WCH/bill/bill'
+        })
+      }
+    },
+    toProfile() {
+      let pages = getCurrentPages()
+      // 判断前一页是否是个人主页
+      if(pages[pages.length - 2] && 'pages/profile/index/index' === pages[pages.length - 2].route) {
+        wx.navigateBack()
+      }else {
+        wx.redirectTo({
+          url: '/pages/profile/index/index'
+        })
+      }
     }
   }
 })

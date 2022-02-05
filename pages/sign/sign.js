@@ -1,0 +1,26 @@
+// pages/sign/sign.js
+Page({
+  data:{
+    stage:1,
+    text:'CAT',
+    fontendText:'JS',
+    catDpNone:false
+  },
+  click_catText(){
+    this.setData({
+      text:'',
+      stage:2
+    })
+  },
+  click_fontend(){
+    console.log(3);
+    this.setData({
+      stage:3
+    })
+    setTimeout(()=>{
+      this.setData({
+        catDpNone:true
+      })
+    },300)
+  }
+})

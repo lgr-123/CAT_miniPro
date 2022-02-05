@@ -1,98 +1,97 @@
-// pages/login/login.js
-import {login} from '../../service/profile'
-import {wxPromise} from '../../utils/utils'
+// pages/WCH/login/login.js
+import {
+  login,
+  getSignUpInfo
+} from '../../service/profile'
+
+import {
+  H_config
+} from '../../service/config'
+
+const app = getApp()
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     code: null
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-    // let eventChannel = this.getOpenerEventChannel()
-    // eventChannel.on('code', data => {
-    //   this.data.code = data.code
-    // })
+    let eventChannel = this.getOpenerEventChannel()
+    eventChannel.on('code', data => {
+      this.data.code = data.code
+    })
   },
-
-  showLogin() {
-   wx.showLoading({
-     title: '正在加载',
-   })
-   
-    wxPromise('getUserProfile', {
-      desc: '获取用户信息',
-    }).then((res) => {
-      wx.hideLoading()
-      console.log(res);
+  showLogin(e) {
+    if (e.detail.errMsg == "getUserInfo:ok"){
       const encryptedData = e.detail.encryptedData;
       const iv = e.detail.iv;
+      wx.showLoading({
+        title: '正在登录中...',
+        icon: 'loading',
+        mask: true
+      })
       login({
         code: this.data.code,
-        iv: iv,
-        encryptedData: encryptedData
-      }).then((res) => {
-        
+        encryptedData: encryptedData,
+        iv: iv
+      }).then(res => {
+        const id = res.data.data.id
+        const token = res.data.data.token
+        if(res.data.code === 2203 || res.data.code === 2204) {
+          wx.setStorageSync('token', token)
+          wx.setStorageSync('userId', id)
+          wx.hideLoading()
+
+          getSignUpInfo({
+            userId: id
+          }).then(res => {
+            if(res.data && res.data.code && res.data.code === H_config.STATUSCODE_getSignUpInfo_SUCCESS) {
+              wx.setStorageSync('direction', res.data.data.direction)
+              app.globalData.isSignUp = true
+              app.globalData.userInfo = res.data.data
+              wx.getUserInfo({
+                success: res => {
+                  app.globalData.userInfo.avatarUrl = res.userInfo.avatarUrl
+                  wx.showToast({
+                    title: '登录成功',
+                    duration: 1000
+                  })
+                  setTimeout(() => {
+                    wx.navigateBack()
+                  }, 100)
+                }
+              })
+            } else {
+              app.globalData.isSignUp = false
+              wx.showToast({
+                title: '登录成功',
+                duration: 1000
+              })
+              setTimeout(() => {
+                wx.navigateBack()
+              }, 100)
+            }
+            wx.hideLoading()
+          }).catch((err) => {
+            console.log(err);
+          })
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+        }
+      }).catch(err => {
+        console.log(err);
       })
-    }).catch((err) => {
-      console.log(err);
-    })
-    
+    } else {
+      showToast('登录失败')
+    }
   },
-
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  onShareAppMessage(options) {
+    return {
+      title: 'CAT Studio',
+      path: '/subPages/studio/studio',
+      imageUrl: '/assets/img/catlogo.jpg'
+    }
   }
 })

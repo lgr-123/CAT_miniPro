@@ -1,13 +1,21 @@
 {
-    "pages": [
-        "pages/index/index",
-        "pages/login/login",
-        "pages/singup/signup"
-    ],
-    "window": {
-     
-    },
-    "style": "v2",
-    "sitemapLocation": "sitemap.json",
-    "lazyCodeLoading": "requiredComponents"
+  "pages": [
+    "subPages/studio/studio",
+    "pages/home/home",
+    "subPages/sign3/sign3",
+    "pages/profile/index/index",
+    "pages/profile/progress/progress",
+    "pages/profile/reservation/reservation",
+    "pages/profile/group/group",
+    "pages/profile/more/more",
+    "pages/login/login"
+  ],
+  "window": {
+    "navigationStyle": "custom"
+  },
+  "usingComponents": {
+    "cu-custom": "./colorui/components/cu-custom"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
 }
