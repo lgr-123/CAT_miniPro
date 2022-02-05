@@ -1,0 +1,28 @@
+<!--pages/message/message.wxml-->
+<cu-custom bgColor="bg-olive" isBack="{{true}}">
+  <text slot="content">消息中心</text>
+</cu-custom>
+
+<view class="padding-lg-xl padding-top margin-bottom-lg">
+  <block wx:for="{{stage}}">
+  <!--
+    <view>
+      <view class="num padding-xs text-center">
+        <view class="cuIcon-{{icon[index]}} text-{{color[index]}} text-xxl margin-top-xs"></view>
+        <view class="text-left padding-tb-xs padding-lr-sm">{{item}}</view>
+      </view>
+    </view>
+    <view class="flex justify-around">
+      <text class="cuIcon-titles text-olive" wx:if="{{index !== 5}}"></text>
+      <text class="cuIcon-titles text-olive" wx:if="{{index !== 5}}"></text>
+    </view>
+    -->
+    <view class="cu-timeline">
+        <view class="cu-item cur cuIcon-{{icon[index]}}">
+            <view class="content bg-{{color[index]}} shadow-blur">
+            <text>{{item}}</text> 
+            </view>
+        </view>
+    </view>
+  </block>
+</view>
