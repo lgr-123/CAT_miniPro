@@ -1,10 +1,14 @@
-const BASE_URL = 'https://www.lizeqiang.top:8083'
+// const BASE_URL = 'https://www.lizeqiang.top:8083'
 // const BASE_URL = 'https://192.168.1.108:8086'
+const BASE_URL = 'https://lixianghao.top:2358'
+
+
+
 
 const H_config = {}
 
 // 登录
-H_config.API_login_URL = '/user/login'
+H_config.API_login_URL = '/w/login'
 
 // 获取用户信息
 H_config.API_getUserInfo_URL = '/user/selectUserInfo'

@@ -53,7 +53,7 @@ Page({
     date: '2021-02-18 周四',
     userInfo: app.globalData.userInfo,
     time: '上午好',
-    isLogin: wx.getStorageSync('userId'),
+    isLogin: wx.getStorageSync('token'),
     isSignUp: app.globalData.isSignUp
   },
   onLoad: function (options) {
@@ -186,12 +186,12 @@ Page({
 
     this.setData({
       date: formatTime(time).split(' ')[0] + ' 周' + day,
-      isLogin: wx.getStorageSync('userId') ? true : false
+      isLogin: wx.getStorageSync('token') ? true : false
     })
   },
   navigate(e) {
     let route = e.currentTarget.dataset.route
-    if(!wx.getStorageSync('userId') && (route === '/pages/profile/progress/progress' || route === '/pages/profile/reservation/reservation')) {
+    if(!wx.getStorageSync('token') && (route === '/pages/profile/progress/progress' || route === '/pages/profile/reservation/reservation')) {
       login()
     } else if ((route === '/pages/profile/progress/progress' || route === '/pages/profile/reservation/reservation') && !this.data.isSignUp) {
       showToast('请先报名后再查看~')
@@ -224,7 +224,7 @@ Page({
     }
   },
   showModal(e) {
-    if(wx.getStorageSync('userId')) {
+    if(wx.getStorageSync('token')) {
       this.setData({
         modalName: e.currentTarget.dataset.target
       })

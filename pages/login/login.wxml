@@ -7,5 +7,5 @@
   <view class="flex justify-center">
     <image style="width: 800rpx; height: 360rpx" src="../../assets/img/cat.png"></image>
   </view>
-  <button open-type="getUserInfo" bindgetuserinfo="showLogin" class="text-center margin-top num" type="primary" style="height: 96rpx; width: 474rpx; line-height: 66rpx">授权登录</button>
+  <button bindtap="showLogin" class="text-center margin-top num" type="primary" style="height: 96rpx; width: 474rpx; line-height: 66rpx">授权登录</button>
 </view>

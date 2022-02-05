@@ -40,8 +40,20 @@ export function login() {
   })
 }
 
+// 将微信的api换成promise形式
+const wxPromise = (functionName, params) => {
+  return new Promise((resolve, reject) => {
+    wx[functionName]({
+      ...params,
+      success: resolve,
+      fail: reject
+    })
+  })
+}
+
 module.exports = {
   formatTime,
   showToast,
-  login
+  login,
+  wxPromise
 }
