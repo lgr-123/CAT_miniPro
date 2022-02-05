@@ -5,6 +5,10 @@ import {
 } from '../../service/profile'
 
 import {
+  wxPromise
+} from '../../utils/util'
+
+import {
   H_config
 } from '../../service/config'
 
@@ -21,36 +25,58 @@ Page({
     })
   },
   showLogin(e) {
-    if (e.detail.errMsg == "getUserInfo:ok"){
-      const encryptedData = e.detail.encryptedData;
-      const iv = e.detail.iv;
-      wx.showLoading({
-        title: '正在登录中...',
-        icon: 'loading',
-        mask: true
-      })
-      login({
-        code: this.data.code,
-        encryptedData: encryptedData,
-        iv: iv
-      }).then(res => {
-        const id = res.data.data.id
-        const token = res.data.data.token
-        if(res.data.code === 2203 || res.data.code === 2204) {
-          wx.setStorageSync('token', token)
-          wx.setStorageSync('userId', id)
-          wx.hideLoading()
+   
+    wxPromise('getUserProfile', {
+      desc: '获取用户信息',
+    }).then((e) => {
 
-          getSignUpInfo({
-            userId: id
+        console.log(e);
+        // app.globalData.userInfo.avatarUrl = e.userInfo.avatarUrl
+        // app.globalData.userInfo.nickName = e.userInfo.nickName
+        app.globalData.userInfo = e.userInfo
+        // 暂时修改
+        app.globalData.isSignUp = false
+          const encryptedData = e.encryptedData;
+          const iv = e.iv;
+          wx.showLoading({
+            title: '正在登录中...',
+            icon: 'loading',
+            mask: true
+          })
+          login({
+            code: this.data.code,
+            encryptedData: encryptedData,
+            iv: iv
           }).then(res => {
-            if(res.data && res.data.code && res.data.code === H_config.STATUSCODE_getSignUpInfo_SUCCESS) {
-              wx.setStorageSync('direction', res.data.data.direction)
-              app.globalData.isSignUp = true
-              app.globalData.userInfo = res.data.data
-              wx.getUserInfo({
-                success: res => {
-                  app.globalData.userInfo.avatarUrl = res.userInfo.avatarUrl
+            console.log(res);
+            const id = res.data.data.id
+            const token = res.data.data.token
+              wx.setStorageSync('token', token)
+              // wx.setStorageSync('userId', id)
+              wx.hideLoading()
+              wx.navigateBack()
+    /*
+              getSignUpInfo({
+                userId: id
+              }).then(res => {
+                if(res.data && res.data.code && res.data.code === H_config.STATUSCODE_getSignUpInfo_SUCCESS) {
+                  wx.setStorageSync('direction', res.data.data.direction)
+                  app.globalData.isSignUp = true
+                  app.globalData.userInfo = res.data.data
+                  // wx.getUserInfo({
+                  //   success: res => {
+                  //     app.globalData.userInfo.avatarUrl = res.userInfo.avatarUrl
+                  //     wx.showToast({
+                  //       title: '登录成功',
+                  //       duration: 1000
+                  //     })
+                  //     setTimeout(() => {
+                  //       wx.navigateBack()
+                  //     }, 100)
+                  //   }
+                  // })
+                } else {
+                  // app.globalData.isSignUp = false
                   wx.showToast({
                     title: '登录成功',
                     duration: 1000
@@ -59,33 +85,23 @@ Page({
                     wx.navigateBack()
                   }, 100)
                 }
+                wx.hideLoading()
+              }).catch((err) => {
+                console.log(err);
               })
-            } else {
-              app.globalData.isSignUp = false
-              wx.showToast({
-                title: '登录成功',
-                duration: 1000
-              })
-              setTimeout(() => {
-                wx.navigateBack()
-              }, 100)
-            }
-            wx.hideLoading()
-          }).catch((err) => {
+
+              */
+            
+          }).catch(err => {
             console.log(err);
           })
-        } else {
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none'
-          })
-        }
-      }).catch(err => {
-        console.log(err);
-      })
-    } else {
+        
+      
+    }).catch(() => {
       showToast('登录失败')
-    }
+    })
+   
+    
   },
   onShareAppMessage(options) {
     return {
