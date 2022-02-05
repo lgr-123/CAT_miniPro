@@ -1,57 +1,46 @@
-// pages/login/login.js
-import {login} from '../../service/profile'
-import {wxPromise} from '../../utils/utils'
-
+// pages/singup/signup.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    code: null
+    stuName: '234',
+    stuNum: '',
+    phoneNum: '',
+    stuSex: '',
+    stuCollege: '',
+    stuMajor: '',
+    classNum: '',
+    stuIntro: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // let eventChannel = this.getOpenerEventChannel()
-    // eventChannel.on('code', data => {
-    //   this.data.code = data.code
-    // })
-  },
-
-  showLogin() {
-   wx.showLoading({
-     title: '正在加载',
-   })
-   
-    wxPromise('getUserProfile', {
-      desc: '获取用户信息',
-    }).then((res) => {
-      wx.hideLoading()
-      console.log(res);
-      const encryptedData = e.detail.encryptedData;
-      const iv = e.detail.iv;
-      login({
-        code: this.data.code,
-        iv: iv,
-        encryptedData: encryptedData
-      }).then((res) => {
-        
-      })
-    }).catch((err) => {
-      console.log(err);
-    })
     
   },
+  getInput(e) {
+    const {type} = e.currentTarget.dataset
+    this.setData({
+      [type]:e.detail.value
+    })
+  },
+  nmaeReg() {
+    console.log(1);
+  },
 
+  formSubmit() {
+    // console.log(this.data.stuName);
+   
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+   
   },
 
   /**

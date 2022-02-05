@@ -1,26 +1,25 @@
 <!--pages/login/login.wxml-->
 <!--pages/login/login.wxml-->
-<view>
-  <view class="cu-avatar xl round margin-left bg-red">
-    <image class="" src="../../assets/img/catlogo.jpg" mode="aspectFit"></image>
+<view class="margin-top-xl">
+  <view class="flex justify-center">
+    <image class="cu-avatar xl round margin-left bg-blue" style="width: 350rpx; height: 350rpx" src="../../assets/img/CAT-logo.png" mode="aspectFit"></image>
+  </view>
+  <view class="solids-bottom padding-xs flex align-center">
+    <view class="flex-sub text-center">
+      <view class="text-sm padding">
+        <text class="text-grey">cat工作室</text>
+      </view>
+    </view>
   </view>
 </view>
 <view class="solids-bottom padding-xs flex align-center">
   <view class="flex-sub">
     <view class="solid-bottom text-xl padding">
-      <text class="text-black text-bold">您的订单已提交成功！</text>
+      <text class="text-black text-bold">申请获取以下权限</text>
     </view>
-    <view class="padding">页面大标题，用于结果页等单一信息页</view>
+    <view class="padding">获得你的公开信息（昵称、头像等）</view>
   </view>
 </view>
-
-<cu-custom isBack="{{true}}">
-  <text slot="content">授权登录</text>
-</cu-custom>
-
-<view class="padding-xl" style="margin-top: 200rpx">
-  <view class="flex justify-center">
-    <image style="width: 800rpx; height: 360rpx" src="../../assets/img/cat.png"></image>
-  </view>
-  <button bindtap="showLogin" class="text-center margin-top num" type="primary" style="height: 96rpx; width: 474rpx; line-height: 66rpx">授权登录</button>
+<view class="padding flex flex-direction margin-top-xl">
+  <button class="cu-btn bg-blue lg" bindtap="showLogin">授权登录</button>
 </view>
