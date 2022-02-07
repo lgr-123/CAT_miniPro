@@ -13,6 +13,11 @@ H_config.API_login_URL = '/w/login'
 // 提交报名表
 H_config.API_submitForm_URL = '/enroll/submit'
 
+// 获取所有学院
+H_config.API_college_URL = '/college/list'
+// 获取指定学院的专业
+H_config.API_major_URL = '/major/college'
+
 // 获取用户信息
 H_config.API_getUserInfo_URL = '/user/selectUserInfo'
 H_config.STATUSCODE_getUserInfo_SUCCESS = 3208

@@ -95,6 +95,12 @@
           "pathName": "pages/message/message",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "subPages/sign3/sign3",
+          "pathName": "subPages/sign3/sign3",
+          "query": "",
+          "scene": null
         }
       ]
     }

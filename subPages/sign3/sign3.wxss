@@ -11,8 +11,26 @@ page {
 }
 
 .decorate {
+  height: 300rpx;
+}
+
+.decorate image {
+  margin: 0 0 0 20px;
+  /* margin: 0 auto; */
+  width: 200rpx;
   height: 200rpx;
 }
+
+.tip {
+  width: 100%;
+  text-align: center;
+}
+
+.page1,
+ .page2{
+  height: 570rpx;
+}
+
 
 input {
   margin: 0 auto 10rpx;
@@ -20,21 +38,111 @@ input {
   color: #9e9b9b;
   height: 75rpx;
   padding: 0 40rpx;
-  width: 500rpx;
+  width: 490rpx;
   background-color: rgb(247, 245, 255,.8);
   /* background-color: #f7f6fc; */
   box-shadow: 0px 3px 8px rgb(82, 78, 78), -2px 0 20px #ffffff;
   border-radius: 60rpx;
 }
+
 .stu {
   width: 100%;
   /* text-align: center; */
 }
+
+.text-icon {
+  position: absolute;
+  top: 51rpx;
+  right: 75rpx;
+  font-size: 50rpx;
+}
+
+/* // 动画 */
+.iconSuccess{
+  animation-name: rotatel;
+  animation-fill-mode: forwards;
+  animation-duration: .6s;
+  animation-timing-function: ease-in-out;
+  color:#20ee5e !important;
+}
+.iconFail{
+  animation-name: rotater;
+  animation-fill-mode: forwards;
+  animation-duration: .6s;
+  animation-timing-function: ease-in-out;
+  color:#f51e1e !important;
+}
+@keyframes rotater{
+  0%{
+    transform: rotate(0);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotatel{
+  0%{
+    transform: rotate(0);
+  }
+  100%{
+    transform: rotate(-360deg);
+  }
+}
+
+
 .stu-tag {
   margin: 0 0 9rpx 65rpx;
   color: #8f8e94;
   font-weight: 550;
   font-size: 25rpx;
+}
+
+.stu-sex{
+  margin: 35rpx 0 0 0; 
+}
+
+.stu-sex radio-group {
+  margin-left: 65rpx;
+}
+
+.stu-sex radio {
+  margin: 0 20rpx;
+}
+
+.page2 {
+
+}
+
+.stu-college {
+  text-align: center;
+}
+
+.stu-college .stu-tag {
+  margin: 0;
+}
+
+.footer {
+  width: 100%;
+}
+
+.footer view {
+  width: 110rpx;
+  height: 60rpx;
+  letter-spacing: 5rpx;
+  text-align: center;
+  line-height: 60rpx;
+}
+
+.back {
+  color: #56de84;
+  border-radius: 30rpx;
+  background-color: #adf5c4;
+}
+
+.confirm {
+  color: #eaa44b;
+  border-radius: 30rpx;
+  background-color: #fee3c8;
 }
 
 

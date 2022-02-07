@@ -13,28 +13,78 @@
  -->
 
 <!-- 
-第一页： 姓名 学号 学院 专业 性别 
+第一页： 姓名 学号 手机号 性别 
   -->
 <view id="bg" style="background-image: url(../../assets/img/bg1.jpg);background-size: 100% 100%;">
 	<view class="decorate">
+		<image class="" src="../../assets/img/1.png" mode="aspectFill" lazy-load="false" binderror="" bindload="" />
+	</view>
+	<view class="tip">请填写你的个人信息</view>
+
+	<view wx:if="{{showPage1}}" class="page1 {{!showPage1? 'animation-slide-left animation-reverse':'animation-slide-left'}}">
+		<view class="stu">  
+			<view class="stu-tag">姓名 </view>
+			<input class="" value="123" type="text" placeholder="" bindinput="getInput" bindblur="nameReg" data-type="stuName"></input>
+      <text class="text-icon {{checkName?'cuIcon-roundcheckfill text-green':'cuIcon-roundclosefill text-red'}} "></text> 
+    </view>
+		<view class="stu">
+			<view class="stu-tag">学号 </view>
+			<input class="" value="123" type="text" placeholder="" bindinput="" bindfocus="" bindblur=""></input>
+		</view>
+		<view class="stu">
+			<view class="stu-tag">手机号码</view>
+			<input class="" value="123" type="text" placeholder="" bindinput="" bindfocus="" bindblur=""></input>
+		</view>
+		<view class="stu stu-sex">
+			<view class="stu-tag">性别</view>
+			<radio-group bindchange="">
+				男<radio value="男"></radio>
+				女<radio value="女"></radio>
+			</radio-group>
+		</view>
+	</view>
+
+	<!-- 
+  第二页： 班级 学院 专业 自我介绍
+ -->
+	<view wx:else class="page2 {{showPage2? 'animation-slide-right':'animation-reverse animation-slide-right'}}">
+		<view class="stu">
+			<view class="stu-tag">班级</view>
+			<input class="" value="123" type="text" placeholder="" bindinput="" bindfocus="" bindblur=""></input>
+		</view>
+
+		<view class="flex stu-college">
+			<view class="stu">
+				<view class="stu-tag">学院</view>
+				<picker class="" mode="selector" range="{{stuCollegeRange}}" range-key="name" value="{{CollegeIndex}}" bindchange="selectCollege" bindcancel="">
+					<view>{{stuCollegeRange[CollegeIndex].name}}</view>
+				</picker>
+			</view>
+			<view class="stu">
+				<view class="stu-tag">专业</view>
+				<picker class="" mode="selector" range="{{stuMajorRange}}" range-key="name" value="{{MajorIndex}}" bindchange="selectMajor" bindcancel="">
+					<view>{{stuMajorRange[MajorIndex].name}}</view>
+				</picker>
+			</view>
+		</view>
+
+
+		<view class="stu">
+			<view class="stu-tag">自我介绍</view>
+			<input class="" value="123" type="text" placeholder="" bindinput="" bindfocus="" bindblur=""></input>
+		</view>
 
 	</view>
-	<view class="stu">
-    <view class="stu-tag">姓名 </view>    
-		<input class="" value="123" type="text" placeholder=""  bindinput="" bindfocus="" bindblur=""></input>
-	</view>
-  <view class="stu">
-    <view class="stu-tag">学号 </view>    
-		<input class="" value="123" type="text" placeholder=""  bindinput="" bindfocus="" bindblur=""></input>
-	</view>
-  <view class="stu">
-    <view class="stu-tag">手机号码</view>    
-		<input class="" value="123" type="text" placeholder=""  bindinput="" bindfocus="" bindblur=""></input>
-	</view>
-  <view class="stu">
-    <view class="stu-tag">性别</view>    
-		<input class="" value="123" type="text" placeholder=""  bindinput="" bindfocus="" bindblur=""></input>
-	</view>
+
+  <view class="footer flex justify-around">
+     <view class="back" bindtap="goBack"> 返回 </view>   
+	  <view class="confirm" bindtap="checkPage1">确定</view>
+  </view>
+    
+
+ 
+
+
 
 
 

@@ -25,8 +25,16 @@ export default async function(options) {
         ...options.data
       } || {userId: wx.getStorageSync('userId')},
       header: options.header || header,
-      success: resolve,
-      fail: reject
+      success: (res) => {
+        wx.hideLoading()
+        resolve(res)
+      },
+      fail: (err) => {
+        wx.hideLoading()
+        reject(err)
+        }
     })
   })
+
+  
 }

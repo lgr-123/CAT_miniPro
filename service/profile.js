@@ -24,6 +24,22 @@ export function login(data) {
   })
 }
 
+export const getCollege = () => {
+  return request({
+    url: H_config.API_college_URL,
+    method: 'get'
+  })
+}
+
+// 获取指定学院的专业
+export const getMajor = (data) => {
+  return request({
+    url: H_config.API_major_URL,
+    method: 'post',
+    data
+  })
+}
+
 // 提交报名表
 export const stuFormSubmit = (data) => {
   return request({
