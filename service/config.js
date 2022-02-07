@@ -10,6 +10,9 @@ const H_config = {}
 // 登录
 H_config.API_login_URL = '/w/login'
 
+// 提交报名表
+H_config.API_submitForm_URL = '/enroll/submit'
+
 // 获取用户信息
 H_config.API_getUserInfo_URL = '/user/selectUserInfo'
 H_config.STATUSCODE_getUserInfo_SUCCESS = 3208

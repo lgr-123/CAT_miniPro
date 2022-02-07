@@ -47,6 +47,30 @@
           "pathName": "pages/singup/signup",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/profile/group/group",
+          "pathName": "pages/profile/group/group",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/home/home",
+          "pathName": "pages/home/home",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "subPages/sign3/sign3",
+          "pathName": "subPages/sign3/sign3",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "subPages/direction/direction",
+          "pathName": "subPages/direction/direction",
+          "query": "",
+          "scene": null
         }
       ]
     }
