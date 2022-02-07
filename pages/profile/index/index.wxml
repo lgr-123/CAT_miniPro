@@ -21,10 +21,12 @@
   </view>
   <view class="text-white text-lg margin-tb">{{date}}</view>
   
-  <view class="card flex bg-white padding-lr-lg padding-tb" bindtap="showModal" data-target="Modal" hover-class="card-active">
+  <view class="card flex bg-white padding-lr-lg padding-tb" bindtap="navigate" data-target="Modal" hover-class="card-active" data-route="/pages/message/message">
     <view class="flex-sub text-cut">
       <view class="title text-lg text-bold">通知</view>
-      <view class="margin-top text-cut">{{notice[0].noticeContent ? notice[0].noticeContent : '目前还没有收到通知'}}</view>
+      <!--<view class="margin-top text-cut">{{notice[0].noticeContent ? notice[0].noticeContent : '目前还没有收到通知'}}</view>-->
+      <view class="margin-top text-cut">点此进入消息中心</view>
+
     </view>
     <view class="icon text-right">
       <text class="cuIcon-notice pos-re">

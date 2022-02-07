@@ -71,6 +71,18 @@
                     "pathName": "pages/profile/group/group",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/profile/index/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/profile/reservation/reservation",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }

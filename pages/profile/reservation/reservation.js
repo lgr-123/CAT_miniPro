@@ -3,7 +3,8 @@ import {
   getAppointTime,
   appointTime,
   selectUserAppoint,
-  cancelAppoint
+  cancelAppoint,
+  appointCheck
 } from '../../../service/profile'
 import {
   H_config
@@ -37,6 +38,7 @@ Page({
       // }
     ],
     isReservated: false,
+    closeappointment: false,
     currentReservation: {},
     userInfo: app.globalData.userInfo
   },
@@ -44,42 +46,89 @@ Page({
     this.setData({
       userInfo: app.globalData.userInfo
     })
-
-    this._selectUserAppoint()
+    appointCheck().then(res => {
+      wx.hideLoading()
+      console.log(res);
+      if(res.data.code === 1208){
+        console.log(1111);
+        this._selectUserAppoint()
+      }else{
+        
+        this.setData({
+          closeappointment: true
+        })
+        this._selectUserAppoint()
+      }
+    })
+    
   },
+  // 判断用户是否预约
   _selectUserAppoint() {
     selectUserAppoint({
       userId: wx.getStorageSync('userId')
     }).then(res => {
       wx.hideLoading()
-      if(res.data.code === H_config.STATUSCODE_selectUserAppoint_SUCCESS) {
+      console.log(res);
+      if(res.data.code === 1519) {
         let item = res.data.data
-        item.time = item.time.slice(5, 16)
+        console.log(item);
         this.setData({
           currentReservation: item,
           isReservated: true
         })
-      } else if(res.data.code === 1500) {
-        this._getAppointTime()
-        this.setData({
-          isReservated: false
-        })
-      } else {
-        showToast('加载失败')
+      } else{
+        if(res.data.code === 1522){
+          this.setData({
+            closeappointment: true
+          })
+        }else{
+          this._getAppointTime()
+          this.setData({
+            isReservated: false
+          })
+        }
+        
       }
     }).catch((err) => {
       console.log(err);
     })
   },
+  // _selectUserAppoint() {
+  //   selectUserAppoint({
+  //     userId: wx.getStorageSync('userId')
+  //   }).then(res => {
+  //     wx.hideLoading()
+  //     if(res.data.code === H_config.STATUSCODE_selectUserAppoint_SUCCESS) {
+  //       let item = res.data.data
+  //       item.time = item.time.slice(5, 16)
+  //       this.setData({
+  //         currentReservation: item,
+  //         isReservated: true
+  //       })
+  //     } else if(res.data.code === 1500) {
+  //       this._getAppointTime()
+  //       this.setData({
+  //         isReservated: false
+  //       })
+  //     } else {
+  //       showToast('加载失败')
+  //     }
+  //   }).catch((err) => {
+  //     console.log(err);
+  //   })
+  // },
+
+  // 获取所有预约时间
   _getAppointTime() {
-    getAppointTime({
-      direction: wx.getStorageSync('direction'),
-      userId: wx.getStorageSync('userId')
-    }).then(res => {
+    getAppointTime().then(res => {
       wx.hideLoading()
+      console.log(res.data.code);
       if(res.data.code === H_config.STATUSCODE_getAppointTime_SUCCESS) {
         for(let item of res.data.data) {
-          item.time = item.time.slice(5, 16)
+          item.begintime = item.beginTime
+          item.endtime = item.endTime
+          item.number = item.count
+          item.limitNumber = item.capacity
         }
         this.setData({
           reservation: res.data.data
@@ -90,17 +139,19 @@ Page({
         showToast('加载失败')
       }
     }).catch((err) => {
+      wx.hideLoading()
       console.log(err);
     })
   },
+  // 预约
   appoint(e) {
-    const appoint = e.currentTarget.dataset.item
+    console.log(e);
+    const appoint = e.currentTarget.dataset.item.id
     appointTime({
-      time: '2021-' + appoint.time + ':00',
-      timeId: appoint.timeId,
-      userId: wx.getStorageSync('userId')
+      appointmentId: appoint
     }).then(res => {
       wx.hideLoading()
+      console.log(res);
       if(res.data.code === H_config.STATUSCODE_appointTime_SUCCESS) {
         showToast('预约成功', 'success')
         this._selectUserAppoint()
@@ -115,19 +166,16 @@ Page({
       console.log(err);
     })
   },
+  // 取消预约
   _cancelAppoint() {
     wx.showModal({
       // title: '提示',
       content: '确定取消预约？',
       success: res => {
         if(res.confirm) {
-          cancelAppoint({
-            time: '2021-' + this.data.currentReservation.time + ':00',
-            timeId: this.data.currentReservation.timeId,
-            userId: wx.getStorageSync('userId')
-          }).then(res => {
+          cancelAppoint().then(res => {
             wx.hideLoading()
-            if(res.data.code === 1200) {
+            if(res.data.code === 1205) {
               wx.showToast({
                 title: '取消成功',
               })

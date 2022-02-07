@@ -3,8 +3,8 @@
   <text slot="content">消息中心</text>
 </cu-custom>
 
-<view class="padding-lg-xl padding-top margin-bottom-lg">
-  <block wx:for="{{stage}}">
+<view class="padding-lg-xl padding-top margin-bottom-lg" style="position: realtive">
+  <block wx:for="{{stage}}" w-key="index">
   <!--
     <view>
       <view class="num padding-xs text-center">
@@ -18,11 +18,68 @@
     </view>
     -->
     <view class="cu-timeline">
-        <view class="cu-item cur cuIcon-{{icon[index]}}">
-            <view class="content bg-{{color[index]}} shadow-blur">
-            <text>{{item}}</text> 
+        <view class="cu-item cur cuIcon-{{icon[index%6]}}">
+        <view>
+            <text class="margin-bottom-xs ">{{item.time}}  </text>
+            <text class="text-{{state[index] === '已读' ? 'green' : 'orange'}}" bindtap='readOK' data-itemcontent='{{item.content}}' data-target="DialogModal1" data-confirmdata='{{index}}'>[{{state[index]}}]</text>
+        </view>
+            <view class="content bg-{{color[index%6]}} shadow-blur margin-top-xs">
+            <text>{{item.content}}</text> 
             </view>
         </view>
     </view>
+
+    
+    <!--
+    <block wx:if="{{stage[0]}}">
+      <view class="cu-item" wx:for="{{stage}}" wx:key="index" bindtap="openDialog" data-notice="{{item.noticeContent}}">
+        <view class="content text-cut text-left">
+          <text class="cuIcon-{{item.stage ? 'read' : 'mail'}} text-grey pos-re">
+            <text wx:if="{{!item.stage}}" class="cu-tag badge dp-in-bk" style="height: 20rpx; width: 20rpx; right: 0; top: 0; line-height: 20rpx"></text>
+          </text>
+          <text class="text-grey">{{item}}</text>
+        </view>
+        <view class="text-{{item.stage ? 'green' : 'orange'}}">[{{item.stage ? '已读' : '未读'}}]</view>
+      </view>
+    </block>
+    -->
   </block>
+
+    <!-- <view  wx:if="{{isread}}" class="shadow-lg {{anmiation}} radius" style="position: absolute;left: 50%;margin-left: -150px; top:40% ;box-shadow: 0px 0px 6px #dae0e6; ">
+      <view class="cu-list menu radius shadow-lg bg-white" style="min-height: 100px; width: 300px;">
+        <view class="flex-sub text-center text-xl padding-top-xs">
+          <text class="text-black text-bold">未读消息</text>
+        </view>
+        <view class="padding-lr-xl padding-tb-xs">
+          <text class="text-gray">{{itemcontent}}</text>
+        </view>
+        <view class="flex">
+          <button bindtap='cancelread' class="cu-btn bg-red margin-tb-sm lx" style="width:100px">取消</button>
+          <button bindtap="confirmread"  class="cu-btn bg-green margin-tb-sm lx" style="width:100px">确认已读</button>
+        </view>
+      </view>
+    </view> -->
+
+
+    
+    <view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
+      <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+          <view class="content">未读消息</view>
+          <view class="action" bindtap="hideModal">
+            <text class="cuIcon-close text-red"></text>
+          </view>
+        </view>
+        <view class="padding-xl">
+          {{itemcontent}}
+        </view>
+        <view class="cu-bar bg-white justify-end">
+          <view class="action" style="width: 300rpx">
+            <button class="cu-btn basis-xl line-green text-green margin-sm" bindtap="hideModal" style="width: 100rpx; margin-right: 10rpx;">取消</button>
+            <button class="cu-btn basis-xl bg-green margin-left" bindtap="confirmread" style="width: 100rpx;">已读</button>
+    
+          </view>
+        </view>
+      </view>
+    </view>
 </view>

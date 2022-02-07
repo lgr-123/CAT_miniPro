@@ -1,4 +1,7 @@
 // pages/message/message.js
+import {
+    messagelist
+  } from '../../service/profile'
 Page({
 
     /**
@@ -11,14 +14,69 @@ Page({
             '成绩出来啦'
           ],
         color: ['cyan', 'orange', 'olive', 'red', 'yellow', 'blue'],
-        icon: ['noticefill','form', 'edit', 'commentfill', 'newfill', 'activityfill', 'evaluate_fill']
+        icon: ['noticefill','form', 'edit', 'commentfill', 'newfill', 'activityfill', 'evaluate_fill'],
+        date: ['2022.1.2', '2022.2.1', '2022.3.1'],
+        state: ['未读', '已读', '已读'],
+        isread: false,
+        itemcontent: '',
+        anmiation: 'animation-scale-up animation-reverse',
+        confirmdata: 0
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        messagelist().then(res=>{
+            if(res.data.code === 1801){
+                this.setData({
+                    stage: res.data.data.reverse()
+                })
+            }
+            
+            console.log(this.data.stage);
+            console.log(res);
+            wx.hideLoading()
+        }).catch(err => {
+            console.log(err);
+            wx.hideLoading()
+        })
+    },
 
+    readOK: function (e){
+        if(this.data.state[e.target.dataset.confirmdata] === '已读') return
+        console.log(e.target.dataset.itemcontent)
+        this.setData({
+            confirmdata: e.target.dataset.confirmdata,
+            anmiation: 'animation-scale-up',
+            itemcontent: e.target.dataset.itemcontent,
+            // isread: true,
+            modalName: e.currentTarget.dataset.target
+        })
+    },
+    cancelread: function (){
+        this.setData({
+            anmiation: 'animation-scale-ups animation-reverse',
+            isread: false
+        })
+    },
+    confirmread: function (e){
+        //调接口
+        console.log(this.data.confirmdata); 
+        // console.log(data.confirmdata); 
+        this.data.state[this.data.confirmdata] = '已读'
+        this.setData({
+            modalName: null
+        })
+        this.onLoad()
+        console.log(this.data)
+    },
+
+
+    hideModal(e) {
+        this.setData({
+            modalName: null
+        })
     },
 
     /**
@@ -72,5 +130,6 @@ Page({
             path: '/subPages/studio/studio',
             imageUrl: '/assets/img/catlogo.jpg'
           }
-    }
+    },
+
 })
