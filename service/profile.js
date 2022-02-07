@@ -53,6 +53,18 @@ export function getSignUpInfo(data) {
   })
 }
 
+// 检查是否报名
+export function checkEnroll(data) {
+  return request({
+    url: H_config.API_checkEnroll_URL,
+    method: 'post',
+    data: data,
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    }
+  })
+}
+
 // 获取用户进度
 export function selectSchedule(data) {
   return request({
@@ -83,9 +95,21 @@ export function appointTime(data) {
     url: H_config.API_appointTime_URL,
     method: 'post',
     data: data,
-    header: {
-      'content-type': 'application/x-www-form-urlencoded'
-    }
+    // header: {
+    //   'content-type': 'application/x-www-form-urlencoded'
+    // }
+  })
+}
+
+// 检查预约是否开启
+export function appointCheck(data) {
+  return request({
+    url: H_config.API_appointCheck_URL,
+    method: 'post',
+    data: data,
+    // header: {
+    //   'content-type': 'application/x-www-form-urlencoded'
+    // }
   })
 }
 
@@ -134,6 +158,15 @@ export function checkNotice(data) {
     header: {
       'content-type': 'application/x-www-form-urlencoded'
     }
+  })
+}
+
+// 获取消息中心的消息
+export function messagelist(data) {
+  return request({
+    url: H_config.API_messagelist_URL,
+    method: 'post',
+    // data: data
   })
 }
 

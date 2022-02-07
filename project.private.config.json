@@ -49,26 +49,50 @@
           "scene": null
         },
         {
-          "name": "pages/profile/group/group",
+          "name": "",
+          "pathName": "subPages/sign3/sign3",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "subPages/sign2/sign2",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/message/message",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
           "pathName": "pages/profile/group/group",
           "query": "",
           "scene": null
         },
         {
-          "name": "pages/home/home",
-          "pathName": "pages/home/home",
+          "name": "",
+          "pathName": "pages/profile/index/index",
           "query": "",
           "scene": null
         },
         {
-          "name": "subPages/sign3/sign3",
-          "pathName": "subPages/sign3/sign3",
+          "name": "",
+          "pathName": "pages/profile/reservation/reservation",
           "query": "",
           "scene": null
         },
         {
           "name": "subPages/direction/direction",
           "pathName": "subPages/direction/direction",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/message/message",
+          "pathName": "pages/message/message",
           "query": "",
           "scene": null
         }

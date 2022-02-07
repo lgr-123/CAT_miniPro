@@ -9,7 +9,8 @@
     "pages/profile/reservation/reservation",
     "pages/profile/group/group",
     "pages/profile/more/more",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/message/message"
   ],
   "window": {
     "navigationStyle": "custom"
@@ -19,4 +20,5 @@
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
+
 }

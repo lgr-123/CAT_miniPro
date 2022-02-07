@@ -4,34 +4,38 @@
 </cu-custom>
 
 <view class="margin-sm">
+  <!-- <view wx:if="{{isReservated === true}}"> -->
   <view wx:if="{{isReservated === false}}">
+    <!-- <view> -->
     <view class="card padding margin-bottom-lg radius" wx:for="{{reservation}}" wx:key="index">
       <view class="content flex justify-between text-lg text-bold">
-        <view class="title">预约时间：{{item.time}}</view>
+        <text class="title">预约开始时间：{{item.begintime}}\n预约结束时间：{{item.endtime}}</text>
+        <!-- <view class="title">预约结束时间：{{item.endtime}}</view> -->
         <view class="text-orange margin-tb-xs">{{item.direction}}组</view>
       </view>
-      <view class="dp-flex justify-between">
+      <view class="dp-flex justify-between margin-top-xs">
         <view>
-          预约人数：{{item.number + '/' + item.limitNumber}}
+          预约人数：{{item.limitNumber-item.number}}/{{item.number}}
         </view>
         <view class="text-orange text-bold">
           {{item.stageName}}
         </view>
       </view>
-      <button class="btn cu-btn margin-top-lg flex text-orange" hover-class="btn-active" bindtap="appoint" data-item="{{item}}" disabled="{{item.number >= item.limitNumber}}">预约</button>
+      <button class="btn cu-btn margin-top-lg flex text-orange" hover-class="btn-active" bindtap="appoint" data-item="{{item}}" disabled="{{item.limitNumber==0}}">预约</button>
     </view>
   </view>
   <view class="text-center padding-top-lg" wx:if="{{isReservated === true}}">
+  <!-- <view class="text-center padding-top-lg" wx:if="{{isReservated === false}}"> -->
     <text class="cuIcon-roundcheckfill text-green text-xsl"></text>
     <view class="text-xl text-bold margin-top">你已预约本轮面试</view>
 
     <view class="flex justify-center bg-gray" style="width: 80vw; margin: 5vh auto">
       <view class="ticket-left pos-re">
-        <view class="bg-olive padding-tb-xs">{{currentReservation.stageName}} -- {{userInfo.name}}</view>
+        <view class="bg-olive padding-tb-xs"><text class="cuIcon-time text-df padding-lr-xs"></text> 时间</view>
         <view class="ticket-left-content text-center padding-tb-sm">
-          <text class="cuIcon-time text-xxl"></text>
-          <view class="padding-top-sm">{{currentReservation.time}}</view>
-          <view class="">面试地点：{{currentReservation.place}}</view>
+          <view class="padding-top-sm">开始时间：{{currentReservation.beginTime}}</view>
+          <view class="padding-top-sm">结束时间：{{currentReservation.beginTime}}</view>
+          <!-- <view class="">面试地点：{{currentReservation.place}}</view> -->
         </view>
       </view>
       <view class="ticket-right pos-re">
@@ -49,9 +53,14 @@
     <view style="width: 70vw; margin: 30rpx auto; line-height: 50rpx">
       请在你预约时间内提前半小时到达面试地点签到并等待面试，若有demo或项目的话请带上电脑并提前打开
     </view>
-    <button class="bg-orange" bindtap="_cancelAppoint">取消预约</button>
+    <button class="bg-orange" bindtap="_cancelAppoint" disabled="{{closeappointment}}">取消预约</button>
     <view class="text-gray margin-top">*面试开始前一天可以取消预约</view>
     <view class="text-gray">之后想修改预约时间请私聊师兄师姐</view>
+  </view>
+  
+  <view class="text-center padding-top-xl" wx:if="{{closeappointment && isReservated === false }}">
+    <text class="cuIcon-roundclosefill text-red text-xsl"></text>
+    <view class="text-xl text-bold margin-top">预约入口未开启</view>
   </view>
 </view>
 

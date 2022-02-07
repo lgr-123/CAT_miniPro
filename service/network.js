@@ -11,9 +11,9 @@ export default async function(options) {
   })
 
   if(options.header) {
-    options.header.token = wx.getStorageSync('token')
+    options.header.accessToken = wx.getStorageSync('token')
   } else {
-    header.token = wx.getStorageSync('token')
+    header.accessToken = wx.getStorageSync('token')
   }
   
   return new Promise((resolve, reject) => {
@@ -21,7 +21,7 @@ export default async function(options) {
       method: options.method || 'get',
       url: BASE_URL + options.url,
       data: {
-        userId: wx.getStorageSync('userId'),
+        // userId: wx.getStorageSync('userId'),
         ...options.data
       } || {userId: wx.getStorageSync('userId')},
       header: options.header || header,

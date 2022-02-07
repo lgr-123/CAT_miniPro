@@ -196,26 +196,29 @@ Page({
     } else if ((route === '/pages/profile/progress/progress' || route === '/pages/profile/reservation/reservation') && !this.data.isSignUp) {
       showToast('请先报名后再查看~')
     } else if (route === '/pages/profile/reservation/reservation') {
-      wx.request({
-        url: BASE_URL + '/appoint/selectTime',
-        method: 'post',
-        data: {
-          userId: wx.getStorageSync('userId'),
-          direction: wx.getStorageSync('direction')
-        },
-        header: {
-          'content-type': 'application/x-www-form-urlencoded',
-          'token': wx.getStorageSync('token')
-        },
-        success: res => {
-          if(res.data.code === 1500) {
-            showToast('当前阶段无可预约时间')
-          } else {
-            wx.navigateTo({
-              url: route
-            })
-          }
-        }
+      // wx.request({
+      //   url: BASE_URL + '/appoint/selectTime',
+      //   method: 'post',
+      //   data: {
+      //     userId: wx.getStorageSync('userId'),
+      //     direction: wx.getStorageSync('direction')
+      //   },
+      //   header: {
+      //     'content-type': 'application/x-www-form-urlencoded',
+      //     'token': wx.getStorageSync('token')
+      //   },
+      //   success: res => {
+      //     if(res.data.code === 1500) {
+      //       showToast('当前阶段无可预约时间')
+      //     } else {
+      //       wx.navigateTo({
+      //         url: route
+      //       })
+      //     }
+      //   }
+      // })
+      wx.navigateTo({
+        url: route
       })
     } else {
       wx.navigateTo({
