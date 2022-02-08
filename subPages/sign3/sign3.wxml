@@ -40,7 +40,7 @@
 		<view class="stu stu-sex">
 			<view class="stu-tag">性别</view>
 			<radio-group bindchange="getSex">
-				男<radio value="男"></radio>
+				男<radio value="男" checked="true"></radio>
 				女<radio value="女"></radio>
 			</radio-group>
 		</view>

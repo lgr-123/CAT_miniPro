@@ -101,6 +101,12 @@
           "pathName": "subPages/sign3/sign3",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "subPages/signFinish/signFinish",
+          "pathName": "subPages/signFinish/signFinish",
+          "query": "",
+          "scene": null
         }
       ]
     }

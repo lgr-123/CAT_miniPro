@@ -274,7 +274,7 @@ Page({
   },
   toSignUp() {
     wx.navigateTo({
-      url: '/subPages/sign3/sign3',
+      url: '/subPages/direction/direction',
     })
   },
   onPullDownRefresh() {

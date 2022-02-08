@@ -14,6 +14,7 @@ Page({
     stuMajor: '',
     classNum: '',
     stuIntro: '',
+    direction: '',
     showPage1: true,
     showPage2: false,
     CollegeIndex: 0,
@@ -35,6 +36,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // console.log(options.key);
+    this.setData({
+      direction: options.key
+    })
     getCollege().then(({data}) => {
       console.log(data);
       this.setData({
@@ -50,7 +55,7 @@ Page({
    
   },
   getInput(e) {
-    console.log(e);
+    // console.log(e);
     const {type} = e.currentTarget.dataset
     this.setData({
       [type]:e.detail.value
@@ -197,7 +202,7 @@ Page({
     }
     console.log(this.data.checkClass, this.data.checkIntro);
    if(this.data.checkClass && this.data.checkIntro) {
-    const {stuName, stuNum, stuCollege, stuMajor, phoneNum, classNum, stuIntro, stuSex} = this.data
+    const {direction ,stuName, stuNum, stuCollege, stuMajor, phoneNum, classNum, stuIntro, stuSex} = this.data
     stuFormSubmit({
       name: stuName,
       studentId: stuNum,
@@ -207,7 +212,7 @@ Page({
       phoneNumber: phoneNum,
       selfIntroduction: stuIntro,
       gender: stuSex,
-      direction: '',
+      direction: direction,
     }).then((res) => {
       console.log(res);
     })  
