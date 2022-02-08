@@ -6,10 +6,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    stuName: '234',
+    stuName: '',
     stuNum: '',
     phoneNum: '',
-    stuSex: '',
+    stuSex: false,
     stuCollege: '',
     stuMajor: '',
     classNum: '',
@@ -20,61 +20,76 @@ Page({
     MajorIndex: 0,
     stuCollegeRange: [],
     stuMajorRange: [],
-    checkName: false
+    checkName: false,
+    showName: false,
+    checkNum: false,
+    showNum: false,
+    checkPhone: false,
+    showPhone: false,
+    checkClass: false,
+    showClass: false,
+    checkIntro: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(111);
     getCollege().then(({data}) => {
       console.log(data);
       this.setData({
-        stuCollegeRange: data.data
+        stuCollegeRange: data.data,
+        stuMajorRange: data.data[0].majors,
+        stuCollege: data.data[0].name,
+        stuMajor: data.data[0].majors[0].name
       })
     }).catch(res => {
       console.log(res);
     })
 
    
-    getMajor({
-      name: '计算机学院'
-    }).then((res) => {
-      // console.log(res);
-      this.setData({
-        stuMajorRange: res.data.data
-      })
-      // console.log(res);
-    })
   },
   getInput(e) {
+    console.log(e);
     const {type} = e.currentTarget.dataset
     this.setData({
       [type]:e.detail.value
     })
   },
-  nmaeReg() {
-    console.log(1);
-  },
 
-  formSubmit() {
-    // console.log(this.data.stuName);
-    stuFormSubmit({})  
+  getSex(e) {
+    // console.log(e);
+    this.setData({
+      stuSex: e.detail.value
+    })
   },
+  
+ 
 
   checkPage1() {
+    this.setData({
+      showName: true,
+      showNum: true,
+      showPhone: true
+    })
+    const {checkName, checkNum, checkPhone, stuSex} = this.data
+    if(checkName && checkNum && checkPhone && stuSex) {
+     
+    }
+    console.log(this.data.stuMajor);
+    console.log(this.data.stuCollege);
     this.setData({
       showPage1: false,
       showPage2: true
     })
-   
   },
 
   selectCollege(e) {
     // console.log(e);
     const value = e.detail.value
     this.setData({
+      stuCollege: this.data.stuCollegeRange[value].name,
+      stuMajor: this.data.stuCollegeRange[value].majors[0].name,
       CollegeIndex: value,
       stuMajorRange: this.data.stuCollegeRange[value].majors
     })
@@ -84,6 +99,7 @@ Page({
     // console.log(e);
     const value = e.detail.value
     this.setData({
+      stuMajor: this.data.stuMajorRange[value].name,
       MajorIndex: value,
     })
   },
@@ -110,43 +126,94 @@ Page({
         checkName: false
       })
     }
+    this.setData({
+      showName: true
+    })
   },
   numberReg(){
     const reg = /^3(1|2)2\d{7}$/
-    if(!reg.test(this.data.number.trim())){
+    if(reg.test(this.data.stuNum.trim())){
       this.setData({
-        numberTrue:3
+        checkNum: true
       })
     }else{
       this.setData({
-        numberTrue:2
+        checkNum: false
       })
     }
+    this.setData({
+      showNum: true
+    })
   },
   classReg(){
-    if(this.data.clazz.trim() == ''){
+    if(this.data.classNum.trim() !== ''){
       this.setData({
-        classTrue:3
+        checkClass: true
       })
     }else{
       this.setData({
-        classTrue:2
+        checkClass: false
       })
     }
+    this.setData({
+      showClass: true
+    })
   },
   phoneReg(){
     const reg = /^(?:(?:\+|00)86)?1\d{10}$/
-    if(!reg.test(this.data.phone.trim())){
+    if(reg.test(this.data.phoneNum.trim())){
       this.setData({
-        phoneTrue:3
+        checkPhone: true
       })
     }else{
       this.setData({
-        phoneTrue:2
+        checkPhone: false
+      })
+    }
+    this.setData({
+      showPhone: true
+    })
+  },
+
+  introReg() {
+    if(this.data.stuIntro.trim() !== '') {
+      this.setData({
+        checkIntro: true
+      })
+    } else {
+      this.setData({
+        checkIntro: false
       })
     }
   },
 
+  formSubmit() {
+    // console.log(this.data.stuName);
+    console.log(111);
+    if(!this.data.showClass) {
+      this.setData({
+        showClass: true
+      })
+    }
+    console.log(this.data.checkClass, this.data.checkIntro);
+   if(this.data.checkClass && this.data.checkIntro) {
+    const {stuName, stuNum, stuCollege, stuMajor, phoneNum, classNum, stuIntro, stuSex} = this.data
+    stuFormSubmit({
+      name: stuName,
+      studentId: stuNum,
+      clazz: classNum,
+      college: stuCollege,
+      major: stuMajor,
+      phoneNumber: phoneNum,
+      selfIntroduction: stuIntro,
+      gender: stuSex,
+      direction: '',
+    }).then((res) => {
+      console.log(res);
+    })  
+   }
+    
+  },
 
   
 })

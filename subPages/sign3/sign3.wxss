@@ -11,7 +11,7 @@ page {
 }
 
 .decorate {
-  height: 300rpx;
+  height: 245rpx;
 }
 
 .decorate image {
@@ -22,6 +22,7 @@ page {
 }
 
 .tip {
+  margin: 0 0 20rpx 0;  
   width: 100%;
   text-align: center;
 }
@@ -46,6 +47,7 @@ input {
 }
 
 .stu {
+  position: relative;
   width: 100%;
   /* text-align: center; */
 }
@@ -63,14 +65,14 @@ input {
   animation-fill-mode: forwards;
   animation-duration: .6s;
   animation-timing-function: ease-in-out;
-  color:#20ee5e !important;
+  /* color:#20ee5e !important; */
 }
 .iconFail{
   animation-name: rotater;
   animation-fill-mode: forwards;
   animation-duration: .6s;
   animation-timing-function: ease-in-out;
-  color:#f51e1e !important;
+  /* color:#f51e1e !important; */
 }
 @keyframes rotater{
   0%{
@@ -109,17 +111,44 @@ input {
   margin: 0 20rpx;
 }
 
-.page2 {
-
-}
 
 .stu-college {
+  margin: 30rpx 0 0 0;
   text-align: center;
 }
 
 .stu-college .stu-tag {
-  margin: 0;
+  margin: 0 0 10rpx 0;
 }
+
+.stu-intro-head {
+  position: relative;
+  width: 100%;
+}
+
+.stu-intro {
+  position: absolute;
+  top: -30rpx;
+  overflow: hidden;
+  width: 100%;
+  height: 400rpx;
+  /* text-align: center; */
+}
+
+.stu-intro .stu-intro-tag {
+  margin: 85rpx 0 25rpx 172rpx;
+  font-size: 30rpx;
+  color: #8aeaee;
+}
+
+.stu-intro textarea {
+  margin: 0 auto;
+  width: 75%;
+}
+
+
+
+
 
 .footer {
   width: 100%;
@@ -144,6 +173,7 @@ input {
   border-radius: 30rpx;
   background-color: #fee3c8;
 }
+
 
 
 
