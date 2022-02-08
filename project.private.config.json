@@ -107,6 +107,12 @@
           "pathName": "subPages/signFinish/signFinish",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/profile/reservation/reservation",
+          "pathName": "pages/profile/reservation/reservation",
+          "query": "",
+          "scene": null
         }
       ]
     }

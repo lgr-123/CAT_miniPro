@@ -32,8 +32,8 @@ Page({
       },
       {
         icon: 'edit',
-        title: '进度',
-        route: '/pages/profile/progress/progress',
+        title: '签到',
+        route: '/pages/profile/signed/signed',
         content: '点击查看考核进度'
       },
       {

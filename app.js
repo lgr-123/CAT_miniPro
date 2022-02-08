@@ -65,13 +65,14 @@ App({
 
     // 判断是否授权登录过
     if(wx.getStorageSync('token')) {
-        updateToken().then(res => {
+        // updateToken().then(res => {
+        //   console.log(res);
+        // })
+        getUserInfo().then((res) => {
           console.log(res);
         })
     }
-    getUserInfo().then((res) => {
-      console.log(res);
-    })
+   
 
   },
   
