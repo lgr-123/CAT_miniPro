@@ -79,14 +79,14 @@ Page({
     })
     const {checkName, checkNum, checkPhone, stuSex} = this.data
     if(checkName && checkNum && checkPhone && stuSex) {
-     
+      this.setData({
+        showPage1: false,
+        showPage2: true
+      })
     }
     console.log(this.data.stuMajor);
     console.log(this.data.stuCollege);
-    this.setData({
-      showPage1: false,
-      showPage2: true
-    })
+   
   },
 
   selectCollege(e) {
@@ -215,6 +215,9 @@ Page({
       direction: direction,
     }).then((res) => {
       console.log(res);
+      wx.navigateTo({
+        url: '/subPages/signFinish/signFinish',
+      })
     })  
    }
     

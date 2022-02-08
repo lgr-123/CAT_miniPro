@@ -18,10 +18,14 @@ H_config.API_college_URL = '/college/list'
 // 获取指定学院的专业
 H_config.API_major_URL = '/major/college'
 
+// 更新用户信息
+H_config.API_updateInfo = '/w/update'
+
 // 获取用户信息
-H_config.API_getUserInfo_URL = '/user/selectUserInfo'
-H_config.STATUSCODE_getUserInfo_SUCCESS = 3208
-H_config.STATUSCODE_getNull_FAILD = 3554
+H_config.API_getInfo_URL = '/w/get'
+
+// 更新用户token,因为token会过期，所以每次登录都会更新token
+H_config.API_updateToken_URL = '/w/updateT'
 
 // 查询报名信息
 H_config.API_getSignUpInfo_URL = '/user/getSignUpInfo'
