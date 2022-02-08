@@ -24,6 +24,12 @@ App({
           //     this.globalData.userInfo.avatarUrl = res.userInfo.avatarUrl
           //   }
           // })
+          registerInfo().then(res=>{
+            this.globalData.registerInfo = res.data.data
+            console.log(this.globalData);
+          }).catch(err=>{
+            console.log(err);
+          })
         } else {
           this.globalData.isSignUp = false
         }
@@ -81,6 +87,7 @@ App({
     Custom: null,
     CustomBar: null,
     userInfo: null,
-    isSignUp: null
+    isSignUp: null,
+    registerInfo: null
   }
 })

@@ -1,5 +1,5 @@
 <!--pages/message/message.wxml-->
-<cu-custom bgColor="bg-olive" isBack="{{true}}">
+<cu-custom bgColor="bg-yellow" isBack="{{true}}">
   <text slot="content">消息中心</text>
 </cu-custom>
 
@@ -21,10 +21,10 @@
         <view class="cu-item cur cuIcon-{{icon[index%6]}}">
         <view>
             <text class="margin-bottom-xs ">{{item.time}}  </text>
-            <text class="text-{{state[index] === '已读' ? 'green' : 'orange'}}" bindtap='readOK' data-itemcontent='{{item.content}}' data-target="DialogModal1" data-confirmdata='{{index}}'>[{{state[index]}}]</text>
+            <text class="text-{{item.isRead ? 'green' : 'orange'}}" bindtap='readOK' data-itemcontent='{{item}}' data-target="DialogModal1" data-confirmdata='{{index}}'>[{{item.isRead ? '已读' : '未读'}}]</text>
         </view>
-            <view class="content bg-{{color[index%6]}} shadow-blur margin-top-xs">
-            <text>{{item.content}}</text> 
+            <view class="content shadow-blur margin-top-xs" style="background-color: {{state[index] === '已读' ? '#74a594' : '#d8ad5e'}}">
+            <text style="color: #fff">{{item.content}}</text> 
             </view>
         </view>
     </view>
@@ -71,7 +71,7 @@
           </view>
         </view>
         <view class="padding-xl">
-          {{itemcontent}}
+          {{itemcontent.content}}
         </view>
         <view class="cu-bar bg-white justify-end">
           <view class="action" style="width: 300rpx">

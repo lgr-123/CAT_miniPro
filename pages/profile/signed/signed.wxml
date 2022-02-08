@@ -1,2 +1,11 @@
 <!--pages/profile/signed/signed.wxml-->
 <text>pages/profile/signed/signed.wxml</text>
+11111
+<view>
+    111
+</view>
+  
+<view bindtap="goSigned">
+    签到
+</view>
+  

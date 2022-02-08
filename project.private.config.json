@@ -113,6 +113,12 @@
           "pathName": "pages/profile/reservation/reservation",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/profile/signed/signed",
+          "pathName": "pages/profile/signed/signed",
+          "query": "",
+          "scene": null
         }
       ]
     }

@@ -1,9 +1,14 @@
 /* pages/reservation/reservation.wxss */
 page {
+  /* background-color: #ecf0f3; */
   background-color: #ecf0f3;
   --RBShadow: rgba(207, 219, 230, .8);
   --LTShadow: rgba(255, 255, 255, .8);
 }
+
+/* .bgc{
+  background-color: #f7d666;
+} */
 
 .card {
   background: #ecf0f3;

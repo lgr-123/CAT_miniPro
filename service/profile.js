@@ -98,14 +98,14 @@ export function checkEnroll(data) {
 }
 
 // 获取用户进度
-export function selectSchedule(data) {
+export function getBriefInfo(data) {
   return request({
-    url: H_config.API_selectSchedule_URL,
+    url: H_config.API_getBriefInfo_URL,
     method: 'post',
     data: data,
-    header: {
-      'content-type': 'application/x-www-form-urlencoded'
-    }
+    // header: {
+    //   'content-type': 'application/x-www-form-urlencoded'
+    // }
   })
 }
 
@@ -199,6 +199,24 @@ export function messagelist(data) {
     url: H_config.API_messagelist_URL,
     method: 'post',
     // data: data
+  })
+}
+
+// 确认已读
+export function messageread(data) {
+  return request({
+    url: H_config.API_messageread_URL,
+    method: 'post',
+    data: data
+  })
+}
+
+// 确认已读
+export function registerInfo(data) {
+  return request({
+    url: H_config.API_registerInfo_URL,
+    method: 'post',
+    data: data
   })
 }
 

@@ -1,5 +1,5 @@
 <!--pages/profile/profile.wxml-->
-<cu-custom bgColor="bg-olive">
+<cu-custom bgColor="bg-yellow">
   <text slot="content">个人中心</text>
 </cu-custom>
 
@@ -30,7 +30,7 @@
     </view>
     <view class="icon text-right">
       <text class="cuIcon-notice pos-re">
-        <text class="tag cu-tag badge text-lg padding dp-in-bk text-center" style="height: 36rpx; width: 36rpx; line-height: 36rpx" wx:if="{{unReadNoticeNum}}">{{unReadNoticeNum}}</text>
+        <text class="tag cu-tag badge text-lg padding dp-in-bk text-center" style="height: 36rpx; width: 36rpx; line-height: 36rpx" wx:if="{{!unReadNoticeNum}}">{{unReadNoticeNum}}</text>
       </text>
     </view>
   </view>

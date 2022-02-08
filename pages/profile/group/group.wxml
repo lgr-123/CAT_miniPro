@@ -1,10 +1,10 @@
 <!--pages/group/group.wxml-->
-<cu-custom bgColor="bg-olive" isBack="{{true}}">
+<cu-custom bgColor="bg-yellow" isBack="{{true}}">
   <text slot="content">招新公告</text>
 </cu-custom>
 
 <view class="padding-lr-xl padding-top text-center margin-bottom-lg">
-  <view class="text-bold text-xxl margin-bottom">2021 招新流程</view>
+  <view class="text-bold text-xxl margin-bottom">2022 招新流程</view>
   <block wx:for="{{stage}}">
     <view>
       <view class="num padding-xs text-center">
@@ -13,8 +13,8 @@
       </view>
     </view>
     <view class="flex justify-around">
-      <text class="cuIcon-titles text-olive" wx:if="{{index !== 5}}"></text>
-      <text class="cuIcon-titles text-olive" wx:if="{{index !== 5}}"></text>
+      <text class="cuIcon-titles text-olive" wx:if="{{index !== 4}}"></text>
+      <text class="cuIcon-titles text-olive" wx:if="{{index !== 4}}"></text>
     </view>
   </block>
 </view>

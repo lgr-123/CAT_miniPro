@@ -38,8 +38,10 @@ H_config.STATUSCODE_checkEnroll_SUCCESS = 800
 H_config.STATUSCODE_checkEnroll_FAILED = 700
 
 // 获取用户进度
-H_config.API_selectSchedule_URL = '/schedule/selectSchedule'
-H_config.STATUSCODE_selectSchedule_SUCCESS = 1200
+H_config.API_getBriefInfo_URL = '/status/getBriefInfo'
+H_config.STATUSCODE_selectSchedule_SUCCESS = 1650
+// H_config.API_selectSchedule_URL = '/schedule/selectSchedule'
+// H_config.STATUSCODE_selectSchedule_SUCCESS = 1200
 
 // 获取可预约时间
 H_config.API_getAppointTime_URL = '/appointment/listAll'
@@ -63,6 +65,14 @@ H_config.API_cancelAppoint_URL = '/appointment/cancelAppointment'
 
 // 获取消息中心的消息
 H_config.API_messagelist_URL = '/message/list'
+
+//确定消息已读
+H_config.API_messageread_URL = '/message/read'
+H_config.STATUSCODE_selectUserAppoint_SUCCESS = 10086
+
+//获取用户报名信息
+H_config.API_registerInfo_URL = '/enroll/getI'
+H_config.STATUSCODE_registerInfo_SUCCESS = 200
 
 
 H_config.API_getNotice_URL = '/schedule/selectNotice'
