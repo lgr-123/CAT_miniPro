@@ -1,184 +1,224 @@
-// subPages/sign3/sign3.js
-import {baomin} from '../../service/profile'
-const app = getApp()
+// pages/singup/signup.js
+import {stuFormSubmit, getMajor, getCollege} from '../../service/profile'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    stage:1,
-    none:1,
-    direction:1,
-    name:'',
-    nameTrue:1,
-    phone:'',
-    phoneTrue:1,
-    number:'',
-    numberTrue:1,
-    clazz:'',
-    classTrue:1,
-    introduce:'',
+    stuName: '',
+    stuNum: '',
+    phoneNum: '',
+    stuSex: false,
+    stuCollege: '',
+    stuMajor: '',
+    classNum: '',
+    stuIntro: '',
+    direction: '',
+    showPage1: true,
+    showPage2: false,
+    CollegeIndex: 0,
+    MajorIndex: 0,
+    stuCollegeRange: [],
+    stuMajorRange: [],
+    checkName: false,
+    showName: false,
+    checkNum: false,
+    showNum: false,
+    checkPhone: false,
+    showPhone: false,
+    checkClass: false,
+    showClass: false,
+    checkIntro: false,
   },
-  getFont(){
-    this.setData({
-      stage:2,
-      direction:1
-    })
-  },
-  getBack(){
-    this.setData({
-      stage:2,
-      direction:2
-    })
-  },
-  nextStep(){
-    const {stage,name,phone,number,clazz,introduce,direction} = this.data
-    if(stage == 1){
-      this.setData({
-        stage:2
-      })
-    }else if(stage == 2){
-      const {nameTrue,classTrue,numberTrue} = this.data
-      if(nameTrue == 2 && classTrue == 2 && numberTrue == 2){
-        this.setData({
-          stage:3
-        })
-      }else{
-        this.nameReg()
-        this.numberReg()
-        this.classReg()
-      }
-    }else if(stage == 3){
-      const {phoneTrue} = this.data
-      if(phoneTrue == 2){
-        console.log(123);
-        baomin({
-          userId:wx.getStorageSync('userId'),
-          clazz,
-          name,
-          phoneNumber:phone,
-          introduce,
-          dirSummary:introduce,
-          stuNumber:number,
-          direction:direction == 1?'前端':'后端'})
-          .then(res=>{
-            if(res.data.code == 2205){
-              this.setData({
-                stage:4
-              })
-              app.globalData.isSignUp = true
-            }else if(res.data.code == 2511){
-              wx.showToast({
-                duration:2000,
-                title: '不可重复报名,有问题可以咨询师兄师姐',
-              })
-            }
-            else{
-              wx.showToast({
-                duration:2000,
-                title: '报名失败',
-              })
-            }
-            wx.hideLoading({
-              success: (res) => {},
-            })
 
-          }).catch((err) => {
-            console.log(err);
-          })
-      }else{
-        this.phoneReg()
-      }
-    }
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    // console.log(options.key);
+    this.setData({
+      direction: options.key
+    })
+    getCollege().then(({data}) => {
+      console.log(data);
+      this.setData({
+        stuCollegeRange: data.data,
+        stuMajorRange: data.data[0].majors,
+        stuCollege: data.data[0].name,
+        stuMajor: data.data[0].majors[0].name
+      })
+    }).catch(res => {
+      console.log(res);
+    })
+
+   
   },
-  preStep(){
-    const {stage} = this.data
-    if(stage == 2){
-      this.setData({
-        stage:1,
-        nameTrue:1,
-        numberTrue:1,
-        classTrue:1,
-        name:'',
-        number:'',
-        clazz:''
-      })
-    }else if(stage == 3){
-      this.setData({
-        stage:2,
-        phoneTrue:1,
-        phone:''
-      })
-    }else if(stage == 4){
-      this.setData({
-        stage:3
-      })
-    }
-  },
-  getInput(e){
+  getInput(e) {
+    // console.log(e);
     const {type} = e.currentTarget.dataset
     this.setData({
       [type]:e.detail.value
     })
   },
+
+  getSex(e) {
+    // console.log(e);
+    this.setData({
+      stuSex: e.detail.value
+    })
+  },
+  
+ 
+
+  checkPage1() {
+    this.setData({
+      showName: true,
+      showNum: true,
+      showPhone: true
+    })
+    const {checkName, checkNum, checkPhone, stuSex} = this.data
+    if(checkName && checkNum && checkPhone && stuSex) {
+     
+    }
+    console.log(this.data.stuMajor);
+    console.log(this.data.stuCollege);
+    this.setData({
+      showPage1: false,
+      showPage2: true
+    })
+  },
+
+  selectCollege(e) {
+    // console.log(e);
+    const value = e.detail.value
+    this.setData({
+      stuCollege: this.data.stuCollegeRange[value].name,
+      stuMajor: this.data.stuCollegeRange[value].majors[0].name,
+      CollegeIndex: value,
+      stuMajorRange: this.data.stuCollegeRange[value].majors
+    })
+
+  },
+  selectMajor(e) {
+    // console.log(e);
+    const value = e.detail.value
+    this.setData({
+      stuMajor: this.data.stuMajorRange[value].name,
+      MajorIndex: value,
+    })
+  },
+  goBack() {
+    if(this.data.showPage1) {
+      wx.navigateBack()
+    } else {
+      this.setData({
+        showPage1: true,
+        showPage2: false
+      })
+    }
+  },
+
+  // 表单验证
   nameReg(){
     const reg = /^(?:[\u4e00-\u9fa5·]{2,16})$/
-    if(!reg.test(this.data.name.trim())){
+    if(reg.test(this.data.stuName.trim())){
       this.setData({
-        nameTrue:3
+        checkName: true
       })
     }else{
       this.setData({
-        nameTrue:2
+        checkName: false
       })
     }
+    this.setData({
+      showName: true
+    })
   },
   numberReg(){
     const reg = /^3(1|2)2\d{7}$/
-    if(!reg.test(this.data.number.trim())){
+    if(reg.test(this.data.stuNum.trim())){
       this.setData({
-        numberTrue:3
+        checkNum: true
       })
     }else{
       this.setData({
-        numberTrue:2
+        checkNum: false
       })
     }
+    this.setData({
+      showNum: true
+    })
   },
   classReg(){
-    if(this.data.clazz.trim() == ''){
+    if(this.data.classNum.trim() !== ''){
       this.setData({
-        classTrue:3
+        checkClass: true
       })
     }else{
       this.setData({
-        classTrue:2
+        checkClass: false
       })
     }
+    this.setData({
+      showClass: true
+    })
   },
   phoneReg(){
     const reg = /^(?:(?:\+|00)86)?1\d{10}$/
-    if(!reg.test(this.data.phone.trim())){
+    if(reg.test(this.data.phoneNum.trim())){
       this.setData({
-        phoneTrue:3
+        checkPhone: true
       })
     }else{
       this.setData({
-        phoneTrue:2
+        checkPhone: false
+      })
+    }
+    this.setData({
+      showPhone: true
+    })
+  },
+
+  introReg() {
+    if(this.data.stuIntro.trim() !== '') {
+      this.setData({
+        checkIntro: true
+      })
+    } else {
+      this.setData({
+        checkIntro: false
       })
     }
   },
-  goToProfile(){
-    wx.navigateTo({
-      url: '/pages/profile/index/index',
-    })
-  },
-  onShareAppMessage(options) {
-    return {
-      title: 'CAT Studio',
-      path: '/subPages/studio/studio',
-      imageUrl: '/assets/img/catlogo.jpg'
+
+  formSubmit() {
+    // console.log(this.data.stuName);
+    console.log(111);
+    if(!this.data.showClass) {
+      this.setData({
+        showClass: true
+      })
     }
-  }
+    console.log(this.data.checkClass, this.data.checkIntro);
+   if(this.data.checkClass && this.data.checkIntro) {
+    const {direction ,stuName, stuNum, stuCollege, stuMajor, phoneNum, classNum, stuIntro, stuSex} = this.data
+    stuFormSubmit({
+      name: stuName,
+      studentId: stuNum,
+      clazz: classNum,
+      college: stuCollege,
+      major: stuMajor,
+      phoneNumber: phoneNum,
+      selfIntroduction: stuIntro,
+      gender: stuSex,
+      direction: direction,
+    }).then((res) => {
+      console.log(res);
+    })  
+   }
+    
+  },
+
+  
 })

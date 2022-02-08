@@ -12,10 +12,38 @@ export function baomin(data){
     data
   })
 }
+
+
+
 // 登录
 export function login(data) {
   return request({
     url: H_config.API_login_URL,
+    method: 'post',
+    data: data
+  })
+}
+
+export const getCollege = () => {
+  return request({
+    url: H_config.API_college_URL,
+    method: 'get'
+  })
+}
+
+// 获取指定学院的专业
+export const getMajor = (data) => {
+  return request({
+    url: H_config.API_major_URL,
+    method: 'post',
+    data
+  })
+}
+
+// 提交报名表
+export const stuFormSubmit = (data) => {
+  return request({
+    url: H_config.API_submitForm_URL,
     method: 'post',
     data: data
   })
