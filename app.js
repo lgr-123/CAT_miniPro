@@ -1,5 +1,5 @@
 // app.js
-import { getSignUpInfo, checkEnroll } from './service/profile'
+import { getSignUpInfo, checkEnroll, registerInfo } from './service/profile'
 import { H_config } from './service/config'
 App({
   onLaunch() {
@@ -24,6 +24,12 @@ App({
           //     this.globalData.userInfo.avatarUrl = res.userInfo.avatarUrl
           //   }
           // })
+          registerInfo().then(res=>{
+            this.globalData.registerInfo = res.data.data
+            console.log(this.globalData);
+          }).catch(err=>{
+            console.log(err);
+          })
         } else {
           this.globalData.isSignUp = false
         }
@@ -62,6 +68,8 @@ App({
         this.globalData.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
       },
     })
+
+
   },
   
   globalData: {
@@ -69,6 +77,7 @@ App({
     Custom: null,
     CustomBar: null,
     userInfo: null,
-    isSignUp: null
+    isSignUp: null,
+    registerInfo: null
   }
 })

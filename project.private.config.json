@@ -83,6 +83,12 @@
                     "pathName": "pages/profile/reservation/reservation",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/message/message",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }

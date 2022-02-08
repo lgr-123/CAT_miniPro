@@ -1,6 +1,6 @@
 // pages/progress/progress.js
 import {
-  selectSchedule
+  getBriefInfo
 } from '../../../service/profile'
 import { H_config } from '../../../service/config';
 
@@ -61,27 +61,25 @@ Page({
     ]
   },
   onLoad: function (options) {
-    if(wx.getStorageSync('userId')) {
-      selectSchedule({
-        userId: wx.getStorageSync('userId')
-      }).then(res => {
+      getBriefInfo().then(res => {
         wx.hideLoading()
+        console.log(res);
         if(res && res.data && res.data.code && res.data.code === H_config.STATUSCODE_selectSchedule_SUCCESS) {
           // res.data.data = res.data.data.slice(0, -1)
           
-          for(let item of res.data.data) {
-            if(item.currentTime) {
-              item.currentTime = item.currentTime.slice(5, 10)
-            }
-          }
+          // for(let item of res.data.data) {
+          //   if(item.currentTime) {
+          //     item.currentTime = item.currentTime.slice(5, 10)
+          //   }
+          // }
           this.setData({
-            progress: res.data.data
+            progress: res.data.data.recruitmentHistoryInfo
           })
+          console.log(this.data.progress);
         }
       }).catch((err) => {
         console.log(err);
       })
-    }
   },
   onShareAppMessage(options) {
     return {

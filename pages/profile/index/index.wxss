@@ -10,7 +10,7 @@ page {
   width: 2000rpx; 
   height: 2000rpx; 
   left: 50%; 
-  background: #74a594;
+  background: var(--yellow);
   transform: translate(-50%, -73%);
 }
 

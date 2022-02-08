@@ -40,11 +40,11 @@ Page({
     isReservated: false,
     closeappointment: false,
     currentReservation: {},
-    userInfo: app.globalData.userInfo
+    userInfo: app.globalData.registerInfo
   },
   onLoad: function (options) {
     this.setData({
-      userInfo: app.globalData.userInfo
+      userInfo: app.globalData.registerInfo
     })
     appointCheck().then(res => {
       wx.hideLoading()
@@ -74,6 +74,8 @@ Page({
         console.log(item);
         this.setData({
           currentReservation: item,
+          currentBegin: item.beginTime.slice(5,16),
+          currentEnd: item.endTime.slice(5,16),
           isReservated: true
         })
       } else{
@@ -125,14 +127,15 @@ Page({
       console.log(res.data.code);
       if(res.data.code === H_config.STATUSCODE_getAppointTime_SUCCESS) {
         for(let item of res.data.data) {
-          item.begintime = item.beginTime
-          item.endtime = item.endTime
+          item.begintime = item.beginTime.slice(5,19)
+          item.endtime = item.endTime.slice(5,19)
           item.number = item.count
           item.limitNumber = item.capacity
         }
         this.setData({
-          reservation: res.data.data
+          reservation: res.data.data,
         })
+        console.log(this.data.allTime);
       } else if(res.data.code === 1500) {
         showToast('当前阶段无可预约时间')
       } else {

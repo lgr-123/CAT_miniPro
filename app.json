@@ -12,7 +12,8 @@
         "pages/message/message"
     ],
     "window": {
-        "navigationStyle": "custom"
+        "navigationStyle": "custom",
+        "backgroundColor": "#face8f"
     },
     "usingComponents": {
         "cu-custom": "./colorui/components/cu-custom"

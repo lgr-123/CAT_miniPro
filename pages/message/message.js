@@ -1,6 +1,7 @@
 // pages/message/message.js
 import {
-    messagelist
+    messagelist,
+    messageread
   } from '../../service/profile'
 Page({
 
@@ -13,10 +14,10 @@ Page({
             '正常走流程而已',
             '成绩出来啦'
           ],
-        color: ['cyan', 'orange', 'olive', 'red', 'yellow', 'blue'],
+        color: ['#d8ad5e', 'orange', 'olive', 'red', 'yellow', 'blue'],
         icon: ['noticefill','form', 'edit', 'commentfill', 'newfill', 'activityfill', 'evaluate_fill'],
         date: ['2022.1.2', '2022.2.1', '2022.3.1'],
-        state: ['未读', '已读', '已读'],
+        state: ['未读', '已读', '已读','已读','已读','已读','已读','已读',],
         isread: false,
         itemcontent: '',
         anmiation: 'animation-scale-up animation-reverse',
@@ -44,7 +45,7 @@ Page({
     },
 
     readOK: function (e){
-        if(this.data.state[e.target.dataset.confirmdata] === '已读') return
+        if(this.data.stage[e.target.dataset.confirmdata].isRead) return
         console.log(e.target.dataset.itemcontent)
         this.setData({
             confirmdata: e.target.dataset.confirmdata,
@@ -62,13 +63,21 @@ Page({
     },
     confirmread: function (e){
         //调接口
-        console.log(this.data.confirmdata); 
+        console.log(this.data.itemcontent);
+        console.log(this.data.itemcontent.id);
+        let id = this.data.itemcontent.id
+        messageread({
+            messageId: this.data.itemcontent.id
+        }).then(res=>{
+            console.log(res);
+            this.onLoad()
+        })
         // console.log(data.confirmdata); 
         this.data.state[this.data.confirmdata] = '已读'
         this.setData({
             modalName: null
         })
-        this.onLoad()
+        
         console.log(this.data)
     },
 
