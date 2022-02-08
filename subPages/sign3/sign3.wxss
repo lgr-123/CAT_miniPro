@@ -12,6 +12,8 @@ page {
 
 .decorate {
   height: 245rpx;
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 40rpx;
 }
 
 .decorate image {
@@ -74,6 +76,12 @@ input {
   animation-timing-function: ease-in-out;
   /* color:#f51e1e !important; */
 }
+
+.icon-intro {
+  top: 255rpx;
+  right: 70rpx;
+}
+
 @keyframes rotater{
   0%{
     transform: rotate(0);
@@ -146,6 +154,7 @@ input {
 .stu-intro textarea {
   margin: 0 auto;
   width: 75%;
+  height: 48%;
 }
 
 

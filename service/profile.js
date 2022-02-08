@@ -169,6 +169,14 @@ export function cancelAppoint(data) {
   })
 }
 
+// 查看是否可签到
+export const checkStatus = () => {
+  return request({
+    url: H_config.API_checkStatus_URL,
+    method: 'post'
+  })
+}
+
 // 获取通知列表
 export function getNotice(data) {
   return request({

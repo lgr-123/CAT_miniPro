@@ -1,4 +1,6 @@
 <view id="bg" style="background-image: url(../../assets//img/bg1.jpg);background-size: 100% 100%;">
+	<text class="cuIcon-back back-icon" bindtap="goBack"></text>
+	  
 	<view class="front">
 		<view class="front-word" bindtap="goSign" data-type="前端" style="background-image: url(../../assets/img/f.png);background-size: 100% 100%;">
 			前端

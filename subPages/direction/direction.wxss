@@ -15,6 +15,13 @@ page {
     height: 100%;
 }
 
+.back-icon {
+    position: relative;
+    top: 70rpx;
+    left: 40rpx;
+    font-size: 36rpx;
+}
+
 .front {
     position: relative;
     top: 200rpx;

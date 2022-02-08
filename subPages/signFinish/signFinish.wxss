@@ -1,1 +1,10 @@
 /* subPages/signFinish/signFinish.wxss */
+page {
+    width: 100%;
+    height: 100%;
+}
+
+#bg {
+    width: 100%;
+    height: 100%;
+}

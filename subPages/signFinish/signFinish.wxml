@@ -1,4 +1,5 @@
 <!--subPages/signFinish/signFinish.wxml-->
+<view id="bg" style="background-image: url(../../assets/img/bg1.jpg);background-size: 100% 100%;">
 <view class="stage4 flex flex-direction align-center justify-center {{stage == 4?'stage3-4':'hide'}}"
     style="position:absolute;width:100%;height:90%;">
     <view class="{{stage == 4?'animation-shake':''}}"
@@ -16,4 +17,5 @@
       </view>
 
     </view>
+  </view>
   </view>

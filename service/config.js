@@ -27,6 +27,9 @@ H_config.API_getInfo_URL = '/w/get'
 // 更新用户token,因为token会过期，所以每次登录都会更新token
 H_config.API_updateToken_URL = '/w/updateT'
 
+// 用户查看是否可签到
+H_config.API_checkStatus_URL = '/queue/checkStatus'
+
 // 查询报名信息
 H_config.API_getSignUpInfo_URL = '/user/getSignUpInfo'
 H_config.STATUSCODE_getSignUpInfo_SUCCESS = 2208
