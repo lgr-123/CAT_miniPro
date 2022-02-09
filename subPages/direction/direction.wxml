@@ -1,8 +1,8 @@
-<view id="bg" style="background-image: url(../../assets//img/bg1.jpg);background-size: 100% 100%;">
+<view id="bg" style="background-image: url(https://lixianghao.top:2358/images/wechat/bg1.jpg);background-size: 100% 100%;">
 	<text class="cuIcon-back back-icon" bindtap="goBack"></text>
 	  
 	<view class="front">
-		<view class="front-word" bindtap="goSign" data-type="前端" style="background-image: url(../../assets/img/f.png);background-size: 100% 100%;">
+		<view class="front-word" bindtap="goSign" data-type="前端" style="background-image: url(https://lixianghao.top:2358/images/wechat/f.png);background-size: 100% 100%;">
 			前端
 		</view>
 		<view class="front-bg" style="background-image: url(../../assets//img/.png);background-size: 100% 100%;">
@@ -19,7 +19,7 @@
 		</view>
 	</view>
 	<view class="back">
-		<view class="back-word" bindtap="goSign" data-type="后台" style="background-image: url(../../assets/img/f.png);background-size: 100% 100%;">
+		<view class="back-word" bindtap="goSign" data-type="后台" style="background-image: url(https://lixianghao.top:2358/images/wechat/f.png);background-size: 100% 100%;">
 			后台
 		</view>
 		<view class="back-bg">
