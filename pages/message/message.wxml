@@ -23,7 +23,8 @@
             <text class="margin-bottom-xs ">{{item.time}}  </text>
             <text class="text-{{item.isRead ? 'green' : 'orange'}}" bindtap='readOK' data-itemcontent='{{item}}' data-target="DialogModal1" data-confirmdata='{{index}}'>[{{item.isRead ? '已读' : '未读'}}]</text>
         </view>
-            <view class="content shadow-blur margin-top-xs" style="background-color: {{state[index] === '已读' ? '#74a594' : '#d8ad5e'}}">
+            <!-- <view class="content shadow-blur margin-top-xs" style="background-color: {{stage[index].isRead? '#74a594' : '#d8ad5e'}}"> -->
+            <view class="content shadow-blur margin-top-xs bg-{{color[index%6]}}">
             <text style="color: #fff">{{item.content}}</text> 
             </view>
         </view>

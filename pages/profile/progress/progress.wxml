@@ -1,5 +1,5 @@
 <!--pages/progress/progress.wxml-->
-<cu-custom bgColor="bg-olive" isBack="{{true}}">
+<cu-custom bgColor="bg-yellow" isBack="{{true}}">
   <text slot="content">进度</text>
 </cu-custom>
 

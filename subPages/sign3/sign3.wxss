@@ -56,7 +56,7 @@ input {
 
 .text-icon {
   position: absolute;
-  top: 51rpx;
+  top: 10rpx;
   right: 75rpx;
   font-size: 50rpx;
 }

@@ -21,7 +21,7 @@
 		{{direction}}
 		<!-- 前端 -->
 	</view>
-	<view class="tip">请填写你的个人信息</view>
+	<!-- <view class="tip">请填写你的个人信息</view> -->
 
 	<view wx:if="{{showPage1}}" class="page1 {{!showPage1? 'animation-slide-left animation-reverse':'animation-slide-left'}}">
 		<view class="stu">
@@ -40,7 +40,7 @@
 			<text wx:if="{{showPhone}}" class="text-icon {{checkPhone?'cuIcon-roundcheckfill text-green iconSuccess':'cuIcon-roundclosefill text-red iconFail'}} "></text>
 		</view>
 		<view class="stu stu-sex">
-			<view class="stu-tag">性别</view>
+			<!-- <view class="stu-tag">性别</view> -->
 			<radio-group bindchange="getSex">
 				男<radio value="男" checked="true"></radio>
 				女<radio value="女"></radio>

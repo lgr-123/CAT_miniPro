@@ -133,7 +133,8 @@ Page({
           item.limitNumber = item.capacity
         }
         this.setData({
-          reservation: res.data.data,
+          // reservation: res.data.data,
+          reservation: res.data.data.filter(item => item.direction !== this.data.userInfo.direction),
         })
         console.log(this.data.allTime);
       } else if(res.data.code === 1500) {
