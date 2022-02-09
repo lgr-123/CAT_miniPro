@@ -49,11 +49,27 @@ export const stuFormSubmit = (data) => {
   })
 }
 
-// 获取用户信息
-export function getUserInfo(data) {
+// 更新用户信息
+export const updateUserInfo = (data) => {
   return request({
-    url: H_config.API_getUserInfo_URL,
-    data: data
+    url: H_config.API_updateInfo,
+    method: 'post',
+    data
+  })
+}
+
+// 获取用户信息
+export const getUserInfo = () => {
+  return request({
+    url: H_config.API_getInfo_URL
+   })
+}
+
+// 更新用户token
+export const updateToken = () => {
+  return request({
+    url: H_config.API_updateToken_URL,
+    method: 'post'
   })
 }
 
@@ -150,6 +166,14 @@ export function cancelAppoint(data) {
     header: {
       'content-type': 'application/x-www-form-urlencoded'
     }
+  })
+}
+
+// 查看是否可签到
+export const checkStatus = () => {
+  return request({
+    url: H_config.API_checkStatus_URL,
+    method: 'post'
   })
 }
 

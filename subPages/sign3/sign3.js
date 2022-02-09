@@ -30,6 +30,7 @@ Page({
     checkClass: false,
     showClass: false,
     checkIntro: false,
+    showIntro: false,
   },
 
   /**
@@ -77,16 +78,20 @@ Page({
       showNum: true,
       showPhone: true
     })
-    const {checkName, checkNum, checkPhone, stuSex} = this.data
-    if(checkName && checkNum && checkPhone && stuSex) {
-     
-    }
-    console.log(this.data.stuMajor);
-    console.log(this.data.stuCollege);
-    this.setData({
-      showPage1: false,
-      showPage2: true
-    })
+    setTimeout(() => {
+      const {checkName, checkNum, checkPhone, stuSex} = this.data
+      if(checkName && checkNum && checkPhone && stuSex) {
+        
+      }
+      this.setData({
+        showPage1: false,
+        showPage2: true
+      })
+      console.log(this.data.stuMajor);
+      console.log(this.data.stuCollege);
+    }, 200)
+    
+   
   },
 
   selectCollege(e) {
@@ -187,36 +192,54 @@ Page({
       })
     } else {
       this.setData({
-        checkIntro: false
+        checkIntro: false 
       })
     }
+    this.setData({
+      showIntro: true
+    })
   },
 
   formSubmit() {
     // console.log(this.data.stuName);
     console.log(111);
+ 
     if(!this.data.showClass) {
       this.setData({
-        showClass: true
+        showClass: true,
+        showIntro: true
       })
     }
-    console.log(this.data.checkClass, this.data.checkIntro);
-   if(this.data.checkClass && this.data.checkIntro) {
-    const {direction ,stuName, stuNum, stuCollege, stuMajor, phoneNum, classNum, stuIntro, stuSex} = this.data
-    stuFormSubmit({
-      name: stuName,
-      studentId: stuNum,
-      clazz: classNum,
-      college: stuCollege,
-      major: stuMajor,
-      phoneNumber: phoneNum,
-      selfIntroduction: stuIntro,
-      gender: stuSex,
-      direction: direction,
-    }).then((res) => {
-      console.log(res);
-    })  
-   }
+    // 延迟一下
+    setTimeout(() => {
+      console.log(this.data.checkClass, this.data.checkIntro);
+      if(this.data.checkClass && this.data.checkIntro) {
+       wx.showLoading({
+         title: '加载中',
+       })
+       const {direction ,stuName, stuNum, stuCollege, stuMajor, phoneNum, classNum, stuIntro, stuSex} = this.data
+       stuFormSubmit({
+         name: stuName,
+         studentId: stuNum,
+         clazz: classNum,
+         college: stuCollege,
+         major: stuMajor,
+         phoneNumber: phoneNum,
+         selfIntroduction: stuIntro,
+         gender: stuSex,
+         direction: direction,
+       }).then((res) => {
+         console.log(res);
+         wx.hideLoading()
+         wx.navigateTo({
+           url: '/subPages/signFinish/signFinish',
+         })
+       }).catch(err => {
+         wx.hideLoading()
+       })
+      }
+    }, 200)
+   
     
   },
 

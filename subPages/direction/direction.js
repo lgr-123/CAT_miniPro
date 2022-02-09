@@ -22,5 +22,10 @@ Page({
     wx.navigateTo({
       url: `/subPages/sign3/sign3?key=${direction}`,
     })
+  },
+
+  goBack() {
+    wx.navigateBack()
   }
+
 })

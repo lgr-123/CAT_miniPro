@@ -1,7 +1,8 @@
 // pages/WCH/login/login.js
 import {
   login,
-  getSignUpInfo
+  getSignUpInfo,
+  updateUserInfo
 } from '../../service/profile'
 
 import {
@@ -31,6 +32,12 @@ Page({
     }).then((e) => {
 
         console.log(e);
+        updateUserInfo({
+          nickname: e.userInfo.nickName,
+          avatarUrl: e.userInfo.avatarUrl
+        }).then((res) => {
+          console.log(res);
+        })
         // app.globalData.userInfo.avatarUrl = e.userInfo.avatarUrl
         // app.globalData.userInfo.nickName = e.userInfo.nickName
         app.globalData.userInfo = e.userInfo

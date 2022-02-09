@@ -11,7 +11,8 @@ import {
   getSignUpInfo,
   getAppointTime,
   getNotice,
-  checkNotice
+  checkNotice,
+  checkStatus
 } from '../../../service/profile'
 import { H_config, BASE_URL } from '../../../service/config'
 
@@ -32,9 +33,9 @@ Page({
       },
       {
         icon: 'edit',
-        title: '进度',
-        route: '/pages/profile/progress/progress',
-        content: '点击查看考核进度'
+        title: '签到',
+        route: '/pages/profile/signed/signed',
+        content: '点击签到等待面试'
       },
       {
         icon: 'time',
@@ -219,6 +220,16 @@ Page({
       // })
       wx.navigateTo({
         url: route
+      })
+    } else if (route === '/pages/profile/signed/signed') {
+      checkStatus().then(({data}) => {
+        if(data.code == '1301') {
+          showToast('当前未开放签到功能')
+        } else if (data.code == '1101') {
+          wx.navigateTo({
+            url: route
+          })
+        }
       })
     } else {
       wx.navigateTo({

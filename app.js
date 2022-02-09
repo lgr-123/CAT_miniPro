@@ -1,5 +1,5 @@
 // app.js
-import { getSignUpInfo, checkEnroll, registerInfo } from './service/profile'
+import { getSignUpInfo, checkEnroll, getUserInfo, updateToken} from './service/profile'
 import { H_config } from './service/config'
 App({
   onLaunch() {
@@ -69,6 +69,16 @@ App({
       },
     })
 
+    // 判断是否授权登录过
+    if(wx.getStorageSync('token')) {
+        // updateToken().then(res => {
+        //   console.log(res);
+        // })
+        getUserInfo().then((res) => {
+          console.log(res);
+        })
+    }
+   
 
   },
   
