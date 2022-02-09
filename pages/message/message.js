@@ -9,15 +9,10 @@ Page({
      * 页面的初始数据
      */
     data: {
-        stage: [
-            '大家不要紧张',
-            '正常走流程而已',
-            '成绩出来啦'
-          ],
-        color: ['#d8ad5e', 'orange', 'olive', 'red', 'yellow', 'blue'],
+        stage: [],
+        color: ['green', 'orange', 'olive', 'red', 'yellow', 'blue'],
         icon: ['noticefill','form', 'edit', 'commentfill', 'newfill', 'activityfill', 'evaluate_fill'],
         date: ['2022.1.2', '2022.2.1', '2022.3.1'],
-        state: ['未读', '已读', '已读','已读','已读','已读','已读','已读',],
         isread: false,
         itemcontent: '',
         anmiation: 'animation-scale-up animation-reverse',
@@ -73,7 +68,7 @@ Page({
             this.onLoad()
         })
         // console.log(data.confirmdata); 
-        this.data.state[this.data.confirmdata] = '已读'
+        // this.data.state[this.data.confirmdata] = '已读'
         this.setData({
             modalName: null
         })
