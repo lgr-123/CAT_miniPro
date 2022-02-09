@@ -64,7 +64,7 @@ Page({
   },
 
   getSex(e) {
-    // console.log(e);
+    console.log(e);
     this.setData({
       stuSex: e.detail.value
     })

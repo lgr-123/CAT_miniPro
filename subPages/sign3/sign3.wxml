@@ -21,29 +21,29 @@
 		{{direction}}
 		<!-- 前端 -->
 	</view>
-	<!-- <view class="tip">请填写你的个人信息</view> -->
+	<view class="tip">JOIN</view>
 
 	<view wx:if="{{showPage1}}" class="page1 {{!showPage1? 'animation-slide-left animation-reverse':'animation-slide-left'}}">
 		<view class="stu">
-			<view class="stu-tag">姓名 </view>
-			<input class="" value="{{stuName}}" type="text" placeholder="" bindinput="getInput" bindblur="nameReg" data-type="stuName"></input>
+			<!-- <view class="stu-tag">姓名 </view> -->
+			<input class="inputmar" value="{{stuName}}" type="text" placeholder="姓名" bindinput="getInput" bindblur="nameReg" data-type="stuName"></input>
 			<text wx:if="{{showName}}" class="text-icon {{checkName?'cuIcon-roundcheckfill text-green iconSuccess':'cuIcon-roundclosefill text-red iconFail'}} "></text>
 		</view>
 		<view class="stu">
-			<view class="stu-tag">学号 </view>
-			<input class="" value="{{stuNum}}" type="text" placeholder="" bindinput="getInput" bindblur="numberReg" data-type="stuNum"></input>
+			<!-- <view class="stu-tag">学号 </view> -->
+			<input class="inputmar" value="{{stuNum}}" type="text" placeholder="学号" bindinput="getInput" bindblur="numberReg" data-type="stuNum"></input>
 			<text wx:if="{{showNum}}" class="text-icon {{checkNum?'cuIcon-roundcheckfill text-green iconSuccess':'cuIcon-roundclosefill text-red iconFail'}} "></text>
 		</view>
 		<view class="stu">
-			<view class="stu-tag">手机号码</view>
-			<input class="" value="{{phoneNum}}" type="text" placeholder="" bindinput="getInput" bindfocus="" bindblur="phoneReg" data-type="phoneNum"></input>
+			<!-- <view class="stu-tag">手机号码</view> -->
+			<input class="inputmar" value="{{phoneNum}}" type="text" placeholder="手机号码" bindinput="getInput" bindfocus="" bindblur="phoneReg" data-type="phoneNum"></input>
 			<text wx:if="{{showPhone}}" class="text-icon {{checkPhone?'cuIcon-roundcheckfill text-green iconSuccess':'cuIcon-roundclosefill text-red iconFail'}} "></text>
 		</view>
 		<view class="stu stu-sex">
 			<!-- <view class="stu-tag">性别</view> -->
 			<radio-group bindchange="getSex">
-				男<radio value="男" checked="true"></radio>
-				女<radio value="女"></radio>
+				<radio class="blue cuIcon-male sexicon {{stuSex === '男' ? 'transexicon' : ''}}" value="男" checked="true"></radio>
+				<radio class="red cuIcon-female sexicon {{stuSex === '女' ? 'transexicon' : ''}}" value="女"></radio>
 			</radio-group>
 		</view>
 	</view>

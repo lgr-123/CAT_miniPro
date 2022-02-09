@@ -27,6 +27,10 @@ page {
   margin: 0 0 20rpx 0;  
   width: 100%;
   text-align: center;
+  font-weight: 600;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 130rpx;
+  padding-top: 150rpx;
 }
 
 .page1,
@@ -108,11 +112,18 @@ input {
 }
 
 .stu-sex{
-  margin: 35rpx 0 0 0; 
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 35rpx 0 35px 0; 
 }
 
 .stu-sex radio-group {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
   margin-left: 65rpx;
+  margin-right: 65rpx;
 }
 
 .stu-sex radio {
@@ -185,6 +196,18 @@ input {
   background-color: #fee3c8;
 }
 
+.inputmar{
+  margin-bottom: 60rpx;
+}
+
+.sexicon{
+  transform: scale(1);
+  transition: 0.5s;
+}
+
+.transexicon{
+  transform:scale(1.5);
+}
 
 
 
