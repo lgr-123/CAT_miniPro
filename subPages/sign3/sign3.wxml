@@ -15,7 +15,7 @@
 <!-- 
 第一页： 姓名 学号 手机号 性别 
   -->
-<view id="bg" style="background-image: url(../../assets/img/bg1.jpg);background-size: 100% 100%;">
+<view id="bg" style="background-image: url(https://lixianghao.top:2358/images/wechat/bg1.jpg);background-size: 100% 100%;">
 	<view class="decorate">
 		<image class="" src="../../assets/img/1.png" mode="aspectFill" lazy-load="false" binderror="" bindload="" />
 		{{direction}}
@@ -74,7 +74,7 @@
 		</view>
 
 		<view class="stu-intro-head">
-			<view class="stu-intro" style="background-image: url(../../assets/img/in.png);background-size: 100% 100%;">
+			<view class="stu-intro" style="background-image: url(https://lixianghao.top:2358/images/wechat/in.png);background-size: 100% 100%;">
 				<view class="stu-intro-tag">可以介绍一下自己吗</view>
 				<textarea class="" value="{{stuIntro}}" placeholder="例如兴趣爱好,目前所掌握的知识,其他方面的一些技能等,100字左右" placeholder-style="" placeholder-class="textarea-placeholder" maxlength="140" bindinput="getInput" bindblur="introReg" data-type="stuIntro" bindlinechange="%{15}">
       </textarea>
