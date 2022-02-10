@@ -17,7 +17,9 @@ const app = getApp()
 
 Page({
   data: {
-    code: null
+    code: null,
+    nickName: '',
+    avatarUrl: ''
   },
   onLoad: function (options) {
     let eventChannel = this.getOpenerEventChannel()
@@ -26,18 +28,17 @@ Page({
     })
   },
   showLogin(e) {
-   
     wxPromise('getUserProfile', {
       desc: '获取用户信息',
     }).then((e) => {
+      console.log(e);
+      this.setData({
+        nickName: e.userInfo.nickName,
+        avatarUrl: e.userInfo.avatarUrl
+      })
 
-        console.log(e);
-        updateUserInfo({
-          nickname: e.userInfo.nickName,
-          avatarUrl: e.userInfo.avatarUrl
-        }).then((res) => {
-          console.log(res);
-        })
+        // console.log(e);
+      
         // app.globalData.userInfo.avatarUrl = e.userInfo.avatarUrl
         // app.globalData.userInfo.nickName = e.userInfo.nickName
         app.globalData.userInfo = e.userInfo
@@ -62,43 +63,13 @@ Page({
               // wx.setStorageSync('userId', id)
               wx.hideLoading()
               wx.navigateBack()
-    /*
-              getSignUpInfo({
-                userId: id
-              }).then(res => {
-                if(res.data && res.data.code && res.data.code === H_config.STATUSCODE_getSignUpInfo_SUCCESS) {
-                  wx.setStorageSync('direction', res.data.data.direction)
-                  app.globalData.isSignUp = true
-                  app.globalData.userInfo = res.data.data
-                  // wx.getUserInfo({
-                  //   success: res => {
-                  //     app.globalData.userInfo.avatarUrl = res.userInfo.avatarUrl
-                  //     wx.showToast({
-                  //       title: '登录成功',
-                  //       duration: 1000
-                  //     })
-                  //     setTimeout(() => {
-                  //       wx.navigateBack()
-                  //     }, 100)
-                  //   }
-                  // })
-                } else {
-                  // app.globalData.isSignUp = false
-                  wx.showToast({
-                    title: '登录成功',
-                    duration: 1000
-                  })
-                  setTimeout(() => {
-                    wx.navigateBack()
-                  }, 100)
-                }
-                wx.hideLoading()
-              }).catch((err) => {
-                console.log(err);
+              updateUserInfo({
+                nickName: this.data.nickName,
+                avatarUrl: this.data.avatarUrl
+              }).then((res) => {
+                console.log(res);
               })
-
-              */
-            
+    
           }).catch(err => {
             console.log(err);
           })

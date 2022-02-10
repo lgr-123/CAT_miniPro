@@ -2,10 +2,26 @@
 <text>pages/profile/signed/signed.wxml</text>
 11111
 <view>
-    111
+	111
 </view>
-  
+
 <view bindtap="goSigned">
-    签到
+	签到
 </view>
-  
+<view class="cu-modal {{modalName=='Modal'?'show':'show'}}">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class="content">Modal标题</view>
+			<view class="action" bindtap="hideModal"> <text class="cuIcon-close text-red"></text> </view>
+		</view>
+		<view class="padding-xl"> Modal 内容。 </view>
+        <view class="cu-bar bg-white justify-center">
+            <view class="action" >
+                <view class="cu-btn line-green text-green radius">取消</view>
+                <view class="cu-btn bg-green margin-left radius">确定</view>
+           </view>
+              
+        </view>
+          
+	</view>
+</view>

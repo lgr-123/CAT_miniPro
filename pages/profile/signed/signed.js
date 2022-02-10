@@ -22,15 +22,7 @@ Page({
 
   },
 
-  goSigned() {
-    console.log(11);
-    wx.requestSubscribeMessage({
-      tmplIds: ['2DJKw__SrskrMQd1sosfneFITtBgBkSNHommFJ8SK2E'],
-      success: (res) => {
-        console.log(res);
-      }
-    })
-  }
+  
 
   
 })

@@ -65,6 +65,14 @@ export const getUserInfo = () => {
    })
 }
 
+// 检查token是否过期
+export const checkToken = () => {
+  return request({
+    url: H_config.API_checkToken_URL,
+    method: 'post'
+  })
+}
+
 // 更新用户token
 export const updateToken = () => {
   return request({
