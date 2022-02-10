@@ -4,9 +4,11 @@ page {
 }
 
 #bg {
-  padding: 150rpx 75rpx 0 75rpx;
+  position: relative;
+  padding: 150rpx 75rpx 125rpx 75rpx;
   width: 100%;
   height: 100%;
+  overflow: hidden;
   /* text-align: center; */
 }
 
@@ -24,18 +26,33 @@ page {
 }
 
 .tip {
-  margin: 0 0 20rpx 0;  
+  position: absolute;
   width: 100%;
+  margin-left: -75rpx;
   text-align: center;
   font-weight: 600;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 130rpx;
-  padding-top: 150rpx;
+  /* top: 500rpx; */
+  bottom: 950rpx;
+  color: #a5673bc4;
 }
 
 .page1,
  .page2{
   height: 570rpx;
+  position: absolute;
+  bottom: 300rpx;
+  width: 100%;
+  margin-left: -75rpx;
+}
+
+.page3{
+  height: 570rpx;
+  position: absolute;
+  bottom: 450rpx;
+  width: 100%;
+  margin-left: -75rpx;
 }
 
 
@@ -48,20 +65,21 @@ input {
   width: 490rpx;
   background-color: rgb(247, 245, 255,.8);
   /* background-color: #f7f6fc; */
-  box-shadow: 0px 3px 8px rgb(82, 78, 78), -2px 0 20px #ffffff;
+  box-shadow: 0px 3px 8px rgb(189, 186, 186), -2px 0 20px #ffffff;
   border-radius: 60rpx;
 }
 
 .stu {
   position: relative;
-  width: 100%;
+  width: 490rpx;
+  margin: 0 auto;
   /* text-align: center; */
 }
 
 .text-icon {
   position: absolute;
   top: 10rpx;
-  right: 75rpx;
+  right: 30rpx;
   font-size: 50rpx;
 }
 
@@ -82,8 +100,11 @@ input {
 }
 
 .icon-intro {
-  top: 255rpx;
-  right: 70rpx;
+  position: absolute;
+  /* top: 255rpx; */
+  bottom: 120rpx;
+  right: 100rpx;
+  font-size: 50rpx;
 }
 
 @keyframes rotater{
@@ -115,15 +136,14 @@ input {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin: 35rpx 0 35px 0; 
+  margin: 35rpx 0 10rpx 0; 
 }
 
 .stu-sex radio-group {
-  width: 100%;
+  width: 60%;
   display: flex;
   justify-content: space-between;
-  margin-left: 65rpx;
-  margin-right: 65rpx;
+  margin: 0 auto;
 }
 
 .stu-sex radio {
@@ -144,15 +164,16 @@ input {
 
 .stu-intro-head {
   position: relative;
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .stu-intro {
-  position: absolute;
-  top: -30rpx;
+  /* position: absolute;
+  top: -30rpx; */
   overflow: hidden;
   width: 100%;
-  height: 400rpx;
+  height: 600rpx;
   /* text-align: center; */
 }
 
@@ -163,7 +184,8 @@ input {
 }
 
 .stu-intro textarea {
-  margin: 0 auto;
+  margin: 220rpx auto 0;
+  padding: 20rpx 20rpx 30rpx;
   width: 75%;
   height: 48%;
 }
@@ -177,23 +199,31 @@ input {
 }
 
 .footer view {
-  width: 110rpx;
+  width: 50%;
   height: 60rpx;
   letter-spacing: 5rpx;
   text-align: center;
   line-height: 60rpx;
 }
 
-.back {
-  color: #56de84;
-  border-radius: 30rpx;
-  background-color: #adf5c4;
+.back{
+  margin-left: 60rpx;
+  margin-top: 0rpx;
+  animation: fly 0.7s infinite linear alternate ;
+}
+
+.back image{
+  max-width: 50%;
+}
+.confirm image{
+  max-width: 60%;
+  height: 400rpx;
 }
 
 .confirm {
-  color: #eaa44b;
-  border-radius: 30rpx;
-  background-color: #fee3c8;
+  padding-right: 80rpx;
+  margin-top: 10rpx;
+  animation: fly 0.7s 0.3s infinite linear alternate ;
 }
 
 .inputmar{
@@ -207,6 +237,15 @@ input {
 
 .transexicon{
   transform:scale(1.5);
+}
+
+@keyframes fly {
+  from{
+      margin-top: 0rpx;
+  }
+  to{
+      margin-top: 20rpx;
+  }
 }
 
 

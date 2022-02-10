@@ -9,7 +9,7 @@ Page({
     stuName: '',
     stuNum: '',
     phoneNum: '',
-    stuSex: false,
+    stuSex: '男',
     stuCollege: '',
     stuMajor: '',
     classNum: '',
@@ -17,6 +17,7 @@ Page({
     direction: '',
     showPage1: true,
     showPage2: false,
+    showPage3: false,
     CollegeIndex: 0,
     MajorIndex: 0,
     stuCollegeRange: [],
@@ -31,6 +32,12 @@ Page({
     showClass: false,
     checkIntro: false,
     showIntro: false,
+    animation1: '',
+    animation11: '',
+    animation2: '',
+    animation22: '',
+    animation3: '',
+    animation33: '',
   },
 
   /**
@@ -70,26 +77,81 @@ Page({
     })
   },
   
- 
+ //<view class="confirm" bindtap="{{showPage3? 'formSubmit' : (showPage2 ? 'checkPage1' : 'formSubmit')}}">确定</view>
 
   checkPage1() {
     this.setData({
       showName: true,
       showNum: true,
-      showPhone: true
+      showPhone: true,
+      animation11: 'animation-reverse',
+      animation2: 'animation-slide-right',
     })
     setTimeout(() => {
-      const {checkName, checkNum, checkPhone, stuSex} = this.data
-      if(checkName && checkNum && checkPhone && stuSex) {
+      this.setData({
+        animation1: 'animation-slide-left' ,
+      })
+    }, 1)
+    setTimeout(() => {
+      this.setData({
+        showPage2: true,
+      })
+    }, 50)
+    setTimeout(() => {
+      
+      // const {checkClass, checkNum, checkPhone, stuSex} = this.data
+      // if(checkName && checkNum && checkPhone && stuSex) {
         
-      }
+      // }
       this.setData({
         showPage1: false,
-        showPage2: true
+        showPage3: false,
+        animation1: '',
+        animation11: '',
+        animation2: '',
       })
       console.log(this.data.stuMajor);
       console.log(this.data.stuCollege);
-    }, 200)
+    }, 350)
+    
+   
+  },
+  checkPage2() {
+    this.setData({
+      showClass: true,
+      animation22: 'animation-reverse', 
+      animation3: 'animation-slide-right',
+      
+    })
+    setTimeout(() => {
+      this.setData({
+        animation2: 'animation-slide-left',
+      })
+    }, 1)
+    setTimeout(() => {
+      this.setData({
+        showPage3: true,
+      })
+    }, 50)
+    setTimeout(() => {
+      // const {checkName, checkNum, checkPhone, stuSex} = this.data
+      // if(checkName && checkNum && checkPhone && stuSex) {
+        
+      // }
+      this.setData({
+        showPage1: false,
+        showPage2: false,
+        showPage3: true,
+        
+        animation2: '',
+        animation22: '',
+        
+        animation3: '',
+        animation33: '',
+      })
+      console.log(this.data.stuMajor);
+      console.log(this.data.stuCollege);
+    }, 350)
     
    
   },
@@ -116,11 +178,71 @@ Page({
   goBack() {
     if(this.data.showPage1) {
       wx.navigateBack()
+    }else if(this.data.showPage2){
+      
+      setTimeout(() => {
+        this.setData({
+          animation11: '' ,
+          animation1: '' ,
+          animation2: '',
+        })
+      }, 1);
+      setTimeout(() => {
+        this.setData({
+          animation1: 'animation-slide-left' ,
+          animation22: 'animation-reverse',
+          animation2: 'animation-slide-right',
+        })
+      }, 2);
+      setTimeout(() => {
+        this.setData({
+          showPage1: true,
+          showPage3: false,
+          // animation1: '' 
+        })
+      }, 50);
+      setTimeout(() => {
+        this.setData({
+          showPage2: false,
+          animation1: '' ,
+          animation11: '' ,
+          animation22: '',
+          animation2: '',
+        })
+      }, 350);
+      
+      
     } else {
-      this.setData({
-        showPage1: true,
-        showPage2: false
-      })
+      setTimeout(() => {
+        this.setData({
+          animation22: '' ,
+          animation2: '' ,
+          animation3: '',
+        })
+      }, 1);
+      setTimeout(() => {
+        this.setData({
+          animation2: 'animation-slide-left' ,
+          animation33: 'animation-reverse',
+          animation3: 'animation-slide-right',
+        })
+      }, 2);
+      setTimeout(() => {
+        this.setData({
+          showPage1: false,
+          showPage2: true,
+          // animation1: '' 
+        })
+      }, 50);
+      setTimeout(() => {
+        this.setData({
+          showPage3: false,
+          animation2: '' ,
+          animation22: '' ,
+          animation33: '',
+          animation3: '',
+        })
+      }, 350);
     }
   },
 

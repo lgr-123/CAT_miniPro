@@ -3,16 +3,16 @@
 <view class="stage4 flex flex-direction align-center justify-center {{stage == 4?'stage3-4':'hide'}}"
     style="position:absolute;width:100%;height:90%;">
     <view class="{{stage == 4?'animation-shake':''}}"
-      style="position:relative;width:70%;height:36%;background:#ffffff;border-radius:14rpx;">
+      style="position:relative;width:70%;height:36%;background:#ffffff00;border-radius:14rpx;">
       <view class="flex justify-center align-center"
-        style="left:50%;transform:translate(-50%,-70rpx); position:absolute;width:140rpx;height:140rpx;border-radius:100%;background:#22b573;border:3px solid #ffffff;">
+        style="left:50%;transform:translate(-50%,-70rpx); position:absolute;width:140rpx;height:140rpx;border-radius:100%;background:#ceca57;">
         <view class="cuIcon-check" style="font-size:80rpx;color:#ffffff;"></view>
       </view>
       <view class="text-center" style="font-size:42rpx;color:#000000; margin-top:100rpx;">恭喜你报名成功</view>
-      <view class="text-center" style="font-size:34rpx;color:#999999;margin-top:50rpx;">希望你在编成路上越走越远</view>
+      <view class="text-center" style="font-size:34rpx;color:#999999;margin-top:50rpx;">希望你在编程路上越走越远</view>
       <view class="text-center" style="font-size:34rpx;color:#999999;">继续努力,加油!</view>
-      <view class="flex justify-center align-center" style="width:100%;margin-top:40rpx;">
-        <view class="text-center" style="color:#ffffff; width:80%;height:70rpx;line-height:70rpx;background:#22b573;" bindtap="goToProfile">
+      <view class="flex justify-center align-center" style="width:100%;margin-top:300rpx;">
+        <view class="text-center" style="color:#ffffff; width:80%;height:70rpx;line-height:70rpx;background:#ceca57;" bindtap="goToProfile">
           前往个人中心</view>
       </view>
 
