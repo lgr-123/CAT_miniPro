@@ -47,7 +47,7 @@
     
 </view>
 
-<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+<!-- <view class="cu-modal {{modalName=='Modal'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-white justify-end">
       <view class="content">通知</view>
@@ -76,6 +76,24 @@
       </view>
     </view>
   </view>
+</view> -->
+
+<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class="content">签到</view>
+			<view class="action" bindtap="hideModal"> <text class="cuIcon-close text-red"></text> </view>
+		</view>
+		<view class="padding-xl"> Modal 内容。 </view>
+        <view class="cu-bar bg-white justify-center">
+            <view class="action" >
+                <view class="cu-btn line-green text-green radius" bindtap="hideModal">取消</view>
+                <view class="cu-btn bg-green margin-left radius" bindtap="goSigned">确定</view>
+           </view>
+              
+        </view>
+          
+	</view>
 </view>
 
 <view class="cu-modal {{dialog?'show':''}}">

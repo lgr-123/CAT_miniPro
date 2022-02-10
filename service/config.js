@@ -24,6 +24,9 @@ H_config.API_updateInfo = '/w/update'
 // 获取用户信息
 H_config.API_getInfo_URL = '/w/get'
 
+// 检查token是否过期
+H_config.API_checkToken_URL = '/w/checkT'
+
 // 更新用户token,因为token会过期，所以每次登录都会更新token
 H_config.API_updateToken_URL = '/w/updateT'
 

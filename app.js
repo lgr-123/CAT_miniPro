@@ -1,5 +1,5 @@
 // app.js
-import { getSignUpInfo, checkEnroll, getUserInfo, updateToken} from './service/profile'
+import { getSignUpInfo, checkEnroll, getUserInfo, updateToken, checkToken} from './service/profile'
 import { H_config } from './service/config'
 App({
   onLaunch() {
@@ -38,27 +38,7 @@ App({
         console.log(err);
       })
     }
-    // if(wx.getStorageSync('userId')) {
-    //   getSignUpInfo({
-    //     userId: wx.getStorageSync('userId')
-    //   }).then(res => {
-    //     if(res.data && res.data.code && res.data.code === H_config.STATUSCODE_getSignUpInfo_SUCCESS) {
-    //       wx.setStorageSync('direction', res.data.data.direction)
-    //       this.globalData.isSignUp = true
-    //       this.globalData.userInfo = res.data.data
-    //       wx.getUserInfo({
-    //         success: res => {
-    //           this.globalData.userInfo.avatarUrl = res.userInfo.avatarUrl
-    //         }
-    //       })
-    //     } else {
-    //       this.globalData.isSignUp = false
-    //     }
-    //     wx.hideLoading()
-    //   }).catch((err) => {
-    //     console.log(err);
-    //   })
-    // }
+    
 
     wx.getSystemInfo({
       success: e => {
@@ -71,12 +51,26 @@ App({
 
     // 判断是否授权登录过
     if(wx.getStorageSync('token')) {
-        // updateToken().then(res => {
-        //   console.log(res);
-        // })
-        getUserInfo().then((res) => {
-          console.log(res);
+       
+        checkToken().then(({data}) => {
+          console.log(data);
+          // 未过期
+          if(!data.data) {
+            // 获取用户的头像和昵称
+            getUserInfo().then(({data}) => {
+              console.log(data);
+              this.globalData.userInfo = data.data
+            })
+            updateToken().then(({data}) => {
+              // console.log(res);
+              wx.setStorageSync('token', data.data)
+            })
+          } else {
+            // token过期，清除token
+             wx.removeStorageSync('token')
+          }
         })
+       
     }
    
 

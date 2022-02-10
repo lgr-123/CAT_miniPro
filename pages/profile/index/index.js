@@ -59,6 +59,7 @@ Page({
   },
   onLoad: function (options) {
     // 计算装四个按钮容器的高度
+    
     wx.createSelectorQuery().select('.card').boundingClientRect().selectViewport().scrollOffset().exec(res => {
       this.setData({
         cardBottom: res[0].bottom
@@ -79,23 +80,15 @@ Page({
     })
   },
   async onShow() {
+    console.log(app);
+    this.setData({
+      userInfo: app.globalData.userInfo
+    })
+    console.log(this.data.userInfo);
+    
+
     if(!app.globalData.isSignUp) {
-      wx.getSetting({
-        success: res => {
-          if (res.authSetting['scope.userInfo'] && !this.data.userInfo) {
-            // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-            wx.getUserInfo({
-              success: res => {
-                app.globalData.userInfo = res.userInfo
-                this.setData({
-                  isSignUp: app.globalData.isSignUp,
-                  userInfo: app.globalData.userInfo
-                })
-              }
-            })
-          }
-        }
-      })
+     
     } else {
       if(wx.getStorageSync('userId')) {
         await getSignUpInfo({
@@ -129,28 +122,7 @@ Page({
           console.log(err);
         })
 
-        getNotice({
-          userId: wx.getStorageSync('userId')
-        }).then(res => {
-          wx.hideLoading()
-          if(res.data.code === 1200) {
-            this.setData({
-              notice: res.data.data
-            })
-          }
-        }).then(() => {
-          let num = 0
-          this.data.notice.forEach((data) => {
-            if(!data.stage) {
-              num++
-            }
-          })
-          this.setData({
-            unReadNoticeNum: num
-          })
-        }).catch((err) => {
-          console.log(err);
-        })
+      
       }
     }
 
@@ -222,13 +194,17 @@ Page({
         url: route
       })
     } else if (route === '/pages/profile/signed/signed') {
+      this.setData({
+        modalName: 'Modal'
+      })
       checkStatus().then(({data}) => {
         if(data.code == '1301') {
           showToast('当前未开放签到功能')
         } else if (data.code == '1101') {
-          wx.navigateTo({
-            url: route
-          })
+          // wx.navigateTo({
+          //   url: route
+          // })
+        
         }
       })
     } else {
@@ -249,6 +225,22 @@ Page({
   hideModal(e) {
     this.setData({
       modalName: null
+    })
+  },
+  // 签到
+  goSigned() {
+    console.log(11);
+    wx.requestSubscribeMessage({
+      tmplIds: ['2DJKw__SrskrMQd1sosfneFITtBgBkSNHommFJ8SK2E'],
+      success: (res) => {
+        console.log(res);
+      },
+      complete: () => {
+        this.setData({
+          modalName: null
+        })
+      }
+
     })
   },
   openDialog(e) {
