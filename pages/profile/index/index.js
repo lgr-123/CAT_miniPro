@@ -12,7 +12,8 @@ import {
   getAppointTime,
   getNotice,
   checkNotice,
-  checkStatus
+  checkStatus,
+  messagecheck
 } from '../../../service/profile'
 import { H_config, BASE_URL } from '../../../service/config'
 
@@ -50,7 +51,7 @@ Page({
     dialog: false,
     cardBottom: null,
     flagBottom: null,
-    unReadNoticeNum: 0,
+    unReadNoticeNum: app.globalData.unReadNotice,
     date: '2021-02-18 周四',
     userInfo: app.globalData.userInfo,
     time: '上午好',
@@ -78,17 +79,25 @@ Page({
         })
       }
     })
+
+    if(this.data.unReadNoticeNum === null){
+      messagecheck().then(res => {
+        this.setData({
+          unReadNoticeNum: res.data.data
+        })
+      })
+    }
   },
   async onShow() {
-    console.log(app);
     this.setData({
-      userInfo: app.globalData.userInfo
+      userInfo: app.globalData.userInfo,
+      isSignUp: app.globalData.isSignUp,
     })
     console.log(this.data.userInfo);
     
 
     if(!app.globalData.isSignUp) {
-     
+      
     } else {
       if(wx.getStorageSync('userId')) {
         await getSignUpInfo({
@@ -243,35 +252,35 @@ Page({
 
     })
   },
-  openDialog(e) {
-    let notice = this.data.notice.find(item => item.noticeContent === e.currentTarget.dataset.notice)
-    if(!notice.stage) {
-      checkNotice({
-        checked: 1,
-        noticeId: notice.noticeId
-      }).then(res => {
-        wx.hideLoading()
-        if(res.data.code !== 1200) {
-          showToast('操作失败')
-        }
-      }).catch((err) => {
-        console.log(err);
-      })
-      notice.stage = 1
-      this.data.unReadNoticeNum--
-    }
-    this.setData({
-      noticeContent: e.currentTarget.dataset.notice,
-      notice: this.data.notice,
-      unReadNoticeNum: this.data.unReadNoticeNum,
-      dialog: true
-    })
-  }, 
-  closeDialog() {
-    this.setData({
-      dialog: false
-    })
-  },
+  // openDialog(e) {
+  //   let notice = this.data.notice.find(item => item.noticeContent === e.currentTarget.dataset.notice)
+  //   if(!notice.stage) {
+  //     checkNotice({
+  //       checked: 1,
+  //       noticeId: notice.noticeId
+  //     }).then(res => {
+  //       wx.hideLoading()
+  //       if(res.data.code !== 1200) {
+  //         showToast('操作失败')
+  //       }
+  //     }).catch((err) => {
+  //       console.log(err);
+  //     })
+  //     notice.stage = 1
+  //     this.data.unReadNoticeNum--
+  //   }
+  //   this.setData({
+  //     noticeContent: e.currentTarget.dataset.notice,
+  //     notice: this.data.notice,
+  //     unReadNoticeNum: this.data.unReadNoticeNum,
+  //     dialog: true
+  //   })
+  // }, 
+  // closeDialog() {
+  //   this.setData({
+  //     dialog: false
+  //   })
+  // },
   toLogin() {
     login()
   },

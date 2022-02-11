@@ -1,5 +1,5 @@
 // app.js
-import { getSignUpInfo, checkEnroll, getUserInfo, updateToken, checkToken} from './service/profile'
+import { getSignUpInfo, checkEnroll, getUserInfo, updateToken, checkToken,registerInfo, messagecheck} from './service/profile'
 import { H_config } from './service/config'
 App({
   onLaunch() {
@@ -29,6 +29,11 @@ App({
             console.log(this.globalData);
           }).catch(err=>{
             console.log(err);
+          })
+          // 获取未读消息
+          messagecheck().then(res => {
+            this.globalData.unReadNotice = res.data.data
+            
           })
         } else {
           this.globalData.isSignUp = false
@@ -72,6 +77,8 @@ App({
         })
        
     }
+
+    
    
 
   },
@@ -82,6 +89,7 @@ App({
     CustomBar: null,
     userInfo: null,
     isSignUp: null,
-    registerInfo: null
+    registerInfo: null,
+    unReadNotice: null
   }
 })

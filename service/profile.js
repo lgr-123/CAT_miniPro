@@ -227,10 +227,19 @@ export function messageread(data) {
   })
 }
 
-// 确认已读
+// 获取报名表信息
 export function registerInfo(data) {
   return request({
     url: H_config.API_registerInfo_URL,
+    method: 'post',
+    data: data
+  })
+}
+
+// 获取未读消息条数
+export function messagecheck(data) {
+  return request({
+    url: H_config.API_messagecheck_URL,
     method: 'post',
     data: data
   })

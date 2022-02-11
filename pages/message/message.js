@@ -1,8 +1,10 @@
 // pages/message/message.js
 import {
+    appointCheck,
     messagelist,
     messageread
   } from '../../service/profile'
+  const app = getApp()
 Page({
 
     /**
@@ -66,6 +68,8 @@ Page({
         }).then(res=>{
             console.log(res);
             this.onLoad()
+            app.globalData.unReadNotice--
+            console.log(app);
         })
         // console.log(data.confirmdata); 
         // this.data.state[this.data.confirmdata] = '已读'
