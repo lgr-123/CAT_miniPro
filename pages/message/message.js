@@ -68,7 +68,6 @@ Page({
         }).then(res=>{
             console.log(res);
             this.onLoad()
-            app.globalData.unReadNotice--
             console.log(app);
         })
         // console.log(data.confirmdata); 

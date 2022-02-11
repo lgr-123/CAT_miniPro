@@ -56,7 +56,8 @@ Page({
     userInfo: app.globalData.userInfo,
     time: '上午好',
     isLogin: wx.getStorageSync('token'),
-    isSignUp: app.globalData.isSignUp
+    // isSignUp: app.globalData.isSignUp
+    isSignUp: null
   },
   onLoad: function (options) {
     // 计算装四个按钮容器的高度
@@ -80,24 +81,43 @@ Page({
       }
     })
 
-    if(this.data.unReadNoticeNum === null){
-      messagecheck().then(res => {
-        this.setData({
-          unReadNoticeNum: res.data.data
-        })
-      })
-    }
+    
+    // 解决app的异步执行，导致数据渲染不出
+    app.isSignUpCallback = this.onShow_self
   },
-  async onShow() {
+  // 监测主页面上的未读消息数量
+  onShow(){
+    messagecheck().then(res => {
+      this.setData({
+        unReadNoticeNum: res.data.data,
+      })
+    })
+  },
+  async onShow_self() {
     this.setData({
       userInfo: app.globalData.userInfo,
       isSignUp: app.globalData.isSignUp,
     })
-    console.log(this.data.userInfo);
     
 
     if(!app.globalData.isSignUp) {
-      
+      // wx.getSetting({
+      //   success: res => {
+      //     if (res.authSetting['scope.userInfo'] && !this.data.userInfo) {
+      //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+      //       wx.getUserInfo({
+      //         success: res => {
+      //           app.globalData.userInfo = res.userInfo
+      //           this.setData({
+      //             isSignUp: app.globalData.isSignUp,
+      //             userInfo: app.globalData.userInfo,
+      //             unReadNoticeNum: app.globalData.unReadNotice,
+      //           })
+      //         }
+      //       })
+      //     }
+      //   }
+      // })
     } else {
       if(wx.getStorageSync('userId')) {
         await getSignUpInfo({
@@ -173,9 +193,9 @@ Page({
   },
   navigate(e) {
     let route = e.currentTarget.dataset.route
-    if(!wx.getStorageSync('token') && (route === '/pages/profile/progress/progress' || route === '/pages/profile/reservation/reservation')) {
+    if(!wx.getStorageSync('token') && (route === '/pages/profile/progress/progress' || route === '/pages/profile/reservation/reservation' || route === '/pages/message/message')) {
       login()
-    } else if ((route === '/pages/profile/progress/progress' || route === '/pages/profile/reservation/reservation') && !this.data.isSignUp) {
+    } else if ((route === '/pages/profile/progress/progress' || route === '/pages/profile/reservation/reservation' || route === '/pages/message/message') && !this.data.isSignUp) {
       showToast('请先报名后再查看~')
     } else if (route === '/pages/profile/reservation/reservation') {
       // wx.request({
@@ -290,7 +310,8 @@ Page({
     })
   },
   onPullDownRefresh() {
-    this.onShow().then(() => {
+    this.onShow_self().then(() => {
+      console.log('haahahaha');
       wx.stopPullDownRefresh()
     })
   },
