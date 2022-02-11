@@ -82,7 +82,8 @@ Page({
   async onShow() {
     console.log(app);
     this.setData({
-      userInfo: app.globalData.userInfo
+      userInfo: app.globalData.userInfo,
+      isSignUp: app.globalData.isSignUp
     })
     console.log(this.data.userInfo);
     
