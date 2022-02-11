@@ -17,63 +17,76 @@
   -->
 <view id="bg" style="background-image: url(https://lixianghao.top:2358/images/wechat/bg1.jpg);background-size: 100% 100%;">
 	<view class="decorate">
-		<image class="" src="../../assets/img/1.png" mode="aspectFill" lazy-load="false" binderror="" bindload="" />
+		<!-- <image class="" src="../../assets/img/1.png" mode="aspectFill" lazy-load="false" binderror="" bindload="" /> -->
 		{{direction}}
 		<!-- 前端 -->
 	</view>
-	<!-- <view class="tip">请填写你的个人信息</view> -->
+	<view class="tip">Hello</view>
 
-	<view wx:if="{{showPage1}}" class="page1 {{!showPage1? 'animation-slide-left animation-reverse':'animation-slide-left'}}">
+	<!-- <view class="page1 anmiation- {{!showPage1? 'animation-slide-left animation-reverse':'animation-slide-left'}}"> -->
+	<view wx:if="{{showPage1}}" class="page1 {{animation11}} {{animation1}}">
 		<view class="stu">
-			<view class="stu-tag">姓名 </view>
-			<input class="" value="{{stuName}}" type="text" placeholder="" bindinput="getInput" bindblur="nameReg" data-type="stuName"></input>
+			<!-- <view class="stu-tag">姓名 </view> -->
+			<input class="inputmar" value="{{stuName}}" type="text" placeholder="姓名" bindinput="getInput" bindblur="nameReg" data-type="stuName"></input>
 			<text wx:if="{{showName}}" class="text-icon {{checkName?'cuIcon-roundcheckfill text-green iconSuccess':'cuIcon-roundclosefill text-red iconFail'}} "></text>
 		</view>
 		<view class="stu">
-			<view class="stu-tag">学号 </view>
-			<input class="" value="{{stuNum}}" type="text" placeholder="" bindinput="getInput" bindblur="numberReg" data-type="stuNum"></input>
+			<!-- <view class="stu-tag">学号 </view> -->
+			<input class="inputmar" value="{{stuNum}}" type="text" placeholder="学号" bindinput="getInput" bindblur="numberReg" data-type="stuNum"></input>
 			<text wx:if="{{showNum}}" class="text-icon {{checkNum?'cuIcon-roundcheckfill text-green iconSuccess':'cuIcon-roundclosefill text-red iconFail'}} "></text>
 		</view>
 		<view class="stu">
-			<view class="stu-tag">手机号码</view>
-			<input class="" value="{{phoneNum}}" type="text" placeholder="" bindinput="getInput" bindfocus="" bindblur="phoneReg" data-type="phoneNum"></input>
+			<!-- <view class="stu-tag">手机号码</view> -->
+			<input class="inputmar" value="{{phoneNum}}" type="text" placeholder="手机号码" bindinput="getInput" bindfocus="" bindblur="phoneReg" data-type="phoneNum"></input>
 			<text wx:if="{{showPhone}}" class="text-icon {{checkPhone?'cuIcon-roundcheckfill text-green iconSuccess':'cuIcon-roundclosefill text-red iconFail'}} "></text>
 		</view>
 		<view class="stu stu-sex">
 			<!-- <view class="stu-tag">性别</view> -->
 			<radio-group bindchange="getSex">
-				男<radio value="男" checked="true"></radio>
-				女<radio value="女"></radio>
+				<radio class="blue cuIcon-male sexicon {{stuSex === '男' ? 'transexicon' : ''}}" value="男" checked="{{stuSex === '男' ? 'true' : ''}}"></radio>
+				<radio class="pink cuIcon-female sexicon {{stuSex === '女' ? 'transexicon pink' : ''}}" value="女" checked="{{stuSex === '女' ? 'true' : ''}}"></radio>
 			</radio-group>
+		</view>
+		<view class="footer flex justify-around">
+			<view class="back iconSuccess" bindtap="goBack">
+				<image class="" src="../../assets/img/balloon1.png" lazy-load="false" />
+			</view>
+			<view class="confirm" bindtap="checkPage1">
+				<image class="" src="../../assets/img/balloon2.png" lazy-load="false" />
+			</view>
 		</view>
 	</view>
 
 	<!-- 
-  第二页： 班级 学院 专业 自我介绍
+  第二页： 班级 学院 专业
  -->
-	<view wx:else class="page2 {{showPage2? 'animation-slide-right':'animation-reverse animation-slide-right'}}">
-		<view class="stu">
-			<view class="stu-tag">班级</view>
-			<input class="" value="{{classNum}}" type="text" placeholder="" bindinput="getInput" bindblur="classReg" data-type="classNum"></input>
-			<text wx:if="{{showClass}}" class="text-icon {{checkClass?'cuIcon-roundcheckfill text-green iconSuccess':'cuIcon-roundclosefill text-red iconFail'}} "></text>
-		</view>
+	<!-- <view wx:if="{{showPage2}}" class="page2 {{showPage2? 'animation-slide-right':'animation-reverse animation-slide-right'}}"> -->
+	<view wx:if="{{showPage2}}" class="page2 {{animation22}} {{animation2}}">
+		
 
-		<view class="flex stu-college">
+		<!-- <view class="flex stu-college"> -->
 			<view class="stu">
-				<view class="stu-tag">学院</view>
-				<picker class="" mode="selector" range="{{stuCollegeRange}}" range-key="name" value="{{CollegeIndex}}" bindchange="selectCollege" bindcancel="">
-					<view>{{stuCollegeRange[CollegeIndex].name}}</view>
+				<!-- <view class="stu-tag">学院</view> -->
+				<picker class="inputmar" mode="selector" range="{{stuCollegeRange}}" range-key="name" value="{{CollegeIndex}}" bindchange="selectCollege" bindcancel="">
+					<!-- <view>{{stuCollegeRange[CollegeIndex].name}}</view> -->
+					<input class="inputmar" value="{{stuCollegeRange[CollegeIndex].name}}" type="hidden" placeholder="学院" disabled>111</input>
 				</picker>
 			</view>
 			<view class="stu">
-				<view class="stu-tag">专业</view>
-				<picker class="" mode="selector" range="{{stuMajorRange}}" range-key="name" value="{{MajorIndex}}" bindchange="selectMajor" bindcancel="">
-					<view>{{stuMajorRange[MajorIndex].name}}</view>
+				<!-- <view class="stu-tag">专业</view> -->
+				<picker class="inputmar" mode="selector" range="{{stuMajorRange}}" range-key="name" value="{{MajorIndex}}" bindchange="selectMajor" bindcancel="">
+					<!-- <view>{{stuMajorRange[MajorIndex].name}}</view> -->
+					<input class="inputmar" value="{{stuMajorRange[MajorIndex].name}}" type="text" placeholder="专业" disabled ></input>
 				</picker>
 			</view>
-		</view>
+			<view class="stu">
+				<!-- <view class="stu-tag">班级</view> -->
+				<input class="inputmar" value="{{classNum}}" type="text" placeholder="班级" bindinput="getInput" bindblur="classReg" data-type="classNum"></input>
+				<text wx:if="{{showClass}}" class="text-icon {{checkClass?'cuIcon-roundcheckfill text-green iconSuccess':'cuIcon-roundclosefill text-red iconFail'}} "></text>
+			</view>
+		<!-- </view> -->
 
-		<view class="stu-intro-head">
+		<!-- <view class="stu-intro-head">
 			<view class="stu-intro" style="background-image: url(https://lixianghao.top:2358/images/wechat/in.png);background-size: 100% 100%;">
 				<view class="stu-intro-tag">可以介绍一下自己吗</view>
 				<textarea class="" value="{{stuIntro}}" placeholder="例如兴趣爱好,目前所掌握的知识,其他方面的一些技能等,100字左右" placeholder-style="" placeholder-class="textarea-placeholder" maxlength="140" bindinput="getInput" bindblur="introReg" data-type="stuIntro" bindlinechange="%{15}">
@@ -81,16 +94,50 @@
 
 			</view>
 			<text wx:if="{{showIntro}}" class="text-icon icon-intro {{checkIntro?'cuIcon-roundcheckfill text-green iconSuccess':'cuIcon-roundclosefill text-red iconFail'}} "></text> 
+		</view> -->
+		<view class="footer flex justify-around">
+			<view class="back iconSuccess" bindtap="goBack">
+				<image class="" src="../../assets/img/balloon1.png" lazy-load="false" />
+			</view>
+			<view class="confirm" bindtap="checkPage2">
+				<image class="" src="../../assets/img/balloon2.png" lazy-load="false" />
+			</view>
 		</view>
 
 
+	</view>
+	<!-- 
+  第三页： 自我介绍
+ -->
+	<!-- <view wx:if="{{showPage3}}" class="page2 {{showPage3? 'animation-slide-right':'animation-reverse animation-slide-right'}}"> -->
+	<view wx:if="{{showPage3}}" class="page3 {{animation33}} {{animation3}}">
+		
+
+		<view class="stu-intro-head">
+			<view class="stu-intro" style="background-image: url(https://lixianghao.top:2358/images/wechat/in.png);background-size: 100% 100%;">
+				<!-- <view class="stu-intro-tag">可以介绍一下自己吗</view> -->
+				<textarea class="" value="{{stuIntro}}" placeholder="简单介绍一下自己吧！例如兴趣爱好,目前所掌握的知识,其他方面的一些技能等,100字左右" placeholder-style="" placeholder-class="textarea-placeholder" maxlength="140" bindinput="getInput" bindblur="introReg" data-type="stuIntro" bindlinechange="%{15}">
+      </textarea>
+
+			</view>
+			<text wx:if="{{showIntro}}" class=" icon-intro {{checkIntro?'cuIcon-roundcheckfill text-green iconSuccess':'cuIcon-roundclosefill text-red iconFail'}} "></text> 
+		</view>
+		<view class="footer flex justify-around">
+			<view class="back iconSuccess" bindtap="goBack">
+				<image class="" src="../../assets/img/balloon1.png" lazy-load="false" />
+			</view>
+			<view class="confirm" bindtap="formSubmit">
+				<image class="" src="../../assets/img/balloon2.png" lazy-load="false" />
+			</view>
+		</view>
+
 
 	</view>
 
-	<view class="footer flex justify-around">
+	<!-- <view class="footer flex justify-around">
 		<view class="back" bindtap="goBack"> 返回 </view>
-		<view class="confirm" bindtap="{{showPage1?'checkPage1':'formSubmit'}}">确定</view>
-	</view>
+		<view class="confirm" bindtap="{{showPage1?'checkPage1':(showPage2 ? 'checkPage2' :'formSubmit')}}">确定</view>
+	</view> -->
 
 
 
