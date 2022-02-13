@@ -13,7 +13,8 @@ import {
   getNotice,
   checkNotice,
   checkStatus,
-  userSign
+  userSign,
+  messagecheck
 } from '../../../service/profile'
 import { H_config, BASE_URL } from '../../../service/config'
 
@@ -51,12 +52,13 @@ Page({
     dialog: false,
     cardBottom: null,
     flagBottom: null,
-    unReadNoticeNum: 0,
+    unReadNoticeNum: app.globalData.unReadNotice,
     date: '2021-02-18 周四',
     userInfo: app.globalData.userInfo,
     time: '上午好',
     isLogin: wx.getStorageSync('token'),
-    isSignUp: app.globalData.isSignUp
+    // isSignUp: app.globalData.isSignUp
+    isSignUp: null
   },
   onLoad: function (options) {
     // 计算装四个按钮容器的高度
@@ -79,55 +81,27 @@ Page({
         })
       }
     })
+
+    
+    // 解决app的异步执行，导致数据渲染不出
+    app.isSignUpCallback = this.onShow_self
   },
-  async onShow() {
-    console.log(app);
+  // 监测主页面上的未读消息数量
+  onShow(){
+    console.log(app.globalData);
+    messagecheck().then(res => {
+      this.setData({
+        unReadNoticeNum: res.data.data,
+      })
+    })
+    console.log(app.globalData);
     this.setData({
       userInfo: app.globalData.userInfo,
-      isSignUp: app.globalData.isSignUp
+      isSignUp: app.globalData.isSignUp,
+      isLogin: wx.getStorageSync('token')
     })
-    console.log(this.data.userInfo);
-    
-
-    if(!app.globalData.isSignUp) {
-     
-    } else {
-      if(wx.getStorageSync('userId')) {
-        await getSignUpInfo({
-          userId: wx.getStorageSync('userId')
-        }).then(res => {
-          if(res.data && res.data.code && res.data.code === H_config.STATUSCODE_getSignUpInfo_SUCCESS) {
-            wx.setStorageSync('direction', res.data.data.direction)
-            app.globalData.isSignUp = true
-            app.globalData.userInfo = res.data.data
-            wx.getUserInfo({
-              success: res => {
-                app.globalData.userInfo.avatarUrl = res.userInfo.avatarUrl
-                this.setData({
-                  isSignUp: app.globalData.isSignUp,
-                  userInfo: app.globalData.userInfo
-                })
-              }
-            })
-          } else {
-            app.globalData.isSignUp = false
-            wx.showToast({
-              title: '登录成功',
-              duration: 1000
-            })
-            setTimeout(() => {
-              wx.navigateBack()
-            }, 100)
-          }
-          wx.hideLoading()
-        }).catch((err) => {
-          console.log(err);
-        })
-
-      
-      }
-    }
-
+  },
+  async onShow_self() {
     const time = new Date()
     let day = ''
     switch(time.getDay()) {
@@ -166,9 +140,9 @@ Page({
   },
   navigate(e) {
     let route = e.currentTarget.dataset.route
-    if(!wx.getStorageSync('token') && (route === '/pages/profile/progress/progress' || route === '/pages/profile/reservation/reservation')) {
+    if(!wx.getStorageSync('token') && (route === '/pages/profile/progress/progress' || route === '/pages/profile/reservation/reservation' || route === '/pages/message/message')) {
       login()
-    } else if ((route === '/pages/profile/progress/progress' || route === '/pages/profile/reservation/reservation') && !this.data.isSignUp) {
+    } else if ((route === '/pages/profile/progress/progress' || route === '/pages/profile/reservation/reservation' || route === '/pages/message/message') && !this.data.isSignUp) {
       showToast('请先报名后再查看~')
     } else if (route === '/pages/profile/reservation/reservation') {
       // wx.request({
@@ -255,35 +229,35 @@ Page({
 
     })
   },
-  openDialog(e) {
-    let notice = this.data.notice.find(item => item.noticeContent === e.currentTarget.dataset.notice)
-    if(!notice.stage) {
-      checkNotice({
-        checked: 1,
-        noticeId: notice.noticeId
-      }).then(res => {
-        wx.hideLoading()
-        if(res.data.code !== 1200) {
-          showToast('操作失败')
-        }
-      }).catch((err) => {
-        console.log(err);
-      })
-      notice.stage = 1
-      this.data.unReadNoticeNum--
-    }
-    this.setData({
-      noticeContent: e.currentTarget.dataset.notice,
-      notice: this.data.notice,
-      unReadNoticeNum: this.data.unReadNoticeNum,
-      dialog: true
-    })
-  }, 
-  closeDialog() {
-    this.setData({
-      dialog: false
-    })
-  },
+  // openDialog(e) {
+  //   let notice = this.data.notice.find(item => item.noticeContent === e.currentTarget.dataset.notice)
+  //   if(!notice.stage) {
+  //     checkNotice({
+  //       checked: 1,
+  //       noticeId: notice.noticeId
+  //     }).then(res => {
+  //       wx.hideLoading()
+  //       if(res.data.code !== 1200) {
+  //         showToast('操作失败')
+  //       }
+  //     }).catch((err) => {
+  //       console.log(err);
+  //     })
+  //     notice.stage = 1
+  //     this.data.unReadNoticeNum--
+  //   }
+  //   this.setData({
+  //     noticeContent: e.currentTarget.dataset.notice,
+  //     notice: this.data.notice,
+  //     unReadNoticeNum: this.data.unReadNoticeNum,
+  //     dialog: true
+  //   })
+  // }, 
+  // closeDialog() {
+  //   this.setData({
+  //     dialog: false
+  //   })
+  // },
   toLogin() {
     login()
   },
@@ -293,7 +267,8 @@ Page({
     })
   },
   onPullDownRefresh() {
-    this.onShow().then(() => {
+    this.onShow_self().then(() => {
+      console.log('haahahaha');
       wx.stopPullDownRefresh()
     })
   },

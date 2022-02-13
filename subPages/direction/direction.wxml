@@ -8,13 +8,13 @@
 		<view class="front-bg" style="background-image: url(../../assets//img/.png);background-size: 100% 100%;">
   
 			<view>
-				前:代表与人直接打交道的这部分,包括界面的展现,与用户的交互等
+				代表与人直接打交道的这部分,包括界面的展现,与用户的交互等
 			</view>
 			<view>
-				端:代表输出终端,例如pc浏览器,手机浏览器,APP,应用程序
+				代表输出终端,例如pc浏览器,手机浏览器,APP,应用程序
 			</view>
 			<view>
-				前端:呈现给用户的视觉和基本的操作
+				呈现给用户的视觉和基本的操作
 			</view>
 		</view>
 	</view>

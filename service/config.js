@@ -83,6 +83,10 @@ H_config.STATUSCODE_selectUserAppoint_SUCCESS = 10086
 H_config.API_registerInfo_URL = '/enroll/getI'
 H_config.STATUSCODE_registerInfo_SUCCESS = 200
 
+//获取未读消息条数
+H_config.API_messagecheck_URL = '/message/check'
+H_config.STATUSCODE_messagecheck_SUCCESS = 10086
+
 
 H_config.API_getNotice_URL = '/schedule/selectNotice'
 
