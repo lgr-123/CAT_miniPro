@@ -102,6 +102,11 @@ Page({
     })
   },
   async onShow_self() {
+    this.setData({
+      userInfo: app.globalData.userInfo,
+      isSignUp: app.globalData.isSignUp,
+      isLogin: wx.getStorageSync('token')
+    })
     const time = new Date()
     let day = ''
     switch(time.getDay()) {
@@ -170,9 +175,6 @@ Page({
         url: route
       })
     } else if (route === '/pages/profile/signed/signed') {
-      this.setData({
-        modalName: 'Modal'
-      })
       checkStatus().then(({data}) => {
         console.log(data);
         if(!data.data.allowSignIn) {
@@ -180,7 +182,11 @@ Page({
           showToast('当前未开放签到功能')
         } else if (data.data.isSignIn) {
          // 此时已签到
-          showToast('已签到')
+          showToast(`已签到,目前排在第${data.data.listIndex}位`)
+        } else if(data.data.allowSignIn) {
+          this.setData({
+            modalName: 'Modal'
+          })
         }
       })
     } else {
