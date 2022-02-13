@@ -12,7 +12,8 @@ import {
   getAppointTime,
   getNotice,
   checkNotice,
-  checkStatus
+  checkStatus,
+  userSign
 } from '../../../service/profile'
 import { H_config, BASE_URL } from '../../../service/config'
 
@@ -199,13 +200,13 @@ Page({
         modalName: 'Modal'
       })
       checkStatus().then(({data}) => {
-        if(data.code == '1301') {
+        console.log(data);
+        if(!data.data.allowSignIn) {
+          // 未开发签到
           showToast('当前未开放签到功能')
-        } else if (data.code == '1101') {
-          // wx.navigateTo({
-          //   url: route
-          // })
-        
+        } else if (data.data.isSignIn) {
+         // 此时已签到
+          showToast('已签到')
         }
       })
     } else {
@@ -235,11 +236,21 @@ Page({
       tmplIds: ['2DJKw__SrskrMQd1sosfneFITtBgBkSNHommFJ8SK2E'],
       success: (res) => {
         console.log(res);
+        userSign().then(({data}) => {
+          console.log(data);
+        })
+      },
+      fail: (err) => {
+        console.log(err);
+        showToast('签到失败')
       },
       complete: () => {
-        this.setData({
-          modalName: null
-        })
+        setTimeout(() => {
+          this.setData({
+            modalName: null
+          })
+        }, 1000)
+       
       }
 
     })

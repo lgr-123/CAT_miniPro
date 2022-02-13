@@ -31,7 +31,10 @@ H_config.API_checkToken_URL = '/w/checkT'
 H_config.API_updateToken_URL = '/w/updateT'
 
 // 用户查看是否可签到
-H_config.API_checkStatus_URL = '/queue/checkStatus'
+H_config.API_checkStatus_URL = '/queue/NCheck'
+
+// 用户签到
+H_config.API_sign_URL = '/queue/sign'
 
 // 查询报名信息
 H_config.API_getSignUpInfo_URL = '/user/getSignUpInfo'
