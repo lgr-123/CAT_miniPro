@@ -12,8 +12,28 @@ page {
   /* text-align: center; */
 }
 
+.session1 {
+  width: 100%;
+  height: 28%;
+  /* background-color: pink; */
+}
+
+.session2 {
+  width: 100%;
+  height: 50%;
+  /* background-color: green; */
+}
+
+.session3 {
+  width: 100%;
+  height: 22%;
+  /* background-color: yellow; */
+}
+
 .decorate {
-  height: 245rpx;
+  overflow: hidden;
+  text-align: center;
+  height: 100%;
   font-family: 'Comic Sans MS', cursive;
   font-size: 40rpx;
 }
@@ -26,9 +46,11 @@ page {
 }
 
 .tip {
-  position: absolute;
+  margin: 40rpx 0 10rpx 0;
+  /* position: absolute; */
+  text-align: center;
   width: 100%;
-  margin-left: -75rpx;
+  /* margin-left: -75rpx; */
   text-align: center;
   font-weight: 600;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -39,21 +61,23 @@ page {
 }
 
 .page1,
- .page2{
+ .page2,
+ .page3{
+   margin: 0 auto;
   height: 570rpx;
-  position: absolute;
-  bottom: 300rpx;
-  width: 100%;
-  margin-left: -75rpx;
+  /* position: absolute; */
+  /* bottom: 300rpx; */
+  /* width: 100%; */
+  /* margin-left: -75rpx; */
 }
 
-.page3{
+/* .page3{
   height: 570rpx;
   position: absolute;
   bottom: 450rpx;
   width: 100%;
   margin-left: -75rpx;
-}
+} */
 
 
 input {
@@ -192,10 +216,15 @@ input {
 
 
 
-
+.session3 {
+  position: relative;
+}
 
 .footer {
+  position: absolute;
+  top: 0;
   width: 100%;
+  height: 100%;
 }
 
 .footer view {
@@ -213,10 +242,11 @@ input {
 }
 
 .back image{
-  max-width: 50%;
+  width: 50%;
+  /* height: 50%; */
 }
 .confirm image{
-  max-width: 60%;
+  width: 70%;
   height: 400rpx;
 }
 

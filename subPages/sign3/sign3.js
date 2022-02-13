@@ -1,5 +1,7 @@
 // pages/singup/signup.js
 import {stuFormSubmit, getMajor, getCollege} from '../../service/profile'
+
+import {showToast} from '../../utils/util'
 Page({
 
   /**
@@ -87,32 +89,30 @@ Page({
       animation11: 'animation-reverse',
       animation2: 'animation-slide-right',
     })
-    setTimeout(() => {
-      this.setData({
-        animation1: 'animation-slide-left' ,
-      })
-    }, 1)
-    setTimeout(() => {
-      this.setData({
-        showPage2: true,
-      })
-    }, 50)
-    setTimeout(() => {
       
-      // const {checkClass, checkNum, checkPhone, stuSex} = this.data
-      // if(checkName && checkNum && checkPhone && stuSex) {
-        
-      // }
-      this.setData({
-        showPage1: false,
-        showPage3: false,
-        animation1: '',
-        animation11: '',
-        animation2: '',
-      })
-      console.log(this.data.stuMajor);
-      console.log(this.data.stuCollege);
-    }, 350)
+      const {checkName ,checkClass, checkNum, checkPhone, stuSex} = this.data
+      // && checkNum && checkPhone && stuSex
+      if(checkName && checkNum && checkPhone && stuSex) {
+        this.setData({
+          animation1: 'animation-slide-left' ,
+        })
+
+        setTimeout(() => {
+          this.setData({
+            showPage1: false,
+            showPage2: true,
+            showPage3: false,
+            animation1: '',
+            animation11: '',
+            animation2: '',
+          })
+        }, 200)
+       
+      }
+      
+      // console.log(this.data.stuMajor);
+      // console.log(this.data.stuCollege);
+ 
     
    
   },
@@ -121,37 +121,28 @@ Page({
       showClass: true,
       animation22: 'animation-reverse', 
       animation3: 'animation-slide-right',
-      
+      animation33: ''    
     })
-    setTimeout(() => {
-      this.setData({
-        animation2: 'animation-slide-left',
-      })
-    }, 1)
-    setTimeout(() => {
-      this.setData({
-        showPage3: true,
-      })
-    }, 50)
-    setTimeout(() => {
-      // const {checkName, checkNum, checkPhone, stuSex} = this.data
-      // if(checkName && checkNum && checkPhone && stuSex) {
+    // setTimeout(() => {
+      const {checkClass} = this.data
+      if(checkClass) {
+        this.setData({
+          animation2: 'animation-slide-left',
+        })
+      setTimeout(() => {
+        this.setData({
+          showPage1: false,
+          showPage2: false,
+          showPage3: true, 
+          animation3: ''
+        })
+      }, 200)
         
-      // }
-      this.setData({
-        showPage1: false,
-        showPage2: false,
-        showPage3: true,
-        
-        animation2: '',
-        animation22: '',
-        
-        animation3: '',
-        animation33: '',
-      })
+      }
+     
       console.log(this.data.stuMajor);
       console.log(this.data.stuCollege);
-    }, 350)
+    // }, 350)
     
    
   },
@@ -213,36 +204,24 @@ Page({
       
       
     } else {
-      setTimeout(() => {
         this.setData({
           animation22: '' ,
           animation2: '' ,
-          animation3: '',
+          animation3: ''
         })
-      }, 1);
-      setTimeout(() => {
         this.setData({
           animation2: 'animation-slide-left' ,
-          animation33: 'animation-reverse',
           animation3: 'animation-slide-right',
+          animation33: 'animation-reverse',
         })
-      }, 2);
       setTimeout(() => {
         this.setData({
           showPage1: false,
           showPage2: true,
-          // animation1: '' 
-        })
-      }, 50);
-      setTimeout(() => {
-        this.setData({
           showPage3: false,
-          animation2: '' ,
-          animation22: '' ,
-          animation33: '',
-          animation3: '',
+          animation2: '' 
         })
-      }, 350);
+      }, 200);
     }
   },
 
@@ -326,12 +305,9 @@ Page({
     // console.log(this.data.stuName);
     console.log(111);
  
-    if(!this.data.showClass) {
       this.setData({
-        showClass: true,
         showIntro: true
       })
-    }
     // 延迟一下
     setTimeout(() => {
       console.log(this.data.checkClass, this.data.checkIntro);
@@ -350,12 +326,17 @@ Page({
          selfIntroduction: stuIntro,
          gender: stuSex,
          direction: direction,
-       }).then((res) => {
+       }).then(({data}) => {
          console.log(res);
          wx.hideLoading()
-         wx.navigateTo({
-           url: '/subPages/signFinish/signFinish',
-         })
+         if(data.data.code == 200) {
+          wx.navigateTo({
+            url: '/subPages/signFinish/signFinish',
+          })
+         } else {
+           showToast('报名失败，请稍后再尝试！')
+         }
+         
        }).catch(err => {
          wx.hideLoading()
        })
