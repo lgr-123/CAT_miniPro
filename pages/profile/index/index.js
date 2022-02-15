@@ -87,6 +87,9 @@ Page({
   },
   // 监测主页面上的未读消息数量
   onShow(){
+    console.log(app.globalData);
+    console.log(app.globalData.isSignUp);
+
     messagecheck().then(res => {
       this.setData({
         unReadNoticeNum: res.data.data,
@@ -223,20 +226,26 @@ Page({
         url: route
       })
     } else if (route === '/pages/profile/signed/signed') {
-      this.setData({
-        modalName: 'Modal'
-      })
+      
       checkStatus().then(({data}) => {
+        wx.hideLoading()
+        this.setData({
+          modalName: 'Modal'
+        })
         if(data.code == '1301') {
-          showToast('当前未开放签到功能')
+          showToast('当前未开启签到')
         } else if (data.code == '1101') {
           // wx.navigateTo({
           //   url: route
           // })
+
         
         }
       })
     } else {
+      this.setData({
+        modalName: 'Modal'
+      })
       wx.navigateTo({
         url: route
       })
@@ -258,11 +267,9 @@ Page({
   },
   // 签到
   goSigned() {
-    console.log(11);
     wx.requestSubscribeMessage({
       tmplIds: ['2DJKw__SrskrMQd1sosfneFITtBgBkSNHommFJ8SK2E'],
       success: (res) => {
-        console.log(res);
       },
       complete: () => {
         this.setData({
@@ -311,7 +318,6 @@ Page({
   },
   onPullDownRefresh() {
     this.onShow_self().then(() => {
-      console.log('haahahaha');
       wx.stopPullDownRefresh()
     })
   },

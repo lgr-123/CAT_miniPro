@@ -18,10 +18,10 @@
 <view id="bg" style="background-image: url(https://lixianghao.top:2358/images/wechat/bg1.jpg);background-size: 100% 100%;">
 	<view class="decorate">
 		<!-- <image class="" src="../../assets/img/1.png" mode="aspectFill" lazy-load="false" binderror="" bindload="" /> -->
-		{{direction}}
+		
 		<!-- 前端 -->
 	</view>
-	<view class="tip">Hello</view>
+	<view class="tip">{{direction}}</view>
 
 	<!-- <view class="page1 anmiation- {{!showPage1? 'animation-slide-left animation-reverse':'animation-slide-left'}}"> -->
 	<view wx:if="{{showPage1}}" class="page1 {{animation11}} {{animation1}}">

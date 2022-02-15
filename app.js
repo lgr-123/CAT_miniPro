@@ -18,7 +18,6 @@ App({
         if(res.data && res.data.code && res.data.code === H_config.STATUSCODE_checkEnroll_SUCCESS) {
           // wx.setStorageSync('direction', res.data.data.direction)
           this.globalData.isSignUp = true
-          console.log('appappappapp');
           // this.globalData.userInfo = res.data.data
           // wx.getUserInfo({
           //   success: res => {
@@ -32,7 +31,6 @@ App({
           }
           registerInfo().then(res=>{
             this.globalData.registerInfo = res.data.data
-            console.log(this.globalData);
           }).catch(err=>{
             console.log(err);
           })
