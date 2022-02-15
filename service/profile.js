@@ -185,6 +185,14 @@ export const checkStatus = () => {
   })
 }
 
+// 用户签到
+export const userSign = () => {
+  return request({
+    url: H_config.API_sign_URL,
+    method: 'post'
+  })
+}
+
 // 获取通知列表
 export function getNotice(data) {
   return request({

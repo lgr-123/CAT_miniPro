@@ -13,6 +13,7 @@ import {
   getNotice,
   checkNotice,
   checkStatus,
+  userSign,
   messagecheck
 } from '../../../service/profile'
 import { H_config, BASE_URL } from '../../../service/config'
@@ -88,76 +89,24 @@ Page({
   // 监测主页面上的未读消息数量
   onShow(){
     console.log(app.globalData);
-    console.log(app.globalData.isSignUp);
-
     messagecheck().then(res => {
       this.setData({
         unReadNoticeNum: res.data.data,
       })
+    })
+    console.log(app.globalData);
+    this.setData({
+      userInfo: app.globalData.userInfo,
+      isSignUp: app.globalData.isSignUp,
+      isLogin: wx.getStorageSync('token')
     })
   },
   async onShow_self() {
     this.setData({
       userInfo: app.globalData.userInfo,
       isSignUp: app.globalData.isSignUp,
+      isLogin: wx.getStorageSync('token')
     })
-    
-
-    if(!app.globalData.isSignUp) {
-      // wx.getSetting({
-      //   success: res => {
-      //     if (res.authSetting['scope.userInfo'] && !this.data.userInfo) {
-      //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-      //       wx.getUserInfo({
-      //         success: res => {
-      //           app.globalData.userInfo = res.userInfo
-      //           this.setData({
-      //             isSignUp: app.globalData.isSignUp,
-      //             userInfo: app.globalData.userInfo,
-      //             unReadNoticeNum: app.globalData.unReadNotice,
-      //           })
-      //         }
-      //       })
-      //     }
-      //   }
-      // })
-    } else {
-      if(wx.getStorageSync('userId')) {
-        await getSignUpInfo({
-          userId: wx.getStorageSync('userId')
-        }).then(res => {
-          if(res.data && res.data.code && res.data.code === H_config.STATUSCODE_getSignUpInfo_SUCCESS) {
-            wx.setStorageSync('direction', res.data.data.direction)
-            app.globalData.isSignUp = true
-            app.globalData.userInfo = res.data.data
-            wx.getUserInfo({
-              success: res => {
-                app.globalData.userInfo.avatarUrl = res.userInfo.avatarUrl
-                this.setData({
-                  isSignUp: app.globalData.isSignUp,
-                  userInfo: app.globalData.userInfo
-                })
-              }
-            })
-          } else {
-            app.globalData.isSignUp = false
-            wx.showToast({
-              title: '登录成功',
-              duration: 1000
-            })
-            setTimeout(() => {
-              wx.navigateBack()
-            }, 100)
-          }
-          wx.hideLoading()
-        }).catch((err) => {
-          console.log(err);
-        })
-
-      
-      }
-    }
-
     const time = new Date()
     let day = ''
     switch(time.getDay()) {
@@ -226,20 +175,18 @@ Page({
         url: route
       })
     } else if (route === '/pages/profile/signed/signed') {
-      
       checkStatus().then(({data}) => {
-        wx.hideLoading()
-        this.setData({
-          modalName: 'Modal'
-        })
-        if(data.code == '1301') {
-          showToast('当前未开启签到')
-        } else if (data.code == '1101') {
-          // wx.navigateTo({
-          //   url: route
-          // })
-
-        
+        console.log(data);
+        if(!data.data.allowSignIn) {
+          // 未开发签到
+          showToast('当前未开放签到功能')
+        } else if (data.data.isSignIn) {
+         // 此时已签到
+          showToast(`已签到,目前排在第${data.data.listIndex}位`)
+        } else if(data.data.allowSignIn) {
+          this.setData({
+            modalName: 'Modal'
+          })
         }
       })
     } else {
@@ -270,11 +217,22 @@ Page({
     wx.requestSubscribeMessage({
       tmplIds: ['2DJKw__SrskrMQd1sosfneFITtBgBkSNHommFJ8SK2E'],
       success: (res) => {
+        console.log(res);
+        userSign().then(({data}) => {
+          console.log(data);
+        })
+      },
+      fail: (err) => {
+        console.log(err);
+        showToast('签到失败')
       },
       complete: () => {
-        this.setData({
-          modalName: null
-        })
+        setTimeout(() => {
+          this.setData({
+            modalName: null
+          })
+        }, 1000)
+       
       }
 
     })

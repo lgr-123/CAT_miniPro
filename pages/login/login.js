@@ -2,7 +2,8 @@
 import {
   login,
   getSignUpInfo,
-  updateUserInfo
+  updateUserInfo,
+  checkEnroll
 } from '../../service/profile'
 
 import {
@@ -39,11 +40,8 @@ Page({
 
         // console.log(e);
       
-        // app.globalData.userInfo.avatarUrl = e.userInfo.avatarUrl
-        // app.globalData.userInfo.nickName = e.userInfo.nickName
+     
         app.globalData.userInfo = e.userInfo
-        // 暂时修改
-        app.globalData.isSignUp = false
           const encryptedData = e.encryptedData;
           const iv = e.iv;
           wx.showLoading({
@@ -62,13 +60,18 @@ Page({
               wx.setStorageSync('token', token)
               // wx.setStorageSync('userId', id)
               wx.hideLoading()
-              wx.navigateBack()
-              updateUserInfo({
+              checkEnroll().then(({data}) => {
+                // console.log(res);
+               app.globalData.isSignUp = data.data.isEnroll
+               updateUserInfo({
                 nickName: this.data.nickName,
                 avatarUrl: this.data.avatarUrl
               }).then((res) => {
                 console.log(res);
+                wx.navigateBack()
               })
+              })
+             
     
           }).catch(err => {
             console.log(err);
