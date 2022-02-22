@@ -53,8 +53,8 @@ H_config.STATUSCODE_selectSchedule_SUCCESS = 1650
 // H_config.STATUSCODE_selectSchedule_SUCCESS = 1200
 
 // 获取可预约时间
-H_config.API_getAppointTime_URL = '/appointment/listAll'
-H_config.STATUSCODE_getAppointTime_SUCCESS = 1201
+H_config.API_getAppointTime_URL = '/appointment/list'
+H_config.STATUSCODE_getAppointTime_SUCCESS = 10086
 
 // 预约
 H_config.API_appointTime_URL = '/appointment/updateUserInfo'

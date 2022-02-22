@@ -134,9 +134,9 @@ Page({
         }
         this.setData({
           // reservation: res.data.data,
-          reservation: res.data.data.filter(item => item.direction !== this.data.userInfo.direction),
+          reservation: res.data.data.filter(item => item.direction === this.data.userInfo.direction),
         })
-        console.log(this.data.allTime);
+        console.log(this.data.reservation);
       } else if(res.data.code === 1500) {
         showToast('当前阶段无可预约时间')
       } else {

@@ -200,12 +200,16 @@ Page({
          // 此时已签到
           showToast(`已签到,目前排在第${data.data.listIndex}位`)
         } else if(data.data.allowSignIn) {
+          // 允许签到
           this.setData({
             modalName: 'Modal'
           })
         }
       })
     } else {
+      this.setData({
+        modalName: ''
+      })
       wx.navigateTo({
         url: route
       })
@@ -270,7 +274,6 @@ Page({
   },
   onPullDownRefresh() {
     this.onShow_self().then(() => {
-      console.log('haahahaha');
       wx.stopPullDownRefresh()
     })
   },
