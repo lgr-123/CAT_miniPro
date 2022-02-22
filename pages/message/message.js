@@ -42,6 +42,10 @@ Page({
     },
 
     readOK: function (e){
+        console.log(e);
+        console.log(this.data.stage[e.target.dataset.confirmdata]);
+        console.log(this.data.stage);
+        console.log(e.target.dataset.confirmdata);
         if(this.data.stage[e.target.dataset.confirmdata].isRead) return
         console.log(e.target.dataset.itemcontent)
         this.setData({
