@@ -17,16 +17,17 @@
   -->
 <view id="bg" style="background-image: url(https://lixianghao.top:2358/images/wechat/bg1.jpg);background-size: 100% 100%;">
 	<!-- <view class="flex justify-column"> -->
-		<view class="session1">
-			<view class="decorate">
+		<view class="session1 flex justify-center align-center">
+			<view class="decorate flex flex-wrap justify-around align-around">
 				<!-- <image class="" src="../../assets/img/1.png" mode="aspectFill" lazy-load="false" binderror="" bindload="" /> -->
 				<view class="tip">Hello</view>
 				<!-- {{direction}} -->
-				前端
+				<view class="direction">{{direction}}</view>
+				
 			</view>
 		</view>
-		<view class="session2">
-			<view wx:if="{{showPage1}}" class="page1 {{animation11}} {{animation1}}">
+		<view class="session2 flex">
+			<view wx:if="{{showPage1}}" class="page1 flex flex-wrap justify-around {{animation11}} {{animation1}}">
 				<view class="stu">
 					<input class="inputmar" value="{{stuName}}" type="text" placeholder="姓名" bindinput="getInput" bindblur="nameReg" data-type="stuName"></input>
 					<text wx:if="{{showName}}" class="text-icon {{checkName?'cuIcon-roundcheckfill text-green iconSuccess':'cuIcon-roundclosefill text-red iconFail'}} "></text>
@@ -48,7 +49,7 @@
 
 			</view>
 
-			<view wx:if="{{showPage2}}" class="page2 {{animation22}} {{animation2}}">
+			<view wx:if="{{showPage2}}" class="page2 flex flex-wrap justify-around {{animation22}} {{animation2}}">
 				<view class="stu">
 					<picker class="inputmar" mode="selector" range="{{stuCollegeRange}}" range-key="name" value="{{CollegeIndex}}" bindchange="selectCollege" bindcancel="">
 						<input class="inputmar" value="{{stuCollegeRange[CollegeIndex].name}}" type="hidden" placeholder="学院" disabled>111</input>
@@ -63,8 +64,9 @@
 					<input class="inputmar" value="{{classNum}}" type="text" placeholder="班级" bindinput="getInput" bindblur="classReg" data-type="classNum"></input>
 					<text wx:if="{{showClass}}" class="text-icon {{checkClass?'cuIcon-roundcheckfill text-green iconSuccess':'cuIcon-roundclosefill text-red iconFail'}} "></text>
 				</view>
+				<view class="stu stu-sex"></view>
 			</view>
-			<view wx:if="{{showPage3}}" class="page3 {{animation33}} {{animation3}}">
+			<view wx:if="{{showPage3}}" class="page3 flex flex-wrap justify-around {{animation33}} {{animation3}}">
 				<view class="stu-intro-head">
 					<view class="stu-intro" style="background-image: url(https://lixianghao.top:2358/images/wechat/in.png);background-size: 100% 100%;">
 						<textarea class="" value="{{stuIntro}}" placeholder="简单介绍一下自己吧！例如兴趣爱好,目前所掌握的知识,其他方面的一些技能等,100字左右" placeholder-style="" placeholder-class="textarea-placeholder" maxlength="140" bindinput="getInput" bindblur="introReg" data-type="stuIntro" bindlinechange="%{15}"></textarea>

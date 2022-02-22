@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/profile/index/index",
     "subPages/studio/studio",
     "pages/home/home",
     "subPages/sign3/sign3",
     "subPages/direction/direction",
     "subPages/signFinish/signFinish",
-    "pages/profile/index/index",
     "pages/profile/progress/progress",
     "pages/profile/signed/signed",
     "pages/profile/reservation/reservation",
