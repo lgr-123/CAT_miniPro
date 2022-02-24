@@ -54,7 +54,7 @@ Page({
     flagBottom: null,
     unReadNoticeNum: app.globalData.unReadNotice,
     date: '2021-02-18 周四',
-    userInfo: app.globalData.userInfo,
+    userInfo: getApp().globalData.userInfo,
     time: '上午好',
     isLogin: wx.getStorageSync('token'),
     // isSignUp: app.globalData.isSignUp
@@ -85,25 +85,40 @@ Page({
     
     // 解决app的异步执行，导致数据渲染不出
     app.isSignUpCallback = this.onShow_self
+    app.getUserInfoCallback = (res) => {
+      console.log(res);
+      this.setData({
+        // userInfo: app.globalData.userInfo,
+        userInfo: res,
+        // isSignUp: app.globalData.isSignUp,
+        // isLogin: wx.getStorageSync('token')
+      })
+    }
   },
   // 监测主页面上的未读消息数量
-  onShow(){
-    console.log(app.globalData);
+ onShow(){
+    console.log(getApp().globalData);
     messagecheck().then(res => {
       this.setData({
         unReadNoticeNum: res.data.data,
       })
     })
     console.log(app.globalData);
+    if(app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+      })
+    }
     this.setData({
-      userInfo: app.globalData.userInfo,
+      // userInfo: app.globalData.userInfo,
+      // userInfo: getApp().globalData.userInfo,
       isSignUp: app.globalData.isSignUp,
       isLogin: wx.getStorageSync('token')
     })
   },
   async onShow_self() {
     this.setData({
-      userInfo: app.globalData.userInfo,
+      // userInfo: app.globalData.userInfo,
       isSignUp: app.globalData.isSignUp,
       isLogin: wx.getStorageSync('token')
     })
@@ -145,7 +160,7 @@ Page({
   },
   navigate(e) {
     let route = e.currentTarget.dataset.route
-    if(!wx.getStorageSync('token') && (route === '/pages/profile/progress/progress' || route === '/pages/profile/reservation/reservation' || route === '/pages/message/message')) {
+    if(!wx.getStorageSync('token') && (route === '/pages/profile/progress/progress' || route === '/pages/profile/reservation/reservation' || route === '/pages/message/message' || route === '/pages/profile/signed/signed')) {
       login()
     } else if ((route === '/pages/profile/progress/progress' || route === '/pages/profile/reservation/reservation' || route === '/pages/message/message') && !this.data.isSignUp) {
       showToast('请先报名后再查看~')
@@ -175,15 +190,17 @@ Page({
         url: route
       })
     } else if (route === '/pages/profile/signed/signed') {
+
       checkStatus().then(({data}) => {
         console.log(data);
-        if(!data.data.allowSignIn) {
+        if(!data.data.allowSignIn && !data.data.isSignIn) {
           // 未开发签到
           showToast('当前未开放签到功能')
         } else if (data.data.isSignIn) {
          // 此时已签到
           showToast(`已签到,目前排在第${data.data.listIndex}位`)
         } else if(data.data.allowSignIn) {
+          // 允许签到
           this.setData({
             modalName: 'Modal'
           })
@@ -191,7 +208,7 @@ Page({
       })
     } else {
       this.setData({
-        modalName: 'Modal'
+        modalName: ''
       })
       wx.navigateTo({
         url: route
@@ -214,13 +231,22 @@ Page({
   },
   // 签到
   goSigned() {
+    console.log(11);
+    const tempId = '2DJKw__SrskrMQd1sosfneFITtBgBkSNHommFJ8SK2E'
     wx.requestSubscribeMessage({
-      tmplIds: ['2DJKw__SrskrMQd1sosfneFITtBgBkSNHommFJ8SK2E'],
+      tmplIds: [tempId],
       success: (res) => {
+        // 允许授权
+        if(res[tempId] == 'accept') {
+          userSign().then(({data}) => {
+            console.log(data);
+          })
+        } else {
+          // 不允许授权
+          showToast('签到失败')
+        }
         console.log(res);
-        userSign().then(({data}) => {
-          console.log(data);
-        })
+        
       },
       fail: (err) => {
         console.log(err);
@@ -237,35 +263,7 @@ Page({
 
     })
   },
-  // openDialog(e) {
-  //   let notice = this.data.notice.find(item => item.noticeContent === e.currentTarget.dataset.notice)
-  //   if(!notice.stage) {
-  //     checkNotice({
-  //       checked: 1,
-  //       noticeId: notice.noticeId
-  //     }).then(res => {
-  //       wx.hideLoading()
-  //       if(res.data.code !== 1200) {
-  //         showToast('操作失败')
-  //       }
-  //     }).catch((err) => {
-  //       console.log(err);
-  //     })
-  //     notice.stage = 1
-  //     this.data.unReadNoticeNum--
-  //   }
-  //   this.setData({
-  //     noticeContent: e.currentTarget.dataset.notice,
-  //     notice: this.data.notice,
-  //     unReadNoticeNum: this.data.unReadNoticeNum,
-  //     dialog: true
-  //   })
-  // }, 
-  // closeDialog() {
-  //   this.setData({
-  //     dialog: false
-  //   })
-  // },
+  
   toLogin() {
     login()
   },

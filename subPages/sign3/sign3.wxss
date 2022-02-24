@@ -14,13 +14,13 @@ page {
 
 .session1 {
   width: 100%;
-  height: 28%;
+  height: 32%;
   /* background-color: pink; */
 }
 
 .session2 {
   width: 100%;
-  height: 50%;
+  height: 46%;
   /* background-color: green; */
 }
 
@@ -32,10 +32,11 @@ page {
 
 .decorate {
   overflow: hidden;
+  margin: 10rpx 0 0 0;
   text-align: center;
-  height: 100%;
+  /* height: 80%; */
   font-family: 'Comic Sans MS', cursive;
-  font-size: 40rpx;
+  font-size: 45rpx;
 }
 
 .decorate image {
@@ -46,7 +47,7 @@ page {
 }
 
 .tip {
-  margin: 40rpx 0 10rpx 0;
+  /* margin: 0 0 10rpx 0; */
   /* position: absolute; */
   text-align: center;
   width: 100%;
@@ -56,20 +57,26 @@ page {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 130rpx;
   /* top: 500rpx; */
+  letter-spacing: 4rpx;
   bottom: 950rpx;
   color: #a5673bc4;
 }
 
-.page1,
+.direction {
+  margin: 18rpx 0 5rpx 0;
+  font-size: 60rpx;
+}
+
+/* .page1,
  .page2,
  .page3{
    margin: 0 auto;
   height: 570rpx;
-  /* position: absolute; */
-  /* bottom: 300rpx; */
-  /* width: 100%; */
-  /* margin-left: -75rpx; */
-}
+  position: absolute; 
+  bottom: 300rpx;
+  width: 100%;
+  margin-left: -75rpx;
+} */
 
 /* .page3{
   height: 570rpx;
@@ -81,7 +88,7 @@ page {
 
 
 input {
-  margin: 0 auto 10rpx;
+  /* margin: 0 auto 10rpx; */
   font-size: 34rpx;
   color: #9e9b9b;
   height: 75rpx;
@@ -95,8 +102,9 @@ input {
 
 .stu {
   position: relative;
+  /* margin: */
   width: 490rpx;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   /* text-align: center; */
 }
 
@@ -158,7 +166,7 @@ input {
 
 .stu-sex{
   width: 100%;
-  display: flex;
+  /* display: flex; */
   justify-content: space-between;
   margin: 35rpx 0 10rpx 0; 
 }
@@ -168,10 +176,13 @@ input {
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
+  /* height: 100rpx; */
 }
 
 .stu-sex radio {
   margin: 0 20rpx;
+  /* width: 100rpx;
+  height: 100rpx; */
 }
 
 
@@ -186,10 +197,16 @@ input {
   margin: 0 0 10rpx 0;
 }
 
+.page3 {
+  width: 100%;
+  height: 100%;
+}
+
 .stu-intro-head {
   position: relative;
-  width: 80%;
-  margin: 0 auto;
+  /* width: 100%;
+  height: 100%; */
+  /* margin: 0 auto; */
 }
 
 .stu-intro {
@@ -209,8 +226,8 @@ input {
 
 .stu-intro textarea {
   margin: 220rpx auto 0;
-  padding: 20rpx 20rpx 30rpx;
-  width: 75%;
+  padding: 15rpx 33rpx 20rpx;
+  width: 85%;
   height: 48%;
 }
 

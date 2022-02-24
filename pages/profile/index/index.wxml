@@ -14,7 +14,7 @@
   </view>
   <view class="avatar cu-avatar round" style="width: 160rpx; height: 160rpx; overflow: hidden; display: block" wx:else></view>
   <view class="text-white text-xxl margin-top dp-in-bk" wx:if="{{isLogin}}">
-    {{userInfo.name ? userInfo.name: userInfo.nickName}}，{{time}}！
+    {{userInfo.nickName}}，{{time}}！
   </view>
   <view class="text-white text-xxl margin-top dp-in-bk" bindtap="toLogin" wx:else>
     点击登录
