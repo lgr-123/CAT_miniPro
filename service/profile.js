@@ -40,6 +40,14 @@ export const getMajor = (data) => {
   })
 }
 
+export const getCurrentSignStatus = (data) => {
+  return request({
+    url: H_config.API_signStatus,
+    method: 'post',
+    data
+  })
+}
+
 // 提交报名表
 export const stuFormSubmit = (data) => {
   return request({

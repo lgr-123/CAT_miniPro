@@ -36,6 +36,9 @@ H_config.API_checkStatus_URL = '/queue/NCheck'
 // 用户签到
 H_config.API_sign_URL = '/queue/sign'
 
+// 用户查询报名阶段
+H_config.API_signStatus = '/status/getCurrentStatus'
+
 // 查询报名信息
 H_config.API_getSignUpInfo_URL = '/user/getSignUpInfo'
 H_config.STATUSCODE_getSignUpInfo_SUCCESS = 2208

@@ -1,36 +1,36 @@
 <view id="bg" style="background-image: url(https://lixianghao.top:2358/images/wechat/bg1.jpg);background-size: 100% 100%;">
 	<text class="cuIcon-back back-icon" bindtap="goBack"></text>
 	  
-	<view class="front">
-		<view class="front-word" bindtap="goSign" data-type="前端" style="background-image: url(https://lixianghao.top:2358/images/wechat/f.png);background-size: 100% 100%;">
+	<view class="front" bindtap="goSign" data-type="前端" >
+		<view class="front-word"  style="background-image: url(https://lixianghao.top:2358/images/wechat/f.png);background-size: 100% 100%;">
 			前端
 		</view>
-		<view class="front-bg" style="background-image: url(../../assets//img/.png);background-size: 100% 100%;">
+		<view class="front-bg">
   
 			<view>
-				代表与人直接打交道的这部分,包括界面的展现,与用户的交互等
+				前：代表与人直接打交道的这部分,包括界面的展现,与用户的交互等
 			</view>
 			<view>
-				代表输出终端,例如pc浏览器,手机浏览器,APP,应用程序
+				端：代表输出终端,例如pc浏览器,手机浏览器,APP,应用程序
 			</view>
 			<view>
-				呈现给用户的视觉和基本的操作
+				前端：呈现给用户的视觉和基本的操作
 			</view>
 		</view>
 	</view>
-	<view class="back">
-		<view class="back-word" bindtap="goSign" data-type="后台" style="background-image: url(https://lixianghao.top:2358/images/wechat/f.png);background-size: 100% 100%;">
+	<view class="back" bindtap="goSign" data-type="后台">
+		<view class="back-word"  style="background-image: url(https://lixianghao.top:2358/images/wechat/f.png);background-size: 100% 100%;">
 			后台
 		</view>
 		<view class="back-bg">
             <view>
-                不涉及创建生成用户界面的开发,从数据库或其他数据源写入读取和处理数据
+                致力于将接收到的客户端数据源处理在服务器端进行一定的逻辑处理
             </view>
             <view>
-                供数据给页面进行展现围绕前端构建程序
+                同时通过数据库增删改查等交互把结果提供给前端展示，构建完整程序
             </view>
             <view>
-                提供所需的所有支持并确保站点或应用始终正常运行
+               后台提供的i/o与计算需要保证稳定性与速度，以提高用户体验
             </view>        
 		</view>
 

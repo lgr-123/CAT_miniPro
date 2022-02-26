@@ -25,7 +25,7 @@ App({
             this.globalData.userInfo = data.data
             if(this.getUserInfoCallback) {
 
-              this.getUserInfoCallback(data.data)
+              this.getUserInfoCallback(this.globalData.userInfo)
             }
           })
           updateToken().then(({data}) => {
@@ -43,7 +43,7 @@ App({
               }
               registerInfo().then(res=>{
                 this.globalData.registerInfo = res.data.data
-                console.log(this.globalData);
+                // console.log(this.globalData);
               }).catch(err=>{
                 console.log(err);
               })
