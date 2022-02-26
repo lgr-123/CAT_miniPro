@@ -33,7 +33,7 @@
       <!-- <button class="btn cu-btn margin-top-lg flex text-white bg-orange" hover-class="btn-active" bindtap="appoint" data-item="{{item}}" disabled="{{item.number==0}}">预约</button> -->
     </view>
 
-    <view class="text-center padding-top-xl" wx:if="{{!reservation.length}}">
+    <view class="text-center padding-top-xl" wx:if="{{!closeappointment && !reservation.length}}">
       <text class="cuIcon-infofill text-gray text-xsl"></text>
       <view class="text-xl text-bold margin-top">暂无可预约时间段</view>
     </view>

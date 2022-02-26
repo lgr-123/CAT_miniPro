@@ -28,7 +28,7 @@ Page({
         messagelist().then(res=>{
             if(res.data.code === 1801){
                 this.setData({
-                    stage: res.data.data.reverse()
+                    stage: res.data.data
                 })
             }
             
