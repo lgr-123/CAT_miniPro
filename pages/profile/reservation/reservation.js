@@ -57,7 +57,7 @@ Page({
         this.setData({
           closeappointment: true
         })
-        this._selectUserAppoint()
+       // this._selectUserAppoint()  // ????????
       }
     })
     

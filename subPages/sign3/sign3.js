@@ -332,7 +332,7 @@ Page({
          wx.hideLoading()
          if(data.code == 200) {
 
-          wx.navigateTo({
+          wx.reLanch({
             url: '/subPages/signFinish/signFinish',
           })
          } else {

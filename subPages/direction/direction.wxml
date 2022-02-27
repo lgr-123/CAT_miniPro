@@ -1,7 +1,7 @@
 <view id="bg" style="background-image: url(https://lixianghao.top:2358/images/wechat/bg1.jpg);background-size: 100% 100%;">
 	<text class="cuIcon-back back-icon" bindtap="goBack"></text>
 	  
-	<view class="front" bindtap="goSign" data-type="前端" >
+	<view class="front " bindtap="goSign" data-type="前端" >
 		<view class="front-word"  style="background-image: url(https://lixianghao.top:2358/images/wechat/f.png);background-size: 100% 100%;">
 			前端
 		</view>

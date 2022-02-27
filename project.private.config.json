@@ -113,6 +113,12 @@
           "pathName": "pages/profile/signed/signed",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "subPages/signFinish/signFinish",
+          "pathName": "subPages/signFinish/signFinish",
+          "query": "",
+          "scene": null
         }
       ]
     }
