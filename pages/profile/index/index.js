@@ -14,7 +14,8 @@ import {
   checkNotice,
   checkStatus,
   userSign,
-  messagecheck
+  messagecheck,
+  appointmentge
 } from '../../../service/profile'
 import { H_config, BASE_URL } from '../../../service/config'
 
@@ -186,9 +187,20 @@ Page({
       //     }
       //   }
       // })
-      wx.navigateTo({
-        url: route
+      appointmentge().then(res => {
+        console.log(res.data);
+        if(res.data.code === 10086){
+          if(!res.data.data){
+            wx.navigateTo({
+              url: route
+            })
+          }else{
+            console.log(111);
+            showToast('您无法预约~')
+          }
+        }
       })
+      
     } else if (route === '/pages/profile/signed/signed') {
 
       checkStatus().then(({data}) => {
