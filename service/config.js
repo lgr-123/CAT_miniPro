@@ -90,6 +90,10 @@ H_config.STATUSCODE_registerInfo_SUCCESS = 200
 H_config.API_messagecheck_URL = '/message/check'
 H_config.STATUSCODE_messagecheck_SUCCESS = 10086
 
+//判断用户是否淘汰
+H_config.API_appointmentge_URL = '/appointment/ge'
+H_config.STATUSCODE_appointmentge_SUCCESS = 10086
+
 
 H_config.API_getNotice_URL = '/schedule/selectNotice'
 

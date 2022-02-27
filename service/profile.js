@@ -261,4 +261,13 @@ export function messagecheck(data) {
   })
 }
 
+// 获取用户是否淘汰
+export function appointmentge(data) {
+  return request({
+    url: H_config.API_appointmentge_URL,
+    method: 'post',
+    data: data
+  })
+}
+
 // 
