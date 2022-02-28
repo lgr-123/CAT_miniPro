@@ -16,7 +16,7 @@ Page({
   },
 
   goToProfile(){
-    wx.navigateTo({
+    wx.reLaunch({
       url: '/pages/profile/index/index',
     })
   },
