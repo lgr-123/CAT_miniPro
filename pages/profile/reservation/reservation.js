@@ -64,9 +64,7 @@ Page({
   },
   // 判断用户是否预约
   _selectUserAppoint() {
-    selectUserAppoint({
-      userId: wx.getStorageSync('userId')
-    }).then(res => {
+    selectUserAppoint().then(res => {
       wx.hideLoading()
       console.log(res);
       if(res.data.code === 1519) {

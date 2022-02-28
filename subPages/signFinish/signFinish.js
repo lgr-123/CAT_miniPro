@@ -20,7 +20,7 @@ Page({
 
   goToProfile(){
     app.globalData.isSignUp = true
-    wx.navigateTo({
+    wx.redirectTo({
       url: '/pages/profile/index/index',
     })
   },

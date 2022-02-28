@@ -244,15 +244,7 @@ Page({
       })
     }
   },
-  showModal(e) {
-    if(wx.getStorageSync('token')) {
-      this.setData({
-        modalName: e.currentTarget.dataset.target
-      })
-    } else {
-      login()
-    }
-  },
+ 
   hideModal(e) {
     this.setData({
       modalName: null
