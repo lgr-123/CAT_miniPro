@@ -15,6 +15,7 @@ import {
   checkStatus,
   userSign,
   messagecheck,
+  getCurrentSignStatus,
   appointmentge
 } from '../../../service/profile'
 import { H_config, BASE_URL } from '../../../service/config'
@@ -110,19 +111,15 @@ Page({
         userInfo: app.globalData.userInfo,
       })
     }
+
+    
     this.setData({
       // userInfo: app.globalData.userInfo,
       // userInfo: getApp().globalData.userInfo,
       isSignUp: app.globalData.isSignUp,
       isLogin: wx.getStorageSync('token')
     })
-  },
-  async onShow_self() {
-    this.setData({
-      // userInfo: app.globalData.userInfo,
-      isSignUp: app.globalData.isSignUp,
-      isLogin: wx.getStorageSync('token')
-    })
+
     const time = new Date()
     let day = ''
     switch(time.getDay()) {
@@ -156,8 +153,17 @@ Page({
 
     this.setData({
       date: formatTime(time).split(' ')[0] + ' 周' + day,
-      isLogin: wx.getStorageSync('token') ? true : false
+      // isLogin: wx.getStorageSync('token') ? true : false
     })
+
+  },
+  async onShow_self() {
+    this.setData({
+      // userInfo: app.globalData.userInfo,
+      isSignUp: app.globalData.isSignUp,
+      isLogin: wx.getStorageSync('token')
+    })
+    
   },
   navigate(e) {
     let route = e.currentTarget.dataset.route
@@ -205,18 +211,29 @@ Page({
 
       checkStatus().then(({data}) => {
         console.log(data);
-        if(!data.data.allowSignIn && !data.data.isSignIn) {
-          // 未开发签到
+        if(data.data.open) {
+          // 管理员开放签到
+          if(!data.data.allowSignIn && !data.data.isSignIn) {
+            // 未开发签到
+            showToast('当前未开放签到功能')
+          } else if(data.data.isPassed) {
+            showToast('已面试,请耐心等待结果')
+          }
+          
+          else if (data.data.isSignIn) {
+           // 此时已签到
+            showToast(`已签到,目前排在第${data.data.listIndex}位`)
+          } else if(data.data.allowSignIn) {
+            // 允许签到
+            this.setData({
+              modalName: 'Modal'
+            })
+          }
+        } else {
+          // 管理员关闭签到
           showToast('当前未开放签到功能')
-        } else if (data.data.isSignIn) {
-         // 此时已签到
-          showToast(`已签到,目前排在第${data.data.listIndex}位`)
-        } else if(data.data.allowSignIn) {
-          // 允许签到
-          this.setData({
-            modalName: 'Modal'
-          })
         }
+       
       })
     } else {
       this.setData({
@@ -227,15 +244,7 @@ Page({
       })
     }
   },
-  showModal(e) {
-    if(wx.getStorageSync('token')) {
-      this.setData({
-        modalName: e.currentTarget.dataset.target
-      })
-    } else {
-      login()
-    }
-  },
+ 
   hideModal(e) {
     this.setData({
       modalName: null
@@ -280,9 +289,17 @@ Page({
     login()
   },
   toSignUp() {
-    wx.navigateTo({
-      url: '/subPages/direction/direction',
+    getCurrentSignStatus().then(({data}) => {
+      console.log(data);
+      if(data.data.id == 2) {
+        wx.navigateTo({
+          url: '/subPages/direction/direction',
+        })
+      } else {
+        showToast('当前未处于报名阶段')
+      }
     })
+   
   },
   onPullDownRefresh() {
     this.onShow_self().then(() => {

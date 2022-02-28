@@ -57,16 +57,14 @@ Page({
         this.setData({
           closeappointment: true
         })
-        this._selectUserAppoint()
+       // this._selectUserAppoint()  // ????????
       }
     })
     
   },
   // 判断用户是否预约
   _selectUserAppoint() {
-    selectUserAppoint({
-      userId: wx.getStorageSync('userId')
-    }).then(res => {
+    selectUserAppoint().then(res => {
       wx.hideLoading()
       console.log(res);
       if(res.data.code === 1519) {
@@ -126,16 +124,20 @@ Page({
       wx.hideLoading()
       console.log(res.data.code);
       if(res.data.code === H_config.STATUSCODE_getAppointTime_SUCCESS) {
+        console.log('1111111111111111'+res);
         for(let item of res.data.data) {
           item.begintime = item.beginTime.slice(5,19)
           item.endtime = item.endTime.slice(5,19)
           item.number = item.count
           item.limitNumber = item.capacity
         }
+        console.log(this.data);
+        console.log(this.data.userInfo);
         this.setData({
           // reservation: res.data.data,
           reservation: res.data.data.filter(item => item.direction === this.data.userInfo.direction),
         })
+        console.log(this.data.userInfo);
         console.log(this.data.reservation);
       } else if(res.data.code === 1500) {
         showToast('当前阶段无可预约时间')

@@ -3,6 +3,7 @@ page {
   background-color: #ecf0f3;
   --RBShadow: rgba(207, 219, 230, .7);
   --LTShadow: rgba(255, 255, 255, .7);
+  touch-action: none;
 }
 
 .bg {

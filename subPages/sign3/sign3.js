@@ -327,10 +327,12 @@ Page({
          gender: stuSex,
          direction: direction,
        }).then(({data}) => {
-         console.log(res);
+        //  console.log(res);
+        console.log(data);
          wx.hideLoading()
-         if(data.data.code == 200) {
-          wx.reLaunch({
+         if(data.code == 200) {
+
+          wx.redirectTo({
             url: '/subPages/signFinish/signFinish',
           })
          } else {

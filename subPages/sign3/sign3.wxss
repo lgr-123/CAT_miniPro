@@ -202,10 +202,17 @@ input {
   height: 100%;
 }
 
+.page3 image {
+  position: absolute;
+  top: -80rpx;
+  width: 200rpx;
+  height: 200rpx;
+}
+
 .stu-intro-head {
   position: relative;
-  /* width: 100%;
-  height: 100%; */
+  width: 100%;
+  height: 100%;
   /* margin: 0 auto; */
 }
 
@@ -214,7 +221,8 @@ input {
   top: -30rpx; */
   overflow: hidden;
   width: 100%;
-  height: 600rpx;
+  height: 100%;
+  /* height: 600rpx; */
   /* text-align: center; */
 }
 
@@ -226,7 +234,7 @@ input {
 
 .stu-intro textarea {
   margin: 220rpx auto 0;
-  padding: 15rpx 33rpx 20rpx;
+  padding: 15rpx 33rpx 20rpx 35rpx;
   width: 85%;
   height: 48%;
 }
@@ -235,6 +243,12 @@ input {
 
 .session3 {
   position: relative;
+  margin: 50rpx 0 0 0;
+}
+
+.session3 image {
+  width: 100rpx;
+  height: 100rpx;
 }
 
 .footer {
@@ -244,18 +258,24 @@ input {
   height: 100%;
 }
 
+.footer button {
+  width: 150rpx;
+  height: 150rpx;
+}
+
 .footer view {
-  width: 50%;
+  width: 125rpx;
   height: 60rpx;
+  border-radius: 25rpx;
   letter-spacing: 5rpx;
   text-align: center;
   line-height: 60rpx;
 }
 
 .back{
-  margin-left: 60rpx;
-  margin-top: 0rpx;
-  animation: fly 0.7s infinite linear alternate ;
+  /* margin-left: 60rpx;
+  margin-top: 0rpx; */
+  /* animation: fly 0.7s infinite linear alternate ; */
 }
 
 .back image{
@@ -268,9 +288,9 @@ input {
 }
 
 .confirm {
-  padding-right: 80rpx;
-  margin-top: 10rpx;
-  animation: fly 0.7s 0.3s infinite linear alternate ;
+  /* padding-right: 80rpx;
+  margin-top: 10rpx; */
+  /* animation: fly 0.7s 0.3s infinite linear alternate ; */
 }
 
 .inputmar{

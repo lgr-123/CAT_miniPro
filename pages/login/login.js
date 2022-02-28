@@ -68,7 +68,11 @@ Page({
                 avatarUrl: this.data.avatarUrl
               }).then((res) => {
                 console.log(res);
-                wx.navigateBack()
+                // wx.navigateBack();
+                app.onLaunch()
+                wx.reLaunch({
+                  url: '/pages/profile/index/index'
+                })
               })
               })
              

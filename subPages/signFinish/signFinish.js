@@ -1,4 +1,7 @@
 // subPages/signFinish/signFinish.js
+
+const app = getApp()
+
 Page({
 
   /**
@@ -16,7 +19,8 @@ Page({
   },
 
   goToProfile(){
-    wx.reLaunch({
+    app.globalData.isSignUp = true
+    wx.redirectTo({
       url: '/pages/profile/index/index',
     })
   },
