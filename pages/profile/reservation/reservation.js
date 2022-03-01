@@ -139,7 +139,7 @@ Page({
         })
         console.log(this.data.userInfo);
         console.log(this.data.reservation);
-      } else if(res.data.code === 1500) {
+      } else if(res.data.code === 1502) {
         showToast('当前阶段无可预约时间')
       } else {
         showToast('加载失败')
