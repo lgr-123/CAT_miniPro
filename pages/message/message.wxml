@@ -4,7 +4,7 @@
 </cu-custom>
 
 <view class="padding-lg-xl padding-top margin-bottom-lg" style="position: realtive">
-  <block wx:if="{{stage.length}}" wx:for="{{stage}}" w-key="index">
+  <block wx:if="{{iscanload && stage.length}}" wx:for="{{stage}}" w-key="index">
   <!--
     <view>
       <view class="num padding-xs text-center">
@@ -25,7 +25,7 @@
         </view>
             <!-- <view class="content shadow-blur margin-top-xs" style="background-color: {{stage[index].isRead? '#74a594' : '#d8ad5e'}}"> -->
             <view class="content shadow-blur margin-top-xs bg-{{color[index%6]}}"  bindtap='readOK' data-itemcontent='{{item}}' data-target="DialogModal1" data-confirmdata='{{index}}'>
-            <text style="color: #fff">{{item.content}}</text> 
+              <text style="color: #fff"  bindtap='readOK' data-itemcontent='{{item}}' data-target="DialogModal1" data-confirmdata='{{index}}'>{{item.content}}</text> 
             </view>
         </view>
     </view>
@@ -86,7 +86,7 @@
       </view>
     </view>
 
-    <view class="text-center padding-top-xl" wx:if="{{!stage.length}}">
+    <view class="text-center padding-top-xl" wx:if="{{iscanload && !stage.length}}">
       <text class="cuIcon-roundclosefill text-red text-xsl"></text>
       <view class="text-xl text-bold margin-top">消息中心暂无消息</view>
     </view>

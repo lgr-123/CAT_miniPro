@@ -18,7 +18,8 @@ Page({
         isread: false,
         itemcontent: '',
         anmiation: 'animation-scale-up animation-reverse',
-        confirmdata: 0
+        confirmdata: 0,
+        iscanload: false    //数据未加载出来页面不显示
     },
 
     /**
@@ -28,7 +29,8 @@ Page({
         messagelist().then(res=>{
             if(res.data.code === 1801){
                 this.setData({
-                    stage: res.data.data
+                    stage: res.data.data,
+                    iscanload: true
                 })
             }
             

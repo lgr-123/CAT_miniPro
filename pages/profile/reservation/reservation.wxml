@@ -5,7 +5,7 @@
 
 <view class="margin-sm">
   <!-- <view wx:if="{{isReservated === true}}"> -->
-  <view wx:if="{{isReservated === false}}">
+  <view wx:if="{{iscanload && !closeappointment && isReservated === false}}">
     <!-- <view> -->
     <view class="card padding margin-bottom-lg radius" style="border-radius: 50rpx;position: relative;" wx:for="{{reservation}}" wx:key="index">
       <view class="content flex justify-around text-lg text-bold">
@@ -33,12 +33,12 @@
       <!-- <button class="btn cu-btn margin-top-lg flex text-white bg-orange" hover-class="btn-active" bindtap="appoint" data-item="{{item}}" disabled="{{item.number==0}}">预约</button> -->
     </view>
 
-    <view class="text-center padding-top-xl" wx:if="{{!closeappointment && !reservation.length}}">
+    <view class="text-center padding-top-xl" wx:if="{{iscanload && !closeappointment && !reservation.length}}">
       <text class="cuIcon-infofill text-gray text-xsl"></text>
       <view class="text-xl text-bold margin-top">暂无可预约时间段</view>
     </view>
   </view>
-  <view class="text-center padding-top-lg" wx:if="{{isReservated === true}}">
+  <view class="text-center padding-top-lg" wx:if="{{iscanload && isReservated === true}}">
   <!-- <view class="text-center padding-top-lg" wx:if="{{isReservated === false}}"> -->
     <text class="cuIcon-roundcheckfill text-green text-xsl"></text>
     <view class="text-xl text-bold margin-top">你已预约本轮面试</view>
@@ -72,7 +72,7 @@
     <view class="text-gray">之后想修改预约时间请私聊师兄师姐</view>
   </view>
   
-  <view class="text-center padding-top-xl" wx:if="{{closeappointment && isReservated === false }}">
+  <view class="text-center padding-top-xl" wx:if="{{iscanload && closeappointment && isReservated === false }}">
     <text class="cuIcon-roundclosefill text-red text-xsl"></text>
     <view class="text-xl text-bold margin-top">预约入口未开启</view>
   </view>

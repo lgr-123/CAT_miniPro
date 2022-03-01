@@ -40,7 +40,8 @@ Page({
     isReservated: false,
     closeappointment: false,
     currentReservation: {},
-    userInfo: app.globalData.registerInfo
+    userInfo: app.globalData.registerInfo,
+    iscanload: false
   },
   onLoad: function (options) {
     this.setData({
@@ -57,7 +58,7 @@ Page({
         this.setData({
           closeappointment: true
         })
-       // this._selectUserAppoint()  // ????????
+       this._selectUserAppoint()  // ????????
       }
     })
     
@@ -71,6 +72,7 @@ Page({
         let item = res.data.data
         console.log(item);
         this.setData({
+          iscanload: true,
           currentReservation: item,
           currentBegin: item.beginTime.slice(5,16),
           currentEnd: item.endTime.slice(5,16),
@@ -79,11 +81,13 @@ Page({
       } else{
         if(res.data.code === 1522){
           this.setData({
+            iscanload: true,
             closeappointment: true
           })
         }else{
           this._getAppointTime()
           this.setData({
+            iscanload: true,
             isReservated: false
           })
         }
@@ -135,6 +139,7 @@ Page({
         console.log(this.data.userInfo);
         this.setData({
           // reservation: res.data.data,
+          iscanload: true,
           reservation: res.data.data.filter(item => item.direction === this.data.userInfo.direction),
         })
         console.log(this.data.userInfo);
@@ -187,6 +192,7 @@ Page({
               })
               this._getAppointTime()
               this.setData({
+                iscanload: true,
                 isReservated: false
               })
             } else {
