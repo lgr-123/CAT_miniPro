@@ -48,7 +48,7 @@ Page({
       userInfo: app.globalData.registerInfo
     })
     appointCheck().then(res => {
-      wx.hideLoading()
+      // wx.hideLoading()
       console.log(res);
       if(res.data.code === 1208){
         console.log(1111);
@@ -66,9 +66,9 @@ Page({
   // 判断用户是否预约
   _selectUserAppoint() {
     selectUserAppoint().then(res => {
-      wx.hideLoading()
+      // wx.hideLoading()
       console.log(res);
-      if(res.data.code === 1519) {
+      if(res.data.code === 1519 || res.data.code === 1520 || res.data.code === 1521) {
         let item = res.data.data
         console.log(item);
         this.setData({
@@ -125,7 +125,7 @@ Page({
   // 获取所有预约时间
   _getAppointTime() {
     getAppointTime().then(res => {
-      wx.hideLoading()
+      // wx.hideLoading()
       console.log(res.data.code);
       if(res.data.code === H_config.STATUSCODE_getAppointTime_SUCCESS) {
         console.log('1111111111111111'+res);
@@ -150,7 +150,7 @@ Page({
         showToast('加载失败')
       }
     }).catch((err) => {
-      wx.hideLoading()
+      // wx.hideLoading()
       console.log(err);
     })
   },
@@ -161,7 +161,7 @@ Page({
     appointTime({
       appointmentId: appoint
     }).then(res => {
-      wx.hideLoading()
+      // wx.hideLoading()
       console.log(res);
       if(res.data.code === H_config.STATUSCODE_appointTime_SUCCESS) {
         showToast('预约成功', 'success')
@@ -185,7 +185,7 @@ Page({
       success: res => {
         if(res.confirm) {
           cancelAppoint().then(res => {
-            wx.hideLoading()
+            // wx.hideLoading()
             if(res.data.code === 1205) {
               wx.showToast({
                 title: '取消成功',
@@ -195,7 +195,9 @@ Page({
                 iscanload: true,
                 isReservated: false
               })
-            } else {
+            } else if(res.data.code === 1509){
+              showToast('不能频繁取消，十分钟才能取消一次')
+            }else {
               showToast('取消失败')
             }
           }).catch((err) => {

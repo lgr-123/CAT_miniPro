@@ -33,7 +33,9 @@ Page({
                     iscanload: true
                 })
             }
-            
+            this.setData({
+                iscanload: true
+            })
             console.log(this.data.stage);
             console.log(res);
             wx.hideLoading()
